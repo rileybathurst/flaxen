@@ -17,12 +17,20 @@
 				'menu_class'     => 'vertical menu',
 			)
 		); ?>
-	 </div>
-	 <ul class="footer-contact vertical menu">
-		<li>PO Box 2673</li>
-		<li>Olympic Valley</li>
-		<li>CA 96146</li>
-	 </ul>
+	</div>
+	<ul class="footer-contact vertical menu">
+		<h4>Email:</h4>
+		<li><a href="mailto:authenticalignmentwellness@gmail.com">authenticalignmentwellness@gmail.com</a></li>
+
+		<h4>Winter Office Hours:</h4>
+		
+			<li>Wednesday: 9am-6pm</li>
+			<li>Thursday: 9am-6pm</li>
+			<li>Friday: 9am-6pm</li>
+			<li>Saturday-Tuesday: Closed</li>
+
+
+	</ul>
 </div>
 
 <img src="https://images.unsplash.com/photo-1542128722-d6fe34923abc?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=83b397fc586354b1b988e43a9e81416c&auto=format&fit=crop&w=1650&q=80" alt="food" class="footer-image">
