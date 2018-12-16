@@ -4,10 +4,10 @@
 1.0 Normalize
 2.0 Accessibility
 3.0 Alignments
-    3.1 Page Grid
-    3.2 Header Grid
-    3.3 Article Grid
-    3.4 Footer Grid
+	3.1 Page Grid
+	3.2 Header Grid
+	3.3 Article Grid
+	3.4 Footer Grid
 4.0 Clearings
 5.0 Typography
 6.0 Forms
@@ -41,7 +41,7 @@
 /* Handled by Foundation */
 
 svg {
-    fill: currentColor;
+	fill: currentColor;
 }
 
 .margin-0 {
@@ -59,45 +59,45 @@ svg {
 $global-grid-gap: 20px;
 
 .site {
-    display: grid;
-    grid-template-columns: 0 1fr 1fr 1fr 1fr 0;
+	display: grid;
+	grid-template-columns: 0 1fr 1fr 1fr 1fr 0;
 	grid-gap: 10px;
 	margin-top: 20px;
-	margin-bottom: 20px;
-    
-    @include breakpoint(large) {
-        grid-template-columns: 20px 1fr 1fr 1fr 1fr 1fr 1fr 20px;
+	margin-bottom: 40px;
+
+	@include breakpoint(large) {
+		grid-template-columns: 20px 1fr 1fr 1fr 1fr 1fr 1fr 20px;
 		grid-gap: $global-grid-gap;
-    }
+	}
 }
 
 .site-header {
-    grid-column: 2 / 6;
-    grid-row: 1 / 3;
+	grid-column: 2 / 6;
+	grid-row: 1 / 3;
 	align-items: center;
-    
-    @include breakpoint(large) {
-        grid-column: 2 / 8;
-    }
+
+	@include breakpoint(large) {
+		grid-column: 2 / 8;
+	}
 }
 
 .header-bottom {
-    grid-column: 4 / 6;
-    grid-row: 3;
-    
-    @include breakpoint(large) {
-        grid-column: 5 / 7;
-    }
+	grid-column: 4 / 6;
+	grid-row: 3;
+
+	@include breakpoint(large) {
+		grid-column: 5 / 7;
+	}
 }
 
 .title-image {
-    grid-column: 1 / 4;
-    grid-row: 3 / 6;
-    z-index: 3;
-    
-    @include breakpoint(large) {
-            grid-column: 3 / 5;
-    }
+	grid-column: 1 / 4;
+	grid-row: 3 / 6;
+	z-index: 3;
+
+	@include breakpoint(large) {
+			grid-column: 3 / 5;
+	}
 }
 
 .title-image img {
@@ -105,72 +105,71 @@ $global-grid-gap: 20px;
 }
 
 .title-border {
-    grid-column: 4 ;
-    grid-row: 4 / 7;
-    border-left: 2px solid $black;
-    z-index: 2;
-    
-    @include breakpoint(large) {
-        grid-column: 5 ;
-    }
+	grid-column: 4 ;
+	grid-row: 4 / 7;
+	border-left: 2px solid $black;
+	z-index: 2;
+
+	@include breakpoint(large) {
+		grid-column: 5 ;
+	}
 }
 
 .main-bg-color {
-    grid-column: 2 / 6;
-    grid-row: 5 / 8;
+	grid-column: 2 / 6;
+	grid-row: 5 / 8;
 	background: scale-color($secondary-color, $lightness: 55%);
-	
-	
+
 	border-radius: $global-radius;
-    
-    @include breakpoint(medium) {
-        grid-column: 2 / 6;
-        grid-row: 5 / 9;
-    }
-    
-    @include breakpoint(large) {
-        grid-column: 2 / 8;
-    }
+
+	@include breakpoint(medium) {
+		grid-column: 2 / 6;
+		grid-row: 5 / 9;
+	}
+
+	@include breakpoint(large) {
+		grid-column: 2 / 8;
+	}
 }
 
 .main {
-    grid-column: 2 / 6;
-    grid-row: 7;
+	grid-column: 2 / 6;
+	grid-row: 7;
 	padding: $global-grid-gap;
-    
-    @include breakpoint(large) {
-        grid-column: 2 / 8;
+
+	@include breakpoint(large) {
+		grid-column: 2 / 8;
 		padding: 0;
-    }
+	}
 }
 
 .footer-border {
-    grid-column: 4;
-    grid-row: 8 / 11;
-    border-left: 2px solid $black;
-    z-index: 2;
-    
-    @include breakpoint(large) {
-        grid-column: 5;
-    }
+	grid-column: 4;
+	grid-row: 8 / 11;
+	border-left: 2px solid $black;
+	z-index: 2;
+
+	@include breakpoint(large) {
+		grid-column: 5;
+	}
 }
 
 .footer-border-extender {
-    /* empty with a minimum heigh to cause the grid row to show */
-    grid-row: 8;
-    min-height: 30px;
+	/* empty with a minimum heigh to cause the grid row to show */
+	grid-row: 8;
+	min-height: 30px;
 }
 
 .flaxen-footer {
-    grid-column: 2 / 6;
-    grid-row: 9 / 11;
+	grid-column: 2 / 6;
+	grid-row: 9 / 11;
 }
 
 .footer-image {
 	grid-column: 4 / 7;
 	grid-row: 10;
 	border-radius: $global-radius;
-	
+
 	@include breakpoint(medium) {
 		grid-column: 5 / 7;
 		grid-row: 10;
@@ -190,7 +189,7 @@ $global-grid-gap: 20px;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-gap: $global-grid-gap;
-	
+
 	@include breakpoint(large) {
 		grid-template-columns: 2fr 1fr 1fr 2fr;
 	}
@@ -199,7 +198,7 @@ $global-grid-gap: 20px;
 .site-branding-text {
 	grid-column: 1 / 4;
 	grid-row: 1;
-	
+
 	@include breakpoint(large) {
 		grid-column: 1;
 	}
@@ -208,7 +207,7 @@ $global-grid-gap: 20px;
 .navigation-top {
 	grid-column: 4;
 	grid-row: 1;
-	
+
 	@include breakpoint(large) {
 		grid-column: 4;
 	}
@@ -221,10 +220,10 @@ $global-grid-gap: 20px;
 .header-promo {
 	grid-column: 1 / 5;
 	grid-row: 2;
-	
+
 	display: grid; /* needed to center align the text */
 	align-items: center;
-	
+
 	@include breakpoint(large) {
 		grid-column: 2 / 4;
 		grid-row: 1;
@@ -259,7 +258,7 @@ $global-grid-gap: 20px;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr; /* 4 columns */
 	grid-gap: $global-grid-gap;
-	
+
 	@include breakpoint(large) {
 		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; /* 8 columns */
 	}
@@ -283,6 +282,12 @@ $global-grid-gap: 20px;
 	grid-column-start: 4;
 }
 
+.large-col-3 {
+	@include breakpoint(large) {
+		grid-column-start: 3;
+	}
+}
+
 .large-col-5 {
 	@include breakpoint(large) {
 		grid-column-start: 5;
@@ -302,12 +307,18 @@ $global-grid-gap: 20px;
 	grid-column-end: 5;
 }
 
+.large-col-end-5 {
+	@include breakpoint(large) {
+		grid-column-end: 5;
+	}
+}
+
 .large-col-end-8 {
 	@include breakpoint(large) {
 		grid-column-end: 8;
 	}
 }
-	
+
 /* Row numbers */
 /* Figure out how to have these auto do by nth child */
 /* Might be smarter to have these hard coded by style as the numbers get bigger */
@@ -342,7 +353,7 @@ $global-grid-gap: 20px;
 	grid-row: 1;
 	background: $light-gray;
 	border-radius: $global-radius;
-	
+
 	@include breakpoint(medium) {
 		grid-column: 1 / 3;
 	}
@@ -351,18 +362,18 @@ $global-grid-gap: 20px;
 .footer-navigation-top {
 	grid-column: 1 / 4;
 	grid-row: 1;
-	
+
 	@include breakpoint(medium) {
 		grid-column: 1;
 	}
 }
-	
+
 .footer-contact {
 	grid-column: 1 / 3;
 	grid-row: 2;
 	padding: $global-grid-gap;
 	color: $medium-gray;
-	
+
 	@include breakpoint(medium) {
 		grid-column: 3;
 		grid-row: 1;
@@ -389,38 +400,41 @@ $global-grid-gap: 20px;
 --------------------------------------------------------------*/
 
 .menu {
-    font-weight: bold !important;
+	font-weight: bold !important;
 }
 
 svg {
-    fill: currentColor;
+	fill: currentColor;
 }
 
 .current-menu-item a {
-    color: $anchor-color-hover;
+	color: $anchor-color-hover;
 }
 
 .off-canvas a:hover, .off-canvas .current-menu-item a {
-    color: $white;
+	color: $white;
 }
 
 .off-canvas hr {
 	border-bottom: 1px solid $secondary-color;
-	margin: $global-grid-gap;
 }
 
 .dark a:hover, .dark .current-menu-item a {
-    color: $white;
+	color: $white;
 }
 
 .icon {
-    width: 1em;
-    // height: 3em;
+	width: 1em;
+	// height: 3em;
 }
 
 .icon-search {
-    padding-left: $global-padding;
-    color: $white;
+	padding-left: $global-padding;
+	color: $white;
+}
+
+.icon-angle-down {
+	height: 1em;
 }
 
 .icon-feature {
@@ -433,44 +447,44 @@ svg {
 }
 
 .header-contact svg {
-    margin: .25em;
+	margin: .25em;
 }
 
 .header-contact button {
-    margin-left: 1em;
-    margin-right: 1em;
+	margin-left: 1em;
+	margin-right: 1em;
 }
 
 .menu li {
-    float: right;
-    list-style-type: none;
+	float: right;
+	list-style-type: none;
 }
 
 .menu-item .is-active {
-    color: $black;
+	color: $black;
 }
 
 .off-canvas .menu li {
-    float: left;
-    clear: both;
-    width: 100%;
+	float: left;
+	clear: both;
+	width: 100%;
 }
 
 /*
 .pagination a, .pagination button {
-    display: inline;
+	display: inline;
 } */
 
 .page-numbers {
-    display: inline;
+	display: inline;
 }
 
 .social-links-menu li {
-    display: inline-block;
+	display: inline-block;
 }
 
 .social-links-menu li a {
-    color: $secondary-color;
+	color: $secondary-color;
 	background: $medium-gray;
 	border-radius: 50%;
 	width: 3em;
@@ -482,25 +496,25 @@ svg {
 }
 
 .social-links-menu li a:hover {
-    color: $primary-color;
+	color: $primary-color;
 }
 
 #menu-social li {
-    width: auto;
+	width: auto;
 }
 
 // This should be in one class
 .social-navigation .icon, #menu-social li a .icon {
-    width: 1em;
-    // height: 1em;
+	width: 1em;
+	// height: 1em;
 }
 
 .submenu a {
-    color: $primary-color;
+	color: $primary-color;
 }
 
 input[type="search"] {
-    width: auto;
+	width: auto;
 }
 
 .off-canvas a:hover, .off-canvas .current-menu-item a {
@@ -542,7 +556,7 @@ input[type="search"] {
 
 /*--------------------------------------------------------------
 20.0 Required Worpess CSS
-    Adapted from Twenty Sixteen
+	Adapted from Twenty Sixteen
 --------------------------------------------------------------*/
 
 .wp-caption {
@@ -550,13 +564,13 @@ input[type="search"] {
 }
 
 .wp-caption-text {
-    margin-top: 1em;
+	margin-top: 1em;
 	font-style: italic;
 }
 
 // https://foundation.zurb.com/sites/docs/sticky.html#sticky-navigation ?
 .sticky {
-    /* Currently not using */
+	/* Currently not using */
 }
 
 .screen-reader-text {
@@ -572,7 +586,7 @@ input[type="search"] {
 }
 
 .screen-reader-text {
-    position: absolute !important;
+	position: absolute !important;
 }
 
 .gallery-caption {
@@ -580,7 +594,11 @@ input[type="search"] {
 }
 
 img .alignleft {
-    padding-right: 1em;
+	padding-right: 1em;
+}
+
+.alignright {
+	float: right;
 }
 
 .aligncenter {
@@ -589,20 +607,30 @@ img .alignleft {
 	margin: 0 auto;
 }
 
+/* little extra hack used to overwrite a foundation menu default */
+.no-padding-left {
+	padding-left: 0 !important;
+}
 
+/* hacky little extra overriding the foundation styles */
+.footer-navigation-top .sub-menu .menu-item {
+	float: left !important;
+	clear: both;
+}
 
+/* little extra for the off canvas sub menus  might be availabe in settings */
+.off-canvas .sub-menu a {
+	color: $secondary-color;
+}
 
+.off-canvas .sub-menu a:hover {
+	color: $white;
+}
 
+.large-text-right {
+	text-align: left;
 
-
-
-
-
-
-
-
-
-
-
-
-
+	@include breakpoint(large) {
+		text-align: right;
+	}
+}

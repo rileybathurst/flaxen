@@ -9,53 +9,58 @@
 </head>
 
 <body <?php body_class(); ?>>
-	
-	<!-- canvas wrappers -->
-    <div class="off-canvas-wrapper">
-        <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
 
-            <!-- this is the off canvas aka small menu -->
-            <div class="off-canvas position-top hide-for-print" id="my-info" data-off-canvas data-position="right">
+	<!-- canvas wrappers -->
+	<div class="off-canvas-wrapper">
+		<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+			<!-- this is the off canvas aka hidden menu -->
+			<div class="off-canvas position-top hide-for-print" id="my-info" data-off-canvas data-position="right">
 
 				<h2 class="text-center breathe-before"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo bloginfo( 'name' ); ?></a></h2>
 				<hr />
-                
-                <?php if ( has_nav_menu( 'top' ) ) { ?>
-                        <nav>
-                            <?php
-                                // Primary navigation menu.
-                                wp_nav_menu( array(
-									
-									// needs to run a grid to evenly distribute from the center when above medium size
-									
-                                    'theme_location'    => 'top',
-                                    'items_wrap'        => '<ul class="vertical medium-horizontal menu text-center">%3$s</ul>'
-                                ) );
-                            ?>
-                        </nav><!-- .main-navigation -->
-                        <hr />
-                    
-                <?php } else { ?>
-                    <ul class="inline-list right main-navigation"><li><a href="<?php echo esc_url( home_url( '/' ) ); ?>wp-admin/nav-menus.php">Put the menu in.</a></li></ul>
-                <?php } ?>
-                
-                <?php if ( has_nav_menu( 'social' ) ) { ?>
-					<nav>
-						<?php
-							// Primary navigation menu.
-							wp_nav_menu( array(
-								// needs to run a grid to evenly distribute from the center when above medium size
 
-								'theme_location'    => 'social',
-								'items_wrap'        => '<ul class="vertical medium-horizontal menu text-center">%3$s</li></ul>'
-							) );
+				<?php if ( has_nav_menu( 'top' ) ) { ?>
+						<nav>
+							<?php
+								// Primary navigation menu.
+								wp_nav_menu( array(
+
+									// needs to run a grid to evenly distribute from the center when above medium size
+
+									'theme_location'    => 'top',
+									'items_wrap'        => '<ul class="vertical medium-horizontal menu text-center">%3$s</ul>'
+								) );
+							?>
+						</nav><!-- .main-navigation -->
+						<hr />
+
+				<?php } else { ?>
+					<ul class="inline-list right main-navigation"><li><a href="<?php echo esc_url( home_url( '/' ) ); ?>wp-admin/nav-menus.php">Put the menu in.</a></li></ul>
+				<?php } ?>
+
+				<?php if ( has_nav_menu( 'social' ) ) { ?>
+					<nav class="footer-social" role="navigation" aria-label="<?php esc_attr_e( 'Footer Social Links Menu', 'twentyseventeen' ); ?>">
+						<?php
+							wp_nav_menu(
+								array(
+									'theme_location' => 'social',
+									'menu_class'     => 'social-links-menu text-center margin-0',
+									'depth'          => 1,
+									'link_before'    => '<span class="screen-reader-text">',
+									'link_after'     => '</span>' . twentyseventeen_get_svg( array( 'icon' => 'chain' ) ),
+								)
+							);
 						?>
-					 </nav><!-- .main-navigation -->
-                <?php } ?>
-            </div>
-            
-            <!--  this is the in canvas -->
-            <div class="off-canvas-content" data-off-canvas-content>
+					</nav><!-- .social-navigation -->
+				<?php } /*end if has_nav_menu */ else { ?>
+					<p class="footer-social">If your an admin you can put the menu in</p>
+				<?php } /*end else has_nav_menu*/ ?>
+
+			</div>
+
+			<!--  this is the in canvas -->
+			<div class="off-canvas-content" data-off-canvas-content>
 				<div id="page" class="site">
 
 					<!-- use the foundation visibilty class -->
@@ -71,15 +76,15 @@
 						<!-- needs to be shown in the pages that this is the promo page -->
 						<!-- if (get_option('header-promo')) { ?>
 							<h3 class="header-promo cards">
-								<a href="<?php echo get_option('header-promo-link'); ?>"><?php echo get_option('header-promo-title'); ?></a>
+								<a href="<!-- php echo get_option('header-promo-link'); ?>"><!-- php echo get_option('header-promo-title'); ?></a>
 							</h3>
 						<!-- } else { ?>
 							<!-- if admin -->
 							<!-- <p class="header-promo cards">Did you know you can put a promo page here. Show a cool page on that functionality in the backend <a href="#">Cool page</a></p> -->
 						<!-- } -->
 
-						<p class="header-promo cards text-center"><a href="<?php echo esc_url( home_url( '/' ) ); ?>my-programs/">Start With a Free Discovery Session</a></p>
-						
+						<p class="header-promo cards text-center"><a href="<?php echo esc_url( home_url( '/' ) ); ?>discovery/">Start With a Free Discovery Session</a></p>
+
 						<?php if ( has_nav_menu( 'top' ) ) { ?>
 							<div class="navigation-top text-right">
 								<button class="button" type="button" data-open="my-info">Menu</button><!-- toggle off canvas -->
@@ -90,7 +95,7 @@
 								<p>Put the menu in</p>
 							</div>
 						<?php } ?>
-		
+
 <!-- Left Open
 	#page
 	#masthead

@@ -2,9 +2,7 @@
 /*  
  *  Template Name: Discovery
  */ 
-?>
-
-<?php get_header(); ?>
+get_header(); ?>
 
 <!-- Start the main container -->
 <div class="container" role="document">
@@ -65,44 +63,41 @@
 					<small class="form-error">A full name is required.</small>
 
 					<label for="email" class="right-medium-up">email:*</label>
-					<input name="email" type="text" required pattern="email" id="email"  
+					<input name="email" type="text" required pattern="email" id="email"
 						<?php if ( is_user_logged_in() ) { ?>
 							value="<?php echo $current_user->user_email; ?>"
 						<?php } else { ?>
-							placeholder="jane at php the_url"
-						<?php } ?>       
+							placeholder="amanda at authentic alignment wellness"
+						<?php } ?>
 					/><small class="form-error">An email address is required.</small>
 
 					<label for="phone" class="right-medium-up">Phone:</label>
 					<input name="phone" type="text" required id="phone" placeholder="&#40;775&#41;">
 
+					<p>What are your 3 biggest obstacles to being in your peak health?</p>
 
-					<p>Can you describe three activities in your daily life that cause your symptoms to be irritated?  How long does this take - seconds, minutes, or hours?  And finally, how long does it take to resolve back to the baseline level - seconds, minutes, or hours?</p>
-
-					<label for="act1" class="right-medium-up">1:</label>
-					<input name="act1" type="text" id="act1" placeholder="walking, 1 hour to hurt, 1 hour to relieve">
+					<label for="obs1" class="right-medium-up">1:</label>
+					<input name="obs1" type="text" id="obs1" placeholder="commitments to family, friends and work">
 
 					<label for="act2" class="right-medium-up">2:</label>
-					<input name="act2" type="text" id="act2" placeholder="stairs, 3 flights to hurt, 30 minutes to relieve">
+					<input name="obs2" type="text" id="obs2" placeholder="previous injury or ailment">
 
 					<label for="act3" class="right-medium-up">3:</label>
-					<input name="act3" type="text" id="act3" placeholder="cycling, 1 mile, next day to relieve">
-                                
-					
-					<label for="start">When and how did the symptoms start?</label>
-					<textarea name="start" id="start" placeholder="Last tuesday while at work"></textarea>
-					
-					
-					<label for="act1" class="right-medium-up">1:</label>
-					<input name="act1" type="text" id="act1" placeholder="walking, 1 hour to hurt, 1 hour to relieve">
+					<input name="obs3" type="text" id="obs3" placeholder="candy just tastes too good">
+
+					<label for="significant">What is one thing that you could be doing for yourself that you know would have a significant impact on your health and well-being?</label>
+					<textarea name="significant" id="significant" placeholder="Having someone to check I'm getting up and off the couch"></textarea>
+
+					<label for="idol" class="right-medium-up">Who is your biggest idol and why?</label>
+					<input name="idol" type="text" id="idol" placeholder="my sister">
 					
 					
-					<label for="act1" class="right-medium-up">1:</label>
-					<input name="act1" type="text" id="act1" placeholder="walking, 1 hour to hurt, 1 hour to relieve">
+					<label for="band" class="right-medium-up">What's your favorite band?</label>
+					<input name="band" type="text" id="band" placeholder="Florence and the Machine">
 					
 					
-					<label for="start">When and how did the symptoms start?</label>
-					<textarea name="start" id="start" placeholder="Last tuesday while at work"></textarea>
+					<label for="find">How did you find Authentic Alignment Wellness?</label>
+					<textarea name="find" id="find" placeholder="friends told me about it"></textarea>
 								
 					<div data-abide-error class="alert callout" style="display: none;">
 						<p><i class="fi-alert"></i> There are some errors in your form.</p>

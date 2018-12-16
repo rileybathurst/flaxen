@@ -1,334 +1,226 @@
-<?php get_header(); 
+<?php
+/*
+ *  Template Name: View Single
+ */
 
-    //define variable for url bar .php?n=
-    $unid = $_GET['n'];
-?>
+get_header();
 
-<!-- Start the main container -->
-<div class="container" role="document">
+	//define variable for url bar .php?n=
+	$unid = $_GET['n'];
 
-    <?php if (have_posts()) { ?>
-        <?php while (have_posts()) : the_post(); 
+	if ( have_posts() ) {
+		while ( have_posts() ) {
+			the_post();
 
-            /*
-             * Pull in a different sub-template, depending on the Post Format.
-             * 
-             * Make sure that there is a default '<tt>format.php</tt>' file to fall back to
-             * as a default. Name templates '<tt>format-link.php</tt>', '<tt>format-aside.php</tt>', etc.
-             *
-             * You should use this in the loop.
-             */
+		if(get_post_meta($id, "split-entry-title-top", true) !== '') { ?>
+			<h1 class="title-top split-entry-title-top text-right"><?php echo get_post_meta($post->ID, "split-entry-title-top", true); ?></h1>
+		<?php } else { ?>
+			<h1 class="title-top split-entry-title-top text-right"><?php the_title(); ?></h1>
+		<?php } ?>
 
-            $format = get_post_format();
-            get_template_part( 'format', $format );
-            ?>
-    
-            <div class="medium-gray">
-                <div class="grid-container">
-                    <div class="grid-x grid-padding-x">
-                        <div class="cell breathe-before breathe-after">
-                            <div class="breadcrumb"><?php get_breadcrumb(); ?></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="grid-container">
-                <div class="grid-x grid-padding-x">
-                    <div class="large-9 cell">
-                        <?php the_post_thumbnail(); ?>
-                    </div>
-                </div>
-            </div>
-                
-            <div class="grid-container">
-                <div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                    <div class="grid-x grid-padding-x">
-                        
-                        <div class="small-12 medium-4 large-3 cell breathe-after">
-                            <div class=" card title-card">
-                                <h2 class="breathe-before text-center"><?php the_title(); ?></h2>
-                                <hr>
-                            </div>
-                        </div>
+</header><!-- #masthead -->
 
-                        <!-- post -->
-                        <div class="small-12 large-9 cell breathe-before-2-5 breathe-after">
-                            <?php the_content(); ?>
+		<?php if(get_post_meta($id, "split-entry-header-lower", true) !== '') { ?>
+			<h1 class="title-bottom split-entry-header-lower"><?php echo get_post_meta($post->ID, "split-entry-header-lower", true); ?></h1>
+		<?php }
 
-                            
-                            <!-- multiple options due to not being logged in would see all guest orders -->
-                            <?php 
-                                $current_user = wp_get_current_user();
-                                $current_id = $current_user->ID;    
-                                $user_info = get_userdata( $current_id );
+		if ( has_post_thumbnail() ) {
+		/* is there a way to add a style to this without wrapping it in a div? class="title-image" */ ?>
+			<div class="title-image">
+				<?php the_post_thumbnail(); ?>
+			</div>
+		<?php } else { ?>
+			<div class="title-image">
+				<img src="<?php echo get_template_directory_uri(); ?>/assets/images/header.jpg" alt="stay gold header image" />
+			</div>
+		<?php } ?>
 
-                                if (is_user_logged_in ()) {
-                                    $user_role = implode(', ', $user_info->roles);
-                                }
+<!-- these are purposley empty as they are grid only elements -->
+<div class="title-border"><!-- stay gold --></div>
+<div class="border-extender"><!-- stay gold --></div>
 
-                                if ($user_role == 'administrator') { 
+<div class="main-bg-color cards"><!-- stay gold --></div>
+<div class="main">
 
-                                // first extract the current user email as the variable 
-                                $current_user = wp_get_current_user();
-                                $current_email = $current_user->user_email;    
+	<div class="col-1 col-end-4 row-1 large-col-5 large-col-end-8">
+		<?php the_content(); ?>
 
-                            // then search for orders -->
-                            $orders = $wpdb->get_results( 
-                                    "
-                                        SELECT * 
-                                        FROM pcrv_inquiry
-                                        WHERE unid = '$unid';
-                                    "
-                                );
-                                foreach ( $orders as $order ) 
-                                { ?>
-                            
-                            <ul class="no-bullet second-rows grid-x grid-padding-x">
+		<!-- Im pretty syre there is a faster cleaner way of doing this -->
+		<?php
+			$current_user = wp_get_current_user();
+			$current_id = $current_user->ID;
+			$user_info = get_userdata( $current_id );
 
-                    <!-- type -->
-                            <li class="cell">TYPE |
-                                    <strong>
-                                        <?php echo $order->type; ?>
-                                    </strong>
-                                </li>            
+			if (is_user_logged_in ()) {
+				$user_role = implode(', ', $user_info->roles);
+			}
 
-                    <!-- unid -->
-                            <li class="cell">ORDER NUMBER |
-                                    <strong>
-                                        <?php echo $order->unid; ?>
-                                    </strong>
-                                </li>
+			if ($user_role == 'administrator') {
 
-                    <!-- name -->
+			// first extract the current user email as the variable
+			$current_user = wp_get_current_user();
+			$current_email = $current_user->user_email;
 
-                                <li class="cell">NAME |
-                                    <strong>
-                                        <?php echo $order->name; ?>
-                                    </strong>
-                                </li>
+		// then search for orders -->
+		$orders = $wpdb->get_results(
+				"
+					SELECT *
+					FROM flaxen_inquiry
+					WHERE unid = '$unid';
+				"
+			);
+			foreach ( $orders as $order )
+			{ ?>
 
-                    <!-- add1 -->
-                                <li class="cell">ADDRESS |
-                                    <strong>
-                                        <?php echo $order->add1; ?>
-                                    </strong>
-                                </li>
+				<ul class="no-bullet second-rows grid-x grid-padding-x">
 
-                    <!-- add2 -->
-                                <li class="cell">SUBURB |
-                                    <strong>
-                                        <?php echo $order->add2; ?>
-                                    </strong>
-                                </li>
+<!-- type -->
+		<li class="cell">TYPE |
+				<strong>
+					<?php echo $order->type; ?>
+				</strong>
+			</li>
 
-                    <!-- add3 add4 -->
-                                <li class="small-8 cell">CITY | 
-                                    <strong>
-                                        <?php echo $order->add3; ?>
-                                    </strong>
-                                </li>
+<!-- unid -->
+		<li class="cell">ORDER NUMBER |
+				<strong>
+					<?php echo $order->unid; ?>
+				</strong>
+			</li>
 
-                                <!-- hack to fix the background colour with the two lines in one for postcode -->
-                                <li></li>
+<!-- name -->
 
-                                <li class="small-4 cell">POSTCODE |
-                                    <strong>
-                                        <?php echo $order->add4; ?>
-                                    </strong>
-                                </li>
+			<li class="cell">NAME |
+				<strong>
+					<?php echo $order->name; ?>
+				</strong>
+			</li>
 
-                    <!-- email -->
-                                <li class="cell">EMAIL |
-                                    <strong>
-                                        <?php echo $order->email; ?>
-                                    </strong>
-                                </li>
+<!-- email -->
+			<li class="cell">EMAIL |
+				<strong>
+					<?php echo $order->email; ?>
+				</strong>
+			</li>
 
-                    <!-- phone -->
-                                <li class="cell">PHONE |
-                                    <strong>
-                                        <?php echo $order->phone; ?>
-                                    </strong>
-                                </li>
+<!-- phone -->
+			<li class="cell">PHONE |
+				<strong>
+					<?php echo $order->phone; ?>
+				</strong>
+			</li>
 
-                                <?php if ($order->type == consultation)  { ?>
+<!-- obs1 -->
+			<li class="cell">OBSTACE 1 |
+				<strong>
+					<?php echo $order->obs1; ?>
+				</strong>
+			</li>
 
-                                    <!-- goal -->
-                                    <li class="cell">GOAL |
-                                        <strong>
-                                            <?php echo $order->goal; ?>
-                                        </strong>
-                                    </li>
+<!-- obs2 -->
+			<li class="cell">OBSTACE 2 |
+				<strong>
+					<?php echo $order->obs2; ?>
+				</strong>
+			</li>
 
-                                    <!-- pain -->
-                                    <li class="cell">PAIN |
-                                        <strong>
-                                            <?php echo $order->pain; ?>
-                                        </strong>
-                                    </li>
+					<!-- obs3 -->
+			<li class="cell">OBSTACE 3 |
+				<strong>
+					<?php echo $order->obs3; ?>
+				</strong>
+			</li>
+<!-- 	significant -->
+			<li class="cell">SIGNIFICANT |
+				<strong>
+					<?php echo $order->	significant; ?>
+				</strong>
+			</li>
+<!-- idol -->
+			<li class="cell">IDOL |
+				<strong>
+					<?php echo $order->idol; ?>
+				</strong>
+			</li>
+<!-- band -->
+			<li class="cell">BAND |
+				<strong>
+					<?php echo $order->band; ?>
+				</strong>
+			</li>
+<!-- find -->
+			<li class="cell">FIND |
+				<strong>
+					<?php echo $order->find; ?>
+				</strong>
+			</li>
 
-                                    <!-- act1 -->
-                                    <li class="cell">ACTIVITY 1 |
-                                        <strong>
-                                            <?php echo $order->act1; ?>
-                                        </strong>
-                                    </li>
+<!-- terms -->
+		<li class="cell">Terms and Conditions confirm |
+				<strong>
+					<?php if ($order->terms == 1) {
+						echo 'Yes';
+					} else {
+						echo 'No';
+					} ?>
+				</strong>
+			</li>
 
-                                    <!-- act2 -->
-                                    <li class="cell">ACTIVITY 2 |
-                                        <strong>
-                                            <?php echo $order->act2; ?>
-                                        </strong>
-                                    </li>
+ <!-- timenow -->
+			<li class="cell">DATE SUBMITTED |
+				<strong>
+					<?php echo $order->timenow; ?>
+				</strong>
+			</li>
 
-                                    <!-- act3 -->
-                                    <li class="cell">ACTIVITY 3 |
-                                        <strong>
-                                            <?php echo $order->act3; ?>
-                                        </strong>
-                                    </li>
+		</ul>
 
-                                    <!-- start -->
-                                    <li class="cell">HOW THE ISSUE STARTED |
-                                        <strong>
-                                            <?php echo $order->start; ?>
-                                        </strong>
-                                    </li>
+			<?php } ?>
 
-                                    <!-- manage -->
-                                    <li class="cell">HOW ARE YOU MANAGING |
-                                        <strong>
-                                            <?php echo $order->manage; ?>
-                                        </strong>
-                                    </li>
+			<!-- back and forward -->
 
-                                    <!-- previous -->
-                                    <li class="cell">PAST ISSUE |
-                                        <strong>
-                                            <?php echo $order->previous; ?>
-                                        </strong>
-                                    </li>
+			<hr class="no-print">
 
-                                    <!-- physician -->
-                                    <li class="cell">PHYSICIAN |
-                                        <strong>
-                                            <?php echo $order->physician; ?>
-                                        </strong>
-                                    </li>
+			<?php
+				// pagination
 
-                                     <!-- health -->
-                                    <li class="cell">HEALTH ISSUES |
-                                        <strong>
-                                            <?php echo $order->health; ?>
-                                        </strong>
-                                    </li>   
+				// number of rows
+				$number = $wpdb->get_var(
+					"SELECT COUNT(*) FROM pcrv_inquiry;"
+				);
 
-                                <?php } ?>
+				// next & previous
+				$above = $unid + 1;
+				$below = $unid - 1;
 
-                    <!-- add_notes -->
-                                <li class="cell">ADDITIONAL NOTES |
-                                    <strong>
-                                        <?php echo $order->add_notes; ?>
-                                    </strong>
-                                </li>
+			// Next
+				if ($number > $unid) { ?>
+					<a href="<?php esc_url( home_url( '/' ) ); ?>view-order/?n=<?php echo $above; ?>" aria-label="Next" class="button">Next Order</a>
+				<?php } else { ?>
+					<a href="<?php esc_url( home_url( '/' ) ); ?>view-order/?n=<?php echo $above; ?>" aria-label="Next" class="button" disabled>Next Order</a>
+				<?php }
 
-                    <!-- questions -->
-                                <li class="cell">QUESTIONS |
-                                    <strong>
-                                        <?php echo $order->questions; ?>
-                                    </strong>
-                                </li>
+				if ($unid>1)  { ?>
+					<a href="<?php esc_url( home_url( '/' ) ); ?>view-order/?n=<?php echo $below; ?>" aria-label="Previous" class="button">Previous Order</a>
+				<?php } else { ?>
+					<a href="<?php esc_url( home_url( '/' ) ); ?>view-order/?n=<?php echo $below; ?>" aria-label="Previous" class="button" disabled>Previous Order</a>
+				<?php } ;?>
 
-                    <!-- FileUpload -->
-                                <li class="cell">File               
-                                    <img src="<?php echo $order->attachment; ?>" alt="uploaded" >
-                                </li>
+			<div class="no-print">
+				<div class="cell">
+					<p><a href="<?php echo esc_url( home_url( '/' ) ); ?>view" class="button">Back to orders</a></p>
+				</div>
+			</div>
 
-                    <!-- terms -->
-                            <li class="cell">Terms and Conditions confirm |
-                                    <strong>                                
-                                        <?php if ($order->terms == 1) { 
-                                            echo 'Yes';
-                                        } else { 
-                                            echo 'No'; 
-                                        } ?>      
-                                    </strong>
-                                </li>
+		<?php } else {
+		echo '<li>Sorry your not an admin.</li>';
+		}
+		?>
 
-                     <!-- timenow -->
-                                <li class="cell">DATE SUBMITTED |
-                                    <strong>
-                                        <?php echo $order->timenow; ?>
-                                    </strong>
-                                </li>
-                                
-                            </ul>
+	</div> <!-- .row -->
+</div> <!-- .main -->
 
-                            <?php  } ?>
+		<?php } // endwhile have posts
 
-                            <!-- back and forward --> 
-
-                                <hr class="no-print">
-
-                                <?php 
-                                    // pagination
-                                    
-                                    // number of rows
-                                    $number = $wpdb->get_var( 
-                                        "SELECT COUNT(*) FROM pcrv_inquiry;"
-                                    );
-                                    
-                                    // next & previous
-                                    $above = $unid + 1; 
-                                    $below = $unid - 1;
-
-                                // Next                                
-                                    if ($number > $unid) { ?>
-                                        <a href="<?php esc_url( home_url( '/' ) ); ?>view-order/?n=<?php echo $above; ?>" aria-label="Next" class="button">Next Order</a>
-                                    <?php } else { ?>
-                                        <a href="<?php esc_url( home_url( '/' ) ); ?>view-order/?n=<?php echo $above; ?>" aria-label="Next" class="button" disabled>Next Order</a>
-                                    <?php }
-                            
-                                    if ($unid>1)  { ?>
-                                        <a href="<?php esc_url( home_url( '/' ) ); ?>view-order/?n=<?php echo $below; ?>" aria-label="Previous" class="button">Previous Order</a>
-                                    <?php } else { ?>
-                                        <a href="<?php esc_url( home_url( '/' ) ); ?>view-order/?n=<?php echo $below; ?>" aria-label="Previous" class="button" disabled>Previous Order</a>
-                                    <?php } ;?>
-                            
-                                <div class="no-print">
-                                    <div class="cell">
-                                        <p><a href="<?php echo esc_url( home_url( '/' ) ); ?>view" class="button">Back to orders</a></p>
-                                    </div>
-                                </div>
-
-                            <?php } else {
-                            echo '<li>Sorry your not an admin.</li>';
-                            }
-                            ?>
-                            
-                        </div>
-                        
-                        <hr>
-
-                    </div> <!-- .grid-x grid-padding-x -->
-                </div> <!-- #post -->
-            </div> <!-- .grid-container -->
-                
-        <?php endwhile; // while have posts 
-        } else { ?>
-    
-            <div class="grid-container">
-                <div class="grid-x grid-padding-x">
-                    <div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-                        <p>Hmmm, seems like what you were looking for isn't here.  You might want to give it another try - the server might have hiccuped - or maybe you even spelled something wrong (though it's more likely <strong>I</strong> did).</p>
-                        <p>How about head back to the <a href="/" title="home">home page</a> and start again</p>
-                     </div> <!-- #post -->
-                </div>
-            </div> <!-- .grid-container -->
-	
-    <?php } ?><!-- if have posts -->
-</div>
-			
-<?php get_footer(); ?>
+   } // end if
+get_footer(); ?>

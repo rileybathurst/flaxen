@@ -545,19 +545,15 @@ function prefix_admin_discovery() {
 			'email'                     => $_POST['email'] ,
 			'phone'                     => $_POST['phone'] ,
 
-			'goal'                     => $_POST['goal'] ,
-			'pain'                     => $_POST['pain'] ,
-			'act1'                     => $_POST['act1'] ,
-			'act2'                     => $_POST['act2'] ,
-			'act3'                     => $_POST['act3'] ,
-			'start'                    => $_POST['start'] ,
-			'manage'                   => $_POST['manage'] ,
-			'previous'                 => $_POST['previous'] ,
-			'physician'                => $_POST['physician'] ,
-			'health'                   => $_POST['health'] ,
+			'obs1'                     => $_POST['obs1'] ,
+			'obs2'                     => $_POST['obs2'] ,
+			'obs3'                     => $_POST['obs3'] ,
 
-			'add_notes'                => $_POST['add_notes'] ,
-			'questions'                => $_POST['questions']
+			'significant'                    => $_POST['significant'] ,
+			'idol'                   => $_POST['idol'] ,
+			'band'                 => $_POST['band'] ,
+
+			'find'                => $_POST['find'] ,
 		)
 	);
 

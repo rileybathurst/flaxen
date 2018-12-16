@@ -10,10 +10,9 @@
 <?php
 	if ( have_posts() ) {
 		while ( have_posts() ) {
-			the_post(); ?>
+			the_post();
 
-
-		<?php if(get_post_meta($id, "split-entry-title-top", true) !== '') { ?>
+		if(get_post_meta($id, "split-entry-title-top", true) !== '') { ?>
 			<h1 class="title-top split-entry-title-top text-right"><?php echo get_post_meta($post->ID, "split-entry-title-top", true); ?></h1>
 		<?php } else { ?>
 			<h1 class="title-top split-entry-title-top text-right"><?php the_title(); ?></h1>

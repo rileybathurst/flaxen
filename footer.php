@@ -4,8 +4,8 @@
 	off-canvas-wrapper-inner
 	off-canvas-content
 -->
-<div class="footer-border show-for-medium"><!-- stay gold --></div>
-<div class="footer-border-extender show-for-medium"><!-- stay gold --></div>
+<div class="footer-border show-for-large"><!-- stay gold --></div>
+<div class="footer-border-extender show-for-large"><!-- stay gold --></div>
 
  <div class="flaxen-footer cards">
 	<div class="footer-bg-color cards"><!-- stay gold --></div>
@@ -14,26 +14,25 @@
 			array(
 				'theme_location' => 'top',
 				'menu_id'        => 'top-menu',
-				'menu_class'     => 'vertical menu',
+				'menu_class'     => 'vertical menu align-left',
 			)
 		); ?>
 	</div>
 	<ul class="footer-contact vertical menu">
 		<h4>Email:</h4>
-		<li><a href="mailto:authenticalignmentwellness@gmail.com">authenticalignmentwellness@gmail.com</a></li>
+		<!-- extra alignment needed as nothing as has links -->
+		<li><a href="mailto:authenticalignmentwellness@gmail.com" class="no-padding-left">authenticalignmentwellness@gmail.com</a></li>
 
 		<h4>Winter Office Hours:</h4>
-		
+
 			<li>Wednesday: 9am-6pm</li>
 			<li>Thursday: 9am-6pm</li>
 			<li>Friday: 9am-6pm</li>
 			<li>Saturday-Tuesday: Closed</li>
-
-
 	</ul>
 </div>
 
-<img src="https://images.unsplash.com/photo-1542128722-d6fe34923abc?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=83b397fc586354b1b988e43a9e81416c&auto=format&fit=crop&w=1650&q=80" alt="food" class="footer-image">
+<img src="http://authenticalignmentwellness.com/wp-content/uploads/2018/12/Amanda_Lifestyles_0223.jpg" alt="authentic alignment wellness can help with your outlook on life" class="footer-image">
 
 <?php if ( has_nav_menu( 'social' ) ) { ?>
 	<nav class="footer-social" role="navigation" aria-label="<?php esc_attr_e( 'Footer Social Links Menu', 'twentyseventeen' ); ?>">
@@ -52,7 +51,7 @@
 <?php } /*end if has_nav_menu */ else { ?>
 	<p class="footer-social">If your an admin you can put the menu in</p>
 <?php } /*end else has_nav_menu*/ ?>
-	
+
 </div><!-- #page opened in header.php-->
 
 </div> <!-- .off-canvas-wrapper -->
