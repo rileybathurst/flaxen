@@ -186,7 +186,7 @@ get_header();
 
 				// number of rows
 				$number = $wpdb->get_var(
-					"SELECT COUNT(*) FROM pcrv_inquiry;"
+					"SELECT COUNT(*) FROM flaxen_inquiry;"
 				);
 
 				// next & previous
@@ -208,7 +208,7 @@ get_header();
 
 			<div class="no-print">
 				<div class="cell">
-					<p><a href="<?php echo esc_url( home_url( '/' ) ); ?>view" class="button">Back to orders</a></p>
+					<p><a href="<?php echo esc_url( home_url( '/' ) ); ?>view-results/?r=" class="button">Back to orders</a></p>
 				</div>
 			</div>
 

@@ -319,27 +319,75 @@ $global-grid-gap: 20px;
 	}
 }
 
-/* Row numbers */
-/* Figure out how to have these auto do by nth child */
-/* Might be smarter to have these hard coded by style as the numbers get bigger */
-.row-1 {
-	grid-row: 1;
+/*--------------------------------------------------------------
+3.3 Article Grid
+--------------------------------------------------------------*/
+.main h1, .main h2, .main h3, .main h4, .main h5, .main h6, .main hr {
+	grid-column-start: 1;
+	grid-column-end: 5;
+
+	@include breakpoint(large) {
+		grid-column-start: 2;
+		grid-column-end: 8;
+	}
 }
 
-.row-2 {
-	grid-row: 2;
+.main hr {
+	width: 100%;
 }
 
-.row-3 {
-	grid-row: 3;
+.main p, .main ul {
+	grid-column-start: 1;
+	grid-column-end: 4;
+
+	@include breakpoint(large) {
+		grid-column-start: 5;
+		grid-column-end: 8;
+	}
 }
 
-.row-4 {
-	grid-row: 4;
+/* Slightly hacky fix to the paragraph not needing alignment this isnt great and its ugly but functional */
+.main p[style="text-align:center"] {
+	text-align: left !important;
+	grid-column-start: 2;
+	grid-column-end: 5;
+
+	@include breakpoint(large) {
+		grid-column-start: 5;
+		grid-column-end: 8;
+	}
+}
+
+.main p[style="text-align:right"] {
+	text-align: left !important;
+	grid-column-start: 2;
+	grid-column-end: 5;
+
+	@include breakpoint(large) {
+		grid-column-start: 5;
+		grid-column-end: 8;
+	}
+}
+
+.main blockquote {
+	grid-column-start: 1;
+	grid-column-end: 5;
+
+	font-size: 1.1875rem;
+	line-height: $header-lineheight;
+	margin-top: 0;
+	margin-bottom: $header-margin-bottom;
+		
+	@include breakpoint(large) {
+		font-size: 1.9375rem;
+	}
+	@include breakpoint(large) {
+		text-align: right;
+	}
 }
 
 /*--------------------------------------------------------------
-3.3 Footer Grid
+3.4 Footer Grid
 --------------------------------------------------------------*/
 
 .flaxen-footer {
@@ -390,9 +438,27 @@ $global-grid-gap: 20px;
 }
 
 .header-promo {
-	background: $light-gray;
+
+}
+
+.header-promo a {
 	padding: $global-padding;
+	background: $light-gray;
 	border-radius: $global-radius;
+	transition: $button-transition;
+}
+
+.header-promo a:hover {
+	background: $primary-color;
+	color: $secondary-color;
+}
+
+/*--------------------------------------------------------------
+10.0 Links
+--------------------------------------------------------------*/
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a, li a {
+	transition: $button-transition;
 }
 
 /*--------------------------------------------------------------
@@ -405,6 +471,10 @@ $global-grid-gap: 20px;
 
 svg {
 	fill: currentColor;
+}
+
+.position-top {
+	height: auto;
 }
 
 .current-menu-item a {
