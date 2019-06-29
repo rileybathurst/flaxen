@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
@@ -165,9 +164,9 @@ function theme_options_page()
                 do_settings_sections("theme-options");
 
                 // Add the submit button to serialize the options
-                submit_button(); 
+                submit_button();
 
-            ?>          
+            ?>
         </form>
     </div>
     <?php
@@ -241,7 +240,8 @@ function theme_options_panel(){
       'home-settings', // menu_slug
       'home_options_page' // function
   );
-  add_submenu_page( 'theme-options', 'FAQ', 'FAQ', 'manage_options', 'stay_gold-faq', 'stay_gold_faq_page');
+	add_submenu_page( 'theme-options', 'Results', 'Results', 'manage_options', 'stay_gold-results', 'stay_gold_results_page');
+	add_submenu_page( 'theme-options', 'FAQ', 'FAQ', 'manage_options', 'stay_gold-faq', 'stay_gold_faq_page');
 }
 // then hook them up
 add_action('admin_menu', 'theme_options_panel');
@@ -303,6 +303,18 @@ function display_home_1_element()
 
 //this action is executed after loads its core, after registering all actions, finds out what page to execute and before producing the actual output(before calling any action callback)
 add_action("admin_init", "home_options");
+
+// content for the sub pages
+function stay_gold_results_page()
+{
+    ?>
+        <div class="wrap">
+        <h1>Results</h1>
+			<p><a href="<?php echo esc_url( home_url( '/view-results/?r=' ) ); ?>">Results</a></p>
+			<p>Click the link to find all the contact emails you have been sent</p>
+    </div>
+    <?php
+}
 
 // content for the sub pages
 function stay_gold_faq_page()
@@ -531,63 +543,108 @@ function stay_gold_faq_page()
 	}
 	add_filter( '_wp_post_revision_field_my_meta', 'flaxen_display_revisions_fields', 10, 2 );
 
+
+
+
+
+
+
+
+
+
+
+
+
+/*----------------------------------------------------------------------------------------------------*/
+/*FIX ON THE BACKEND*/
 // Discovery form from _POST
+// Change the email that root level mail is sent from
+add_filter( 'wp_mail_from', function( $email ) {
+	return 'authenticalignmentwellness@gmail.com';
+});
+
+add_filter( 'wp_mail_from_name', function( $name ) {
+	return 'Amanda from Authentic Alignment Wellness';
+});
+
+
+
+
+
+// deals with contact form sent through form _POST
 function prefix_admin_discovery() {
-	// Extremley Important to set
-	global $wpdb;
+	// Check if captcha has been checked
+	$captcha = $_POST['g-recaptcha-response'];
 
-	// Whats inserted
-	$wpdb->insert( flaxen_inquiry ,
-		array(
-			'type'                      => 'discovery' ,
-
-			'name'                      => $_POST['name'] ,
-			'email'                     => $_POST['email'] ,
-			'phone'                     => $_POST['phone'] ,
-
-			'obs1'                     => $_POST['obs1'] ,
-			'obs2'                     => $_POST['obs2'] ,
-			'obs3'                     => $_POST['obs3'] ,
-
-			'significant'                    => $_POST['significant'] ,
-			'idol'                   => $_POST['idol'] ,
-			'band'                 => $_POST['band'] ,
-
-			'find'                => $_POST['find'] ,
-		)
-	);
-
-	// give the unid in the next url
-	 $id = $wpdb->insert_id;
-
-	// return safe if the inserted number is above zero and inserted to database
-	// the email may be sent even if the database doesn't update but better to false negative than false positive
-	if ($id>0)  {
+	// If no captcha
+	if(!$captcha){
 		// Redirect
-		wp_redirect( home_url() . '/thanks?n=' . $id );
-
-	} else {
-		// Redirect
-		wp_redirect( home_url() . '/sorry' );
+		wp_redirect( home_url() . '/no-captcha' );
+		exit;
 	}
 
-exit();
+	// When the captcha is checked make sure its not spam
+	$secretKey = "6LdiC4YUAAAAAFQuaFjA7c6O5baXRE9FVVwbJXE2";
+	$ip = $_SERVER['REMOTE_ADDR'];
 
-}
+	$response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&response=".$captcha."&remoteip=".$ip);
+	$responseKeys = json_decode($response,true);
+	if(intval($responseKeys["success"]) !== 1) {
+
+		// Spam
+		wp_redirect( home_url() . '/spam' );
+
+	// captcha sucess
+	} else {
+
+			// Extremley Important to set
+			global $wpdb;
+
+			// Whats inserted
+			$wpdb->insert( flaxen_inquiry ,
+				array(
+					'type'                      => 'discovery' ,
+
+					'name'                      => $_POST['name'] ,
+					'email'                     => $_POST['email'] ,
+					'phone'                     => $_POST['phone'] ,
+
+					'obs1'                     => $_POST['obs1'] ,
+					'obs2'                     => $_POST['obs2'] ,
+					'obs3'                     => $_POST['obs3'] ,
+
+					'significant'                    => $_POST['significant'] ,
+					'idol'                   => $_POST['idol'] ,
+					'band'                 => $_POST['band'] ,
+
+					'find'                => $_POST['find'] ,
+				)
+			);
+
+			// give the unid in the next url
+			 $id = $wpdb->insert_id;
+
+			// return safe if the inserted number is above zero and inserted to database
+			// the email may be sent even if the database doesn't update but better to false negative than false positive
+			if ($id>0)  {
+				// Redirect
+				
+				// thanks to the correct person would also be a nice touch
+				wp_redirect( home_url() . '/thanks?n=' . $id );
+
+			} else {
+				// Redirect
+				wp_redirect( home_url() . '/sorry' );
+			}
+
+		} // close out the captcha sucess
+
+	exit();
+
+} // close out the prefix_admin_contact
+
 add_action( 'admin_post_discovery', 'prefix_admin_discovery' );
 add_action( 'admin_post_nopriv_discovery', 'prefix_admin_discovery' );
-
-// Redirects search queries to the search query _POST
-function prefix_admin_viewresults() {
-    
-    wp_redirect( home_url() . '/view-results/?r=' . $_POST['name']  );  
-    exit;
-
-}
-
-add_action( 'admin_post_viewresults', 'prefix_admin_viewresults' );
-add_action( 'admin_post_nopriv_viewresults', 'prefix_admin_viewresults' );
-
 
 
 

@@ -99,9 +99,8 @@ get_header(); ?>
 					<label for="find">How did you find Authentic Alignment Wellness?</label>
 					<textarea name="find" id="find" placeholder="friends told me about it"></textarea>
 								
-					<div data-abide-error class="alert callout" style="display: none;">
-						<p><i class="fi-alert"></i> There are some errors in your form.</p>
-					</div>
+					<!-- recaptcha -->
+					<div class="g-recaptcha" data-sitekey="6LdiC4YUAAAAANuw48UrjkBkcDkhQvUxZO5N752o"></div>
 
 					<button type="submit" class="button">Submit</button>
 

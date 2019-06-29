@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
-<meta charset="<?php bloginfo( 'charset' ); ?>">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="profile" href="http://gmpg.org/xfn/11">
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
 
-<?php wp_head(); ?>
+	<?php wp_head(); ?>
+	
+	<!-- analytics should be done from the back end to have an updateable code per site -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-12917302-18"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-12917302-18');
+	</script>
+
 </head>
 
 <body <?php body_class(); ?>>
@@ -15,31 +27,34 @@
 		<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
 
 			<!-- this is the off canvas aka hidden menu -->
-			<div class="off-canvas position-top hide-for-print" id="my-info" data-off-canvas data-position="right">
-
+			<div class="off-canvas position-top hide-for-print" id="my-info" data-off-canvas data-position="right"> <!-- should this be an html 5 elemnt -->
 				<h2 class="text-center breathe-before"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo bloginfo( 'name' ); ?></a></h2>
-				<hr />
+				<hr>
 
 				<?php if ( has_nav_menu( 'top' ) ) { ?>
 						<nav>
-							<?php
-								// Primary navigation menu.
+							<?php // Primary navigation menu.
 								wp_nav_menu( array(
-
 									// needs to run a grid to evenly distribute from the center when above medium size
-
 									'theme_location'    => 'top',
-									'items_wrap'        => '<ul class="vertical medium-horizontal menu text-center">%3$s</ul>'
+									'items_wrap'        => '<ul class="vertical medium-horizontal menu text-center">%3$s</ul>' // %3$s is the code for the menu item
 								) );
 							?>
 						</nav><!-- .main-navigation -->
-						<hr />
-
+						<hr>
 				<?php } else { ?>
+				
+				
+				
+				<!--need to put in the correct if admin with the link -->
+				
+				
+				
+				
 					<ul class="inline-list right main-navigation"><li><a href="<?php echo esc_url( home_url( '/' ) ); ?>wp-admin/nav-menus.php">Put the menu in.</a></li></ul>
-				<?php } ?>
+				<?php }
 
-				<?php if ( has_nav_menu( 'social' ) ) { ?>
+				if ( has_nav_menu( 'social' ) ) { ?>
 					<nav class="footer-social" role="navigation" aria-label="<?php esc_attr_e( 'Footer Social Links Menu', 'twentyseventeen' ); ?>">
 						<?php
 							wp_nav_menu(
@@ -54,10 +69,17 @@
 						?>
 					</nav><!-- .social-navigation -->
 				<?php } /*end if has_nav_menu */ else { ?>
+								
+				
+				
+				<!--need to put in the correct if admin with the link -->
+				
+				
+				
+				
 					<p class="footer-social">If your an admin you can put the menu in</p>
 				<?php } /*end else has_nav_menu*/ ?>
-
-			</div>
+			</div> <!-- end of the off canvas -->
 
 			<!--  this is the in canvas -->
 			<div class="off-canvas-content" data-off-canvas-content>
@@ -91,6 +113,13 @@
 							</div><!-- .navigation-top -->
 						<?php } else { ?>
 							<div class="navigation-top text-right">
+												
+				
+				<!--need to put in the correct if admin with the link -->
+				
+				
+				
+				
 								<!-- Add the link to edit -->
 								<p>Put the menu in</p>
 							</div>
