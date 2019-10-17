@@ -8,7 +8,6 @@
 	<?php wp_head(); ?>
 
 	<?php if (is_page ('discovery', 'discovery-form')) { ?>
-		<!-- recaptcha -->
 		<script src='https://www.google.com/recaptcha/api.js?render=6LdiC4YUAAAAANuw48UrjkBkcDkhQvUxZO5N752o'></script>
 	<?php } ?>
 	

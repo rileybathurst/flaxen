@@ -100,7 +100,7 @@ get_header(); ?>
 					<textarea name="find" id="find" placeholder="friends told me about it"></textarea>
 								
 					<!-- recaptcha -->
-					<div class="g-recaptcha" data-sitekey="6LdiC4YUAAAAANuw48UrjkBkcDkhQvUxZO5N752o"></div>
+					<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
 
 					<button type="submit" class="button">Submit</button>
 
