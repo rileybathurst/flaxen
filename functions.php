@@ -1,30 +1,9 @@
 <?php
-
-/**
- * Sets up theme defaults and registers support for various WordPress features.
- *
- * Note that this function is hooked into the after_setup_theme hook, which
- * runs before the init hook. The init hook is too late for some features, such
- * as indicating support for post thumbnails.
- */
 function flaxen_setup() {
-	/*
-	 * Make theme available for translation.
-	 * Translations can be filed at WordPress.org. See: https://translate.wordpress.org/projects/wp-themes/flaxen
-	 * If you're building a theme based on Twenty Seventeen, use a find and replace
-	 * to change 'flaxen' to the name of your theme in all the template files.
-	 */
 	load_theme_textdomain( 'flaxen' );
-
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
 
-	/*
-	 * Let WordPress manage the document title.
-	 * By adding theme support, we declare that this theme does not use a
-	 * hard-coded <title> tag in the document head, and expect WordPress to
-	 * provide it for us.
-	 */
 	add_theme_support( 'title-tag' );
 
 	/*
@@ -63,7 +42,7 @@ function flaxen_setup() {
 	 *
 	 * See: https://codex.wordpress.org/Post_Formats
 	 */
-	add_theme_support( 'post-formats', array(
+	add_theme_support( 'post-formats', array( // these can now be removed with gutenberg
 		'aside',
 		'image',
 		'video',
@@ -101,6 +80,8 @@ function flaxen_scripts() {
 	 * SVG icons functions and filters.
 	 */
 	require get_parent_theme_file_path( '/inc/icon-functions.php' );
+	// backend options
+	// require get_parent_theme_file_path( '/inc/admin-pages.php' );
 }
 add_action( 'wp_enqueue_scripts', 'flaxen_scripts' );
 
@@ -133,14 +114,53 @@ function flaxen_fonts_url() {
 	return esc_url_raw( $fonts_url );
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Stay Gold additional setting
 /*WordPress Menus API.*/
 function add_new_menu_items()
 {
     //add a new menu item. This is a top level menu item i.e., this menu item can have sub menus
     add_menu_page(
-        "Stay Gold Options", //Required. Text in browser title bar when the page associated with this menu item is displayed.
-        "stay_gold", //Required. Text to be displayed in the menu.
+        "Flaxen Theme Options", //Required. Text in browser title bar when the page associated with this menu item is displayed.
+        "Flaxen", //Required. Text to be displayed in the menu.
         "manage_options", //Required. The required capability of users to access this menu item.
         "theme-options", //Required. A unique identifier to identify this menu item.
         "theme_options_page", //Optional. This callback outputs the content of the page associated with this menu item.
@@ -149,28 +169,23 @@ function add_new_menu_items()
     );
 }
 
-function theme_options_page()
-{
-    ?>
-        <div class="wrap">
-        <h1>Stay Gold Options</h1>
-        <form method="post" action="options.php">
-            <?php
+function theme_options_page() 
+{ ?>
+<div class="wrap">
+	<form method="post" action="options.php">
+		<?php
 
-                //add_settings_section callback is displayed here. For every new section we need to call settings_fields.
-                settings_fields("header_section");
+			//add_settings_section callback is displayed here. For every new section we need to call settings_fields.
+			settings_fields("header_section");
 
-                // all the add_settings_field callbacks is displayed here
-                do_settings_sections("theme-options");
+			// all the add_settings_field callbacks is displayed here
+			do_settings_sections("theme-options");
 
-                // Add the submit button to serialize the options
-                submit_button();
-
-            ?>
-        </form>
-    </div>
-    <?php
-}
+			// Add the submit button to serialize the options
+			submit_button(); ?>
+	</form>
+</div>
+<?php }
 
 //this action callback is triggered when wordpress is ready to add new items to menu.
 add_action("admin_menu", "add_new_menu_items");
@@ -180,7 +195,7 @@ add_action("admin_menu", "add_new_menu_items");
 function display_options()
 {
     //section name, display name, callback to print description of section, page to which section is attached.
-    add_settings_section("header_section", "Brand Options", "display_header_options_content", "theme-options");
+    add_settings_section("header_section", "Flaxen Theme Options", "display_header_options_content", "theme-options");
     
     //setting name, display name, callback to print form element, page in which field is displayed, section to which it belongs.
     //last field section is optional.
@@ -196,7 +211,7 @@ function display_options()
     register_setting("header_section", "logo_letter");
 }
 
-function display_header_options_content(){echo "Add some details";}
+function display_header_options_content(){echo "Details can be added or changed here in various parts of the site.";}
 
 function display_established_element()
 {
@@ -231,11 +246,11 @@ function display_logo_letter_element()
 add_action("admin_init", "display_options");
 
 // sub menu pages
-function theme_options_panel(){  
-  add_submenu_page( 
+function theme_options_panel(){
+  add_submenu_page(
       'theme-options', //parent_slug
-      'Home Options', //page_title
-      'Home Options', // menu_title
+      'Flaxen Options', //page_title
+      'Flaxen Options', // menu_title
       'manage_options', // capability
       'home-settings', // menu_slug
       'home_options_page' // function
@@ -310,26 +325,57 @@ function stay_gold_results_page()
     ?>
         <div class="wrap">
         <h1>Results</h1>
-			<p><a href="<?php echo esc_url( home_url( '/view-results/?r=' ) ); ?>">Results</a></p>
 			<p>Click the link to find all the contact emails you have been sent</p>
+			<p><a href="<?php echo esc_url( home_url( '/view-results/?r=' ) ); ?>">Results</a></p>
     </div>
     <?php
 }
 
 // content for the sub pages
 function stay_gold_faq_page()
-{
-    ?>
-        <div class="wrap">
-        <h1>FAQ</h1>
-            <p>Theme development by Stay Gold Design Club.</p>
-    </div>
-    <?php
-}
+{ ?>
+	<div class="wrap">
+		<h1>FAQ</h1>
+		<p>Theme development by Stay Gold Design Club.</p>
+	</div>
+<?php }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Create a metabox with multiple fields.
-
 	 * Create the metabox
 	 * @link https://developer.wordpress.org/reference/functions/add_meta_box/
 	 */
@@ -376,13 +422,10 @@ function stay_gold_faq_page()
 
 			<fieldset>
                 
-                <!-- street number ----------------------------------------------------------------------------------------------- -->
+                <!-- Split Left ----------------------------------------------------------------------------------------------- -->
 				<div class="wrap">
 					<label for="flaxen_custom_metabox_split_left" class="subtitle">
-						<?php
-							// This runs the text through a translation and echoes it (for internationalization)
-							_e( 'Split Left', 'flaxen' );
-						?>
+						<?php _e( 'Split Left', 'flaxen' ); ?>
 					</label>
 					
 					<input
@@ -393,13 +436,10 @@ function stay_gold_faq_page()
 					>
 				</div>
                 
-                <!-- unit number ----------------------------------------------------------------------------------------------- -->
+                <!-- Split Right ----------------------------------------------------------------------------------------------- -->
 				<div class="wrap">
 					<label for="flaxen_custom_metabox_split_right" class="subtitle">
-						<?php
-							// This runs the text through a translation and echoes it (for internationalization)
-							_e( 'Split Right', 'flaxen' );
-						?>
+						<?php _e( 'Split Right', 'flaxen' ); ?>
 					</label>
 					
 					<input
@@ -417,7 +457,7 @@ function stay_gold_faq_page()
 		// actual dashboard and not the front end or
 		// a remote server.
 		wp_nonce_field( 'flaxen_form_metabox_nonce', 'flaxen_form_metabox_process' );
-	}
+		}
 	//
 	// Save our data
 	//
@@ -542,59 +582,163 @@ function stay_gold_faq_page()
 	}
 	add_filter( '_wp_post_revision_field_my_meta', 'flaxen_display_revisions_fields', 10, 2 );
 
-
-
-
-
-
-
-
-
-
-
-
-
 /*----------------------------------------------------------------------------------------------------*/
-/*FIX ON THE BACKEND*/
+
+
+
+
+
+
+
+
+
+/*FIX A FEW THINGS WITH AUTOUPDATING TO THE SITE*/
 // Discovery form from _POST
-// Change the email that root level mail is sent from
-add_filter( 'wp_mail_from', function( $email ) {
-	return 'authenticalignmentwellness@gmail.com';
-});
-
-add_filter( 'wp_mail_from_name', function( $name ) {
-	return 'Amanda from Authentic Alignment Wellness';
-});
-
-
-
-
-
 // deals with contact form sent through form _POST
 function prefix_admin_discovery() {
 	// Check if captcha has been checked
-	$captcha = $_POST['g-recaptcha-response'];
-
-	// If no captcha
-	if(!$captcha){
-		// Redirect
-		wp_redirect( home_url() . '/no-captcha' );
-		exit;
+	if(isset($_POST['g-recaptcha-response'])){
+		$captcha=$_POST['g-recaptcha-response'];
+	}
+	else {
+		$captcha = false;
 	}
 
-	// When the captcha is checked make sure its not spam
-	$secretKey = "6LdiC4YUAAAAAFQuaFjA7c6O5baXRE9FVVwbJXE2";
-	$ip = $_SERVER['REMOTE_ADDR'];
-
-	$response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secretKey."&response=".$captcha."&remoteip=".$ip);
-	$responseKeys = json_decode($response,true);
-	if(intval($responseKeys["success"]) !== 1) {
-
-		// Spam
-		wp_redirect( home_url() . '/spam' );
-
-	// captcha sucess
+	if(!$captcha){
+		//Do something with error
+		wp_redirect( home_url() . '/no-captcha' );
 	} else {
+	// When the captcha is checked make sure its not spam
+		$secret = '6LdiC4YUAAAAAFQuaFjA7c6O5baXRE9FVVwbJXE2';
+		$response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=
+			.$secret.&response=".$captcha."&remoteip=".$_SERVER['REMOTE_ADDR']);
+		if($response.success==false)
+		{
+			wp_redirect( home_url() . '/sorry' );
+		} else {
+			// The Captcha is valid you can continue with the rest of your code
+			wp_redirect( home_url() . '/thanks' );
+
+			// send the email before inserting into the database
+			//get form elements and email
+			$name = $_POST['name'];
+			$email = $_POST['email'];
+
+			/*---------------------------------------------------------------------------------------------------*/
+			/*email to riley@rileybathurst.com
+			/*---------------------------------------------------------------------------------------------------*/
+			$to			= 'riley@rileybathurst.com';
+			$to2		= 'authenticalignmentwellness@gmail.com';
+			$subject	= 'Authentic Alignment Wellness Discovery Session: '.$name;
+
+			//write email
+			$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+				<html xmlns="http://www.w3.org/1999/xhtml">
+					<head>
+						<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+						<title>Authentic Alignment Wellness</title>
+					</head>
+
+					<body bgcolor="#ebebeb">
+
+						<table cellspacing="0" cellpadding="0" width="100%" bgcolor="#ebebeb" align="center">
+							<tbody>
+								<tr>
+									<table style="border-left: 2px solid #e6e6e6; border-right: 2px solid #e6e6e6;" cellspacing="0" cellpadding="25" width="605" align="center">
+
+										<tr>
+											<td width="596" align="center" style="background-color: #ffffff; border-top: 0px solid #000000; text-align: left; height: 50px;">
+												<p style="margin-bottom: 10px; font-size: 22px; font-weight: bold; color: #494a48; font-family: arial; line-height: 110%; text-align: center;">Authentic Alignment Wellness</p>
+											</td>
+										</tr>
+
+										<tr>
+											<td style="background-color: #ffffff; border-top: 0px solid #000000; text-align: left;" align="center">
+
+												<hr style="color:#d9d9d9;background-color:#d9d9d9;min-height:1px;border:none;"/>
+
+												<p>
+													Thanks for your contact, '.
+														$_POST['name'] .
+													' we will be in touch ASAP.
+												</p>
+
+												<hr style="color:#d9d9d9;background-color:#d9d9d9;min-height:1px;border:none;"/>
+
+												<p>
+													For your records the message was,<br>
+													What are your 3 biggest obstacles to being in your peak health?
+												</p>
+
+												<p>'.
+													$_POST['ob1'] . '<br/>'.
+													$_POST['ob2'] . '<br/>'.
+													$_POST['ob3'] . '<br/>
+												</p>
+
+												<p>What is one thing that you could be doing for yourself that you know would have a significant impact on your health and well-being?</p> ' .
+													$_POST['significant'] .
+
+												'<p>Who is your biggest idol and why?</p> ' .
+													$_POST['idol'] .
+
+												'<p> Whats your favorite band?</p> ' .
+													$_POST['band'] .
+
+												'<p>How did you find Authentic Alignment Wellness?</p> ' .
+													$_POST['find'] .
+
+												'<hr style="color:#d9d9d9;background-color:#d9d9d9;min-height:1px;border:none;"/>
+
+												<p>
+													We will contact you back on, ' .
+														$_POST['email'] .
+													' or '.
+														$_POST['phone'] .
+												'</p>
+
+												<hr style="color:#d9d9d9;background-color:#d9d9d9;min-height:1px;border:none;"/>
+
+											</td>
+										</tr>
+
+										<tr>
+											<td style="background-color: #ffffff; border-top: 0px solid #000000; text-align: center;" align="center">
+												<span style="font-size: 11px; color: #575757; line-height: 200%; font-family: arial; text-decoration: none;">
+													Authentic Alignment Wellness<br>
+													<a href="mailto:info@authenticalignmentwellness">info@authenticalignmentwellness</a>
+													<br>
+													<a href="https://www.facebook.com/authenticalignmentwellness/">facebook</a>
+													<br>
+													<a href="https://www.instagram.com/authentic.alignment.wellness/">instagram</a>
+												</span>
+											</td>
+										</tr>
+
+									</table>
+								</tr>
+							</tbody>
+						</table>
+					</body>
+				</html>';
+
+		add_filter( 'wp_mail_content_type', 'set_content_type' );
+            function set_content_type( $content_type ) {
+                return 'text/html';
+        }
+
+		// Change the email that root level mail is sent from
+		add_filter( 'wp_mail_from', function( $email_from ) {
+			return 'authenticalignmentwellness@gmail.com';
+		});
+
+		add_filter( 'wp_mail_from_name', function( $name_from ) {
+			return 'Amanda from Authentic Alignment Wellness';
+		});
+
+        wp_mail($to, $subject, $message);
+        wp_mail($to2, $subject, $message);
+        wp_mail($email, $subject, $message);
 
 			// Extremley Important to set
 			global $wpdb;
@@ -625,8 +769,7 @@ function prefix_admin_discovery() {
 
 			// return safe if the inserted number is above zero and inserted to database
 			// the email may be sent even if the database doesn't update but better to false negative than false positive
-			if ($id>0) {
-
+			if ($id>0)  {
 				//get form elements and email
 				$name = $_POST['name'];
 				$email = $_POST['email'];
@@ -724,23 +867,7 @@ function prefix_admin_discovery() {
 				wp_mail($to, $subject, $message); // amanda
 				wp_mail($developer, $subject, $message); // developer for testing should be off as a default
 				wp_mail($email, $subject, $message); // client
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-				// Redirect
+				
 				// thanks to the correct person would also be a nice touch
 				wp_redirect( home_url() . '/thanks?n=' . $id );
 
@@ -750,13 +877,29 @@ function prefix_admin_discovery() {
 			}
 
 		} // close out the captcha sucess
-
+	}
 	exit();
 
 } // close out the prefix_admin_contact
 
 add_action( 'admin_post_discovery', 'prefix_admin_discovery' );
 add_action( 'admin_post_nopriv_discovery', 'prefix_admin_discovery' );
+
+// simply redirects to the search query _POST
+function prefix_admin_viewresults() {
+    
+    wp_redirect( home_url() . '/view-results/?r=' . $_POST['name']  );  
+    exit;
+
+}
+
+add_action( 'admin_post_viewresults', 'prefix_admin_viewresults' );
+add_action( 'admin_post_nopriv_viewresults', 'prefix_admin_viewresults' );
+
+
+
+
+
 
 
 
