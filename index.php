@@ -32,7 +32,7 @@
 				</div>
 			<?php } else { ?>
 				<div class="title-image">
-					<img src="<?php echo get_template_directory_uri(); ?>/assets/images/header.jpg" alt="stay gold header image" />
+					<img src="<?php echo get_template_directory_uri(); ?>/screenshot.jpg" alt="stay gold header image" />
 				</div>
 			<?php } ?>
 

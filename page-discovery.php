@@ -44,7 +44,7 @@ get_header(); ?>
 				<div class="class=col-1 col-end-4 row-1 large-col-5 large-col-end-8">
 					<?php the_content(); ?>
 				</div>
-                 
+
 				<!-- enctype='multipart/form-data' is key to submitting documents -->
 				<form action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" enctype='multipart/form-data' method="post" data-abide novalidate class="col-1 col-end-4 row-2 large-col-5 large-col-end-8">
 
