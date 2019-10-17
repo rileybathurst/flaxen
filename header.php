@@ -6,6 +6,11 @@
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 
 	<?php wp_head(); ?>
+
+	<?php if (is_page ('discovery', 'discovery-form')) { ?>
+		<!-- recaptcha -->
+		<script src='https://www.google.com/recaptcha/api.js?render=6LdiC4YUAAAAANuw48UrjkBkcDkhQvUxZO5N752o'></script>
+	<?php } ?>
 	
 	<!-- analytics should be done from the back end to have an updateable code per site -->
 	<!-- Global site tag (gtag.js) - Google Analytics -->
