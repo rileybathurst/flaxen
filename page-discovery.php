@@ -41,12 +41,22 @@ get_header(); ?>
 			<div class="main-bg-color cards"><!-- stay gold --></div>
 			<div class="main">
 
-				<div class="class=col-1 col-end-4 row-1 large-col-5 large-col-end-8">
+				<!-- <div class="col-1 col-end-4 row-1 large-col-5 large-col-end-8"> --> <!-- I think the <p> tag is controlling this now-->
 					<?php the_content(); ?>
-				</div>
-
+				<!-- </div> -->
+				
+				<script src="https://www.google.com/recaptcha/api.js?render=reCAPTCHA_site_key"></script>
+				  <script>
+				  grecaptcha.ready(function() {
+					  grecaptcha.execute('6LdiC4YUAAAAANuw48UrjkBkcDkhQvUxZO5N752o', {action: 'discovery'}).then(function(token) {
+						// add token value to form
+							document.getElementById('g-recaptcha-response').value = token;
+					  });
+				  });
+				  </script>
+                 
 				<!-- enctype='multipart/form-data' is key to submitting documents -->
-				<form action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" enctype='multipart/form-data' method="post" data-abide novalidate class="col-1 col-end-4 row-2 large-col-5 large-col-end-8">
+				<form action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" enctype='multipart/form-data' method="post" data-abide novalidate class="col-1 col-end-5 row-2 large-col-5 large-col-end-8">
 
 					<input type="hidden" name="action" value="discovery">
 					<input type="hidden" name="data" value="discoveryid"><!-- slightly different value to differentiate, not used -->
@@ -69,7 +79,7 @@ get_header(); ?>
 						<?php } else { ?>
 							placeholder="amanda at authentic alignment wellness"
 						<?php } ?>
-					/><small class="form-error">An email address is required.</small>
+					/>
 
 					<label for="phone" class="right-medium-up">Phone:</label>
 					<input name="phone" type="text" required id="phone" placeholder="&#40;775&#41;">
