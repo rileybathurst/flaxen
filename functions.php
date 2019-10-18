@@ -584,7 +584,7 @@ function stay_gold_faq_page()
 
 /*----------------------------------------------------------------------------------------------------*/
 
-
+/* I wonder if these are the issue locked down by godaddy or something?
 // Change the email that root level mail is sent from
 add_filter( 'wp_mail_from', function( $email ) {
 	return 'authenticalignmentwellness@gmail.com'; // these should be variables - site email
@@ -593,7 +593,7 @@ add_filter( 'wp_mail_from', function( $email ) {
 add_filter( 'wp_mail_from_name', function( $name ) {
 	return 'Amanda from Authentic Alignment Wellness'; // these should be variables - site name
 });
-
+*/
 
 /*FIX A FEW THINGS WITH AUTOUPDATING TO THE SITE*/
 // Discovery form from _POST
