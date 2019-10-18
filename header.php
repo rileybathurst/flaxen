@@ -9,6 +9,14 @@
 
 	<?php if (is_page ('discovery', 'discovery-form')) { ?>
 		<script src='https://www.google.com/recaptcha/api.js?render=6LdiC4YUAAAAANuw48UrjkBkcDkhQvUxZO5N752o'></script>
+		<script>
+			grecaptcha.ready(function () {
+				grecaptcha.execute('6LdiC4YUAAAAANuw48UrjkBkcDkhQvUxZO5N752o', { action: 'contact' }).then(function (token) {
+					var recaptchaResponse = document.getElementById('recaptchaResponse');
+					recaptchaResponse.value = token;
+				});
+			});
+		</script>
 	<?php } ?>
 	
 	<!-- analytics should be done from the back end to have an updateable code per site -->
