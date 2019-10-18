@@ -629,7 +629,7 @@ function prefix_admin_discovery() {
 			$email = $_POST['email'];
 
 			$to			= 'riley@rileybathurst.com'; // developer testing needs to be off
-			$to2		= 'authenticalignmentwellness@gmail.com';
+			// $to2		= 'authenticalignmentwellness@gmail.com';
 			$subject	= 'Authentic Alignment Wellness Discovery Session: '.$name;
 
 			//write email
@@ -723,7 +723,7 @@ function prefix_admin_discovery() {
 					</body>
 				</html>';
 
-			add_filter( 'wp_mail_content_type', 'set_content_type' );
+			/* add_filter( 'wp_mail_content_type', 'set_content_type' );
 				function set_content_type( $content_type ) {
 					return 'text/html';
 			}
@@ -735,11 +735,14 @@ function prefix_admin_discovery() {
 
 			add_filter( 'wp_mail_from_name', function( $name_from ) {
 				return 'Amanda from Authentic Alignment Wellness';
-			});
+			}); */
 
-			wp_mail($to, $subject, $message);
-			wp_mail($to2, $subject, $message);
-			wp_mail($email, $subject, $message);
+			$headers[] = array('Content-Type: text/html; charset=UTF-8');
+			$headers[] = 'From: Amanda from Authentic Alignment Wellness <authenticalignmentwellness@gmail.com>';
+
+			wp_mail($to, $subject, $message, $headers);
+			wp_mail($to2, $subject, $message, $headers);
+			wp_mail($email, $subject, $message, $headers);
 
 			// Extremley Important to set
 			global $wpdb;
