@@ -585,11 +585,14 @@ function stay_gold_faq_page()
 /*----------------------------------------------------------------------------------------------------*/
 
 
+// Change the email that root level mail is sent from
+add_filter( 'wp_mail_from', function( $email ) {
+	return 'authenticalignmentwellness@gmail.com'; // these should be variables - site email
+});
 
-
-
-
-
+add_filter( 'wp_mail_from_name', function( $name ) {
+	return 'Amanda from Authentic Alignment Wellness'; // these should be variables - site name
+});
 
 
 /*FIX A FEW THINGS WITH AUTOUPDATING TO THE SITE*/
@@ -723,11 +726,12 @@ function prefix_admin_discovery() {
 					</body>
 				</html>';
 
-			/* add_filter( 'wp_mail_content_type', 'set_content_type' );
+			add_filter( 'wp_mail_content_type', 'set_content_type' );
 				function set_content_type( $content_type ) {
 					return 'text/html';
 			}
 
+			/*
 			// Change the email that root level mail is sent from
 			add_filter( 'wp_mail_from', function( $email_from ) {
 				return 'authenticalignmentwellness@gmail.com';
