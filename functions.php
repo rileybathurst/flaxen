@@ -723,29 +723,29 @@ function prefix_admin_discovery() {
 					</body>
 				</html>';
 
-		add_filter( 'wp_mail_content_type', 'set_content_type' );
-            function set_content_type( $content_type ) {
-                return 'text/html';
-        }
+			add_filter( 'wp_mail_content_type', 'set_content_type' );
+				function set_content_type( $content_type ) {
+					return 'text/html';
+			}
 
-		// Change the email that root level mail is sent from
-		add_filter( 'wp_mail_from', function( $email_from ) {
-			return 'authenticalignmentwellness@gmail.com';
-		});
+			// Change the email that root level mail is sent from
+			add_filter( 'wp_mail_from', function( $email_from ) {
+				return 'authenticalignmentwellness@gmail.com';
+			});
 
-		add_filter( 'wp_mail_from_name', function( $name_from ) {
-			return 'Amanda from Authentic Alignment Wellness';
-		});
+			add_filter( 'wp_mail_from_name', function( $name_from ) {
+				return 'Amanda from Authentic Alignment Wellness';
+			});
 
-        wp_mail($to, $subject, $message);
-        wp_mail($to2, $subject, $message);
-        wp_mail($email, $subject, $message);
+			wp_mail($to, $subject, $message);
+			wp_mail($to2, $subject, $message);
+			wp_mail($email, $subject, $message);
 
 			// Extremley Important to set
 			global $wpdb;
 
 			// Whats inserted
-			$wpdb->insert( flaxen_inquiry ,
+			$wpdb->insert( 'flaxen_inquiry' ,
 				array(
 					'type'			=> 'discovery' ,
 
@@ -766,7 +766,7 @@ function prefix_admin_discovery() {
 			);
 
 			// give the unid in the next url
-			 $id = $wpdb->insert_id;
+			$id = $wpdb->insert_id;
 
 			// return safe if the inserted number is above zero and inserted to database
 			// the email may be sent even if the database doesn't update but better to false negative than false positive
@@ -774,10 +774,9 @@ function prefix_admin_discovery() {
 			// thanks to the correct person would also be a nice touch
 			wp_redirect( home_url() . '/thanks?n=' . $id );
 
-		} else {
+		} else { // if captcha score above 0.5
 			// Not verified - show form error
 			wp_redirect( home_url() . '/sorry' );
-
 		}
 	}
 	exit();
