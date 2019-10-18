@@ -737,12 +737,12 @@ function prefix_admin_discovery() {
 				return 'Amanda from Authentic Alignment Wellness';
 			}); */
 
-			$headers[] = array('Content-Type: text/html; charset=UTF-8');
-			$headers[] = 'From: Amanda from Authentic Alignment Wellness <authenticalignmentwellness@gmail.com>';
+			// $headers[] = array('Content-Type: text/html; charset=UTF-8');
+			// $headers[] = 'From: Amanda from Authentic Alignment Wellness <authenticalignmentwellness@gmail.com>';
 
-			wp_mail($to, $subject, $message, $headers);
+			wp_mail($to, $subject, $message);
 			// wp_mail($to2, $subject, $message, $headers);
-			wp_mail($email, $subject, $message, $headers);
+			wp_mail($email, $subject, $message);
 
 			// Extremley Important to set
 			global $wpdb;
