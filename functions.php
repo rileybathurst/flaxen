@@ -608,14 +608,18 @@ function prefix_admin_discovery() {
 		//Do something with error
 		wp_redirect( home_url() . '/no-captcha' );
 	} else {
-	// When the captcha is checked make sure its not spam
-		$secret = '6LdiC4YUAAAAAFQuaFjA7c6O5baXRE9FVVwbJXE2';
-		$response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=
-			.$secret.&response=".$captcha."&remoteip=".$_SERVER['REMOTE_ADDR']);
-		if($response.success==false)
-		{
-			wp_redirect( home_url() . '/sorry' );
-		} else {
+		// Build POST request:
+		$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+		$recaptcha_secret = 'YOUR_RECAPTCHA_SECRET_KEY';
+		$recaptcha_response = $_POST['recaptcha_response'];
+	
+		// Make and decode POST request:
+		$recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+		$recaptcha = json_decode($recaptcha);
+	
+		// Take action based on the score returned:
+		if ($recaptcha->score >= 0.5) {
+			// Verified - send email
 			// The Captcha is valid you can continue with the rest of your code
 			// wp_redirect( home_url() . '/thanks' );
 
@@ -624,10 +628,7 @@ function prefix_admin_discovery() {
 			$name = $_POST['name'];
 			$email = $_POST['email'];
 
-			/*---------------------------------------------------------------------------------------------------*/
-			/*email to riley@rileybathurst.com
-			/*---------------------------------------------------------------------------------------------------*/
-			$to			= 'riley@rileybathurst.com';
+			$to			= 'riley@rileybathurst.com'; // developer testing needs to be off
 			$to2		= 'authenticalignmentwellness@gmail.com';
 			$subject	= 'Authentic Alignment Wellness Discovery Session: '.$name;
 
@@ -769,17 +770,15 @@ function prefix_admin_discovery() {
 
 			// return safe if the inserted number is above zero and inserted to database
 			// the email may be sent even if the database doesn't update but better to false negative than false positive
-			if ($id>0)  {
 				
-				// thanks to the correct person would also be a nice touch
-				wp_redirect( home_url() . '/thanks?n=' . $id );
+			// thanks to the correct person would also be a nice touch
+			wp_redirect( home_url() . '/thanks?n=' . $id );
 
-			} else {
-				// Redirect
-				wp_redirect( home_url() . '/sorry' );
-			}
+		} else {
+			// Not verified - show form error
+			wp_redirect( home_url() . '/sorry' );
 
-		} // close out the captcha sucess
+		}
 	}
 	exit();
 
