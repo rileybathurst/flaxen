@@ -610,7 +610,7 @@ function prefix_admin_discovery() {
 	} else {
 		// Build POST request:
 		$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-		$recaptcha_secret = 'YOUR_RECAPTCHA_SECRET_KEY';
+		$recaptcha_secret = '6LdiC4YUAAAAAFQuaFjA7c6O5baXRE9FVVwbJXE2';
 		$recaptcha_response = $_POST['g-recaptcha-response'];
 	
 		// Make and decode POST request:
