@@ -671,9 +671,9 @@ function prefix_admin_discovery() {
 												</p>
 
 												<p>'.
-													$_POST['ob1'] . '<br/>'.
-													$_POST['ob2'] . '<br/>'.
-													$_POST['ob3'] . '<br/>
+													$_POST['obs1'] . '<br/>'.
+													$_POST['obs2'] . '<br/>'.
+													$_POST['obs3'] . '<br/>
 												</p>
 
 												<p>What is one thing that you could be doing for yourself that you know would have a significant impact on your health and well-being?</p> ' .
@@ -746,21 +746,21 @@ function prefix_admin_discovery() {
 			// Whats inserted
 			$wpdb->insert( flaxen_inquiry ,
 				array(
-					'type'                      => 'discovery' ,
+					'type'			=> 'discovery' ,
 
-					'name'                      => $_POST['name'] ,
-					'email'                     => $_POST['email'] ,
-					'phone'                     => $_POST['phone'] ,
+					'name'			=> $_POST['name'] ,
+					'email'			=> $_POST['email'] ,
+					'phone'			=> $_POST['phone'] ,
 
-					'obs1'                     => $_POST['obs1'] ,
-					'obs2'                     => $_POST['obs2'] ,
-					'obs3'                     => $_POST['obs3'] ,
+					'obs1'			=> $_POST['obs1'] ,
+					'obs2'			=> $_POST['obs2'] ,
+					'obs3'			=> $_POST['obs3'] ,
 
-					'significant'                    => $_POST['significant'] ,
-					'idol'                   => $_POST['idol'] ,
-					'band'                 => $_POST['band'] ,
+					'significant'	=> $_POST['significant'] ,
+					'idol'			=> $_POST['idol'] ,
+					'band'			=> $_POST['band'] ,
 
-					'find'                => $_POST['find'] ,
+					'find'			=> $_POST['find'] ,
 				)
 			);
 
