@@ -618,7 +618,7 @@ function prefix_admin_discovery() {
 		$recaptcha = json_decode($recaptcha);
 	
 		// Take action based on the score returned:
-		if ($recaptcha->score >= 0.5) {
+		if ($recaptcha->score >= 0.1) {
 			// Verified - send email
 			// The Captcha is valid you can continue with the rest of your code
 			// wp_redirect( home_url() . '/thanks' );
