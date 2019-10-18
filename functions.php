@@ -629,7 +629,7 @@ function prefix_admin_discovery() {
 			$email = $_POST['email'];
 
 			$to			= 'riley@rileybathurst.com'; // developer testing needs to be off
-			// $to2		= 'authenticalignmentwellness@gmail.com';
+			$to2		= 'authenticalignmentwellness@gmail.com';
 			$subject	= 'Authentic Alignment Wellness Discovery Session: '.$name;
 
 			//write email
@@ -741,7 +741,7 @@ function prefix_admin_discovery() {
 			$headers[] = 'From: Amanda from Authentic Alignment Wellness <authenticalignmentwellness@gmail.com>';
 
 			wp_mail($to, $subject, $message, $headers);
-			wp_mail($to2, $subject, $message, $headers);
+			// wp_mail($to2, $subject, $message, $headers);
 			wp_mail($email, $subject, $message, $headers);
 
 			// Extremley Important to set
