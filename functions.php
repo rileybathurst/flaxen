@@ -745,7 +745,7 @@ function prefix_admin_discovery() {
 			// $headers[] = 'From: Amanda from Authentic Alignment Wellness <authenticalignmentwellness@gmail.com>';
 
 			wp_mail($to, $subject, $message);
-			// wp_mail($to2, $subject, $message, $headers);
+			wp_mail($to2, $subject, $message);
 			wp_mail($email, $subject, $message);
 
 			// Extremley Important to set
