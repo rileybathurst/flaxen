@@ -10,22 +10,11 @@
 <?php
 	if ( have_posts() ) {
 		while ( have_posts() ) {
-			the_post();
+			the_post(); ?>
 
-		if(get_post_meta($id, "split-entry-title-top", true) !== '') { ?>
-			<h1 class="title-top split-entry-title-top text-right"><?php echo get_post_meta($post->ID, "split-entry-title-top", true); ?></h1>
-		<?php } else { ?>
-			<h1 class="title-top split-entry-title-top text-right"><?php the_title(); ?></h1>
-		<?php } ?>
+			<h1 class="title-bottom split-entry-header-lower"><?php the_title(); ?></h1>
 
-</header><!-- #masthead -->
-
-
-		<?php if(get_post_meta($id, "split-entry-header-lower", true) !== '') { ?>
-			<h1 class="title-bottom split-entry-header-lower"><?php echo get_post_meta($post->ID, "split-entry-header-lower", true); ?></h1>
-		<?php }
-
-if ( has_post_thumbnail() ) {
+<?php if ( has_post_thumbnail() ) {
 /* is there a way to add a style to this without wrapping it in a div? class="title-image" */ ?>
 	<div class="title-image">
 		<?php the_post_thumbnail(); ?>

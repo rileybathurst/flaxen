@@ -1,51 +1,47 @@
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
-1.0 Normalize
-2.0 Accessibility
-3.0 Alignments
-	3.1 Page Grid
-	3.2 Header Grid
-	3.3 Article Grid
-	3.4 Footer Grid
-4.0 Clearings
-5.0 Typography
-6.0 Forms
-7.0 Formatting
-8.0 Lists
-9.0 Tables
-10.0 Links
-11.0 Featured Image Hover
-12.0 Navigation
-13.0 Layout
-   13.1 Header
-   13.2 Front Page
-   13.3 Regular Content
-   13.4 Posts
-   13.5 Pages
-   13.6 Footer
-14.0 Comments
-15.0 Widgets
-16.0 Media
-   16.1 Galleries
-17.0 Customizer
-18.0 SVGs Fallbacks
-19.0 Media Queries
-20.0 Print
---------------------------------------------------------------*/
+
+// yeah I need to finish this
 
 /*--------------------------------------------------------------
 1.0 Normalize
 --------------------------------------------------------------*/
 
-/* Handled by Foundation */
+/* sass variables */
+$breakpoints: (
+	small: 0,
+	medium: 640px,
+	large: 1024px,
+);
 
-svg {
-	fill: currentColor;
-}
+$white: #fefefe;
+$black: #222;
+$light-gray: #E2E2E2;
+$medium-gray: #73768D;
+$dark-gray: #8a8a8a;
 
-.margin-0 {
-	margin: 0;
+$primary-color: #35070F;
+$secondary-color: #F2AD8D; // this might be better with an rgba?
+
+$blend-color: #995751;
+
+$anchor-color-hover: scale-color($secondary-color, $lightness: -55%);
+
+$global-padding: 1rem;
+$global-radius: 5px;
+$global-grid-gap: 20px; // should also be an rem?
+
+$button-transition: background-color 0.25s ease-out, color 0.25s ease-out;
+
+$header-lineheight: 1.4;
+$header-margin-bottom: 0.5rem;
+
+$shadow: 2px 2px 10px 0px rgba(0,0,0,0.20);
+$shadow-hover: 2px 2px 10px 0px rgba(0,0,0,0.50);
+
+.text-center {
+	text-align: center;
 }
 
 /*--------------------------------------------------------------
@@ -56,129 +52,184 @@ svg {
 3.1 Page Grid
 --------------------------------------------------------------*/
 
-$global-grid-gap: 20px;
+// https://type-scale.com/
+html {font-size: 16px;}
+
+body {
+  background-color: white;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  line-height: 1.45;
+  color: $primary-color;
+  margin: 0; // reset
+}
+
+p {margin-bottom: 1.25em;}
+
+h1, h2, h3, h4, h5 {
+  // margin: 1rem 0 2.75rem 0; // top right bottom left
+  font-weight: 400;
+  line-height: 1.15;
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 2.441rem;
+  font-size: 3.052em;
+  font-weight: 900; // these are specific to aaw
+  font-style: italic; // these are specific to aaw
+  font-family: 'Playfair Display script=all rev=1', serif;
+}
+
+h2 {
+	font-size: 2.441em;
+	margin-bottom: 1.953rem;
+}
+
+h3 {
+	font-size: 1.953em;
+	margin-bottom: 1.563rem;
+}
+
+h4 {
+	font-size: 1.563em;
+	margin-bottom: 1.25rem;
+}
+
+h5 {
+	font-size: 1.25em;
+	margin-bottom: 1rem;
+}
+
+small, .text_small {font-size: 0.8em;}
+
+svg {
+	fill: currentColor; 
+}
+
+svg:hover {
+	fill: $blend-color;
+}
+
+a {
+	color: $primary-color;
+}
+
+a:hover {
+	color: $blend-color;
+}
+
+button, .button {
+	background: $secondary-color;
+	color: $primary-color;
+	padding: $global-padding;
+	border-radius: $global-radius;
+	border: none;
+	font-family: 'playfair-display', serif;
+	font-size: 1.25em;
+	display: inline-block;
+	transition-duration: 1s;
+	box-shadow: $shadow;
+}
+
+button:hover {
+	background: $blend-color;
+	color: $secondary-color;
+	box-shadow: $shadow-hover;
+}
+
+li {
+	margin-bottom: 0.5em;
+}
 
 .site {
 	display: grid;
-	grid-template-columns: 0 1fr 1fr 1fr 1fr 0;
-	grid-gap: 10px;
-	margin-top: 20px;
-	margin-bottom: 40px;
+	grid-template-columns: 1fr 10px 1fr; // kinda creating the grid gap as I use it for the vertical borders
+	
+	margin: 0 10px 40px 10px; // top (hide mini menu use padding) right bottom left
+	grid-gap: 10px; // mobile first would say this should be the grid gap then *2 below
+	padding-top: 2.441em; // type scale
 
-	@include breakpoint(large) {
-		grid-template-columns: 20px 1fr 1fr 1fr 1fr 1fr 1fr 20px;
-		grid-gap: $global-grid-gap;
+	@media (min-width: map-get($breakpoints, large)) {
+		grid-template-columns: 1fr 20px 1fr;
 	}
 }
 
 .site-header {
-	grid-column: 2 / 6;
-	grid-row: 1 / 3;
-	align-items: center;
-
-	@include breakpoint(large) {
-		grid-column: 2 / 8;
-	}
-}
-
-.header-bottom {
-	grid-column: 4 / 6;
-	grid-row: 3;
-
-	@include breakpoint(large) {
-		grid-column: 5 / 7;
-	}
+	grid-column: 1 / 4;
+	grid-row: 1;
+	align-items: baseline;
+	width: 100%;
+	max-width: 66rem;
+	justify-self: center;
 }
 
 .title-image {
-	grid-column: 1 / 4;
-	grid-row: 3 / 6;
-	z-index: 3;
-
-	@include breakpoint(large) {
-			grid-column: 3 / 5;
-	}
+	grid-column: 1;
+	grid-row: 3 / 5;
+	z-index: 3; // above background color
+	max-width: 22rem;
+	justify-self: end;
 }
 
 .title-image img {
 	border-radius: $global-radius;
+	max-width: 100%;
+	height: auto;
+	box-shadow: $shadow;
 }
 
 .title-border {
-	grid-column: 4 ;
-	grid-row: 4 / 7;
+	grid-column: 2;
+	grid-row: 3 / 6;
 	border-left: 2px solid $black;
 	z-index: 2;
-
-	@include breakpoint(large) {
-		grid-column: 5 ;
-	}
 }
 
 .main-bg-color {
-	grid-column: 2 / 6;
-	grid-row: 5 / 8;
-	background: scale-color($secondary-color, $lightness: 55%);
-
+	grid-column: 1 / 4;
+	grid-row: 4 / 8;
+	background: scale-color($secondary-color, $lightness: 55%); // I think this could probably made a second variable higher up
 	border-radius: $global-radius;
-
-	@include breakpoint(medium) {
-		grid-column: 2 / 6;
-		grid-row: 5 / 9;
-	}
-
-	@include breakpoint(large) {
-		grid-column: 2 / 8;
-	}
+	box-shadow: $shadow;
 }
 
-.main {
-	grid-column: 2 / 6;
-	grid-row: 7;
+main, .main {
+	grid-column: 1 / 4;
+	grid-row: 6;
 	padding: $global-grid-gap;
-
-	@include breakpoint(large) {
-		grid-column: 2 / 8;
-		padding: 0;
-	}
+	width: 100%;
+	max-width: 44em;
+	margin: 0 auto;
+	// box-shadow: $shadow;
 }
 
 .footer-border {
-	grid-column: 4;
-	grid-row: 8 / 11;
+	grid-column: 2;
+	grid-row: 7 / 9;
 	border-left: 2px solid $black;
-	z-index: 2;
-
-	@include breakpoint(large) {
-		grid-column: 5;
-	}
+	z-index: 2; // above main bg color
 }
 
 .footer-border-extender {
 	/* empty with a minimum heigh to cause the grid row to show */
-	grid-row: 8;
+	grid-row: 7;
 	min-height: 30px;
 }
 
 .flaxen-footer {
-	grid-column: 2 / 6;
+	grid-column: 1 / 4;
 	grid-row: 9 / 11;
 }
 
-.footer-image {
-	grid-column: 4 / 7;
-	grid-row: 10;
-	border-radius: $global-radius;
-
-	@include breakpoint(medium) {
-		grid-column: 5 / 7;
-		grid-row: 10;
-	}
+.footer-social {
+	grid-column: 1 / 4;
+	grid-row: 9;
+	display: flex; // make it a block
 }
 
-.footer-social {
-	grid-column: 2 / 8;
-	grid-row: 11;
+.footer-social ul {
+	display: flex;
 }
 
 /*--------------------------------------------------------------
@@ -186,203 +237,55 @@ $global-grid-gap: 20px;
 --------------------------------------------------------------*/
 
 .site-header {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	grid-gap: $global-grid-gap;
-
-	@include breakpoint(large) {
-		grid-template-columns: 2fr 1fr 1fr 2fr;
-	}
-}
-
-.site-branding-text {
-	grid-column: 1 / 4;
-	grid-row: 1;
-
-	@include breakpoint(large) {
-		grid-column: 1;
-	}
-}
-
-.navigation-top {
-	grid-column: 4;
-	grid-row: 1;
-
-	@include breakpoint(large) {
-		grid-column: 4;
-	}
-}
-
-.split-entry-title-top {
-	grid-column: 1/3;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }
 
 .header-promo {
-	grid-column: 1 / 5;
+	grid-column: 1 / 4;
 	grid-row: 2;
-
-	display: grid; /* needed to center align the text */
-	align-items: center;
-
-	@include breakpoint(large) {
-		grid-column: 2 / 4;
-		grid-row: 1;
-	}
+	justify-self: center;
 }
 
-.title-top {
-	grid-column: 1 / 3;
+.title-bottom { // need to change the title when its ready
+	grid-column: 3;
 	grid-row: 3;
-	text-align: right;
-}
-
-.title-bottom {
-	grid-column: 4 / 7;
-	grid-row: 3;
-
-	@include breakpoint(large) {
-		grid-column: 5 / 7;
-	}
+	max-width: 33rem;
+	margin-bottom: 0; // reset
 }
 
 .border-extender {
-	grid-row: 6;
-	min-height: 60px; /* this should be a variable or dependant on a em to be more responsive */
+	grid-row: 5;
+	min-height: 5rem;
 }
 
 /*--------------------------------------------------------------
 3.2 Article Grid
 --------------------------------------------------------------*/
 
-.main {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr; /* 4 columns */
-	grid-gap: $global-grid-gap;
-
-	@include breakpoint(large) {
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; /* 8 columns */
-	}
-}
-
-/* Column start numbers */
-/* these I think are already in foundation grid or need to be automated in a better way */
-.col-1 {
-	grid-column-start: 1;
-}
-
-.col-2 {
-	grid-column-start: 2;
-}
-
-.col-3 {
-	grid-column-start: 3;
-}
-
-.col-4 {
-	grid-column-start: 4;
-}
-
-.large-col-3 {
-	@include breakpoint(large) {
-		grid-column-start: 3;
-	}
-}
-
-.large-col-5 {
-	@include breakpoint(large) {
-		grid-column-start: 5;
-	}
-}
-
-/* Column end numbers */
-.col-end-3 {
-	grid-column-end: 3;
-}
-
-.col-end-4 {
-	grid-column-end: 4;
-}
-
-.col-end-5 {
-	grid-column-end: 5;
-}
-
-.large-col-end-5 {
-	@include breakpoint(large) {
-		grid-column-end: 5;
-	}
-}
-
-.large-col-end-8 {
-	@include breakpoint(large) {
-		grid-column-end: 8;
-	}
-}
-
 /*--------------------------------------------------------------
 3.3 Article Grid
 --------------------------------------------------------------*/
-.main h1, .main h2, .main h3, .main h4, .main h5, .main h6, .main hr {
-	grid-column-start: 1;
-	grid-column-end: 5;
 
-	@include breakpoint(large) {
-		grid-column-start: 2;
-		grid-column-end: 8;
-	}
-}
-
-.main hr {
-	width: 100%;
-}
-
+.main h1, .main h2, .main h3, .main h4, .main h5, .main h6, .main hr, .main blockquote,
+.main div, // secondary catch all
 .main p, .main ul {
-	grid-column-start: 1;
-	grid-column-end: 4;
-
-	@include breakpoint(large) {
-		grid-column-start: 5;
-		grid-column-end: 8;
-	}
-}
-
-/* Slightly hacky fix to the paragraph not needing alignment this isnt great and its ugly but functional */
-.main p[style="text-align:center"] {
-	text-align: left !important;
-	grid-column-start: 2;
-	grid-column-end: 5;
-
-	@include breakpoint(large) {
-		grid-column-start: 5;
-		grid-column-end: 8;
-	}
-}
-
-.main p[style="text-align:right"] {
-	text-align: left !important;
-	grid-column-start: 2;
-	grid-column-end: 5;
-
-	@include breakpoint(large) {
-		grid-column-start: 5;
-		grid-column-end: 8;
-	}
+	width: 100%;
+	max-width: 44rem; // has to be rem or all the h will be different
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .main blockquote {
-	grid-column-start: 1;
-	grid-column-end: 5;
-
-	font-size: 1.1875rem;
+	font-size: 1.1875rem; // where is this number coming from? type scale?
 	line-height: $header-lineheight;
-	margin-top: 0;
+	margin-top: 0; // is this a default overwrite?
 	margin-bottom: $header-margin-bottom;
+	padding-left: 0;
 		
-	@include breakpoint(large) {
-		font-size: 1.9375rem;
-	}
-	@include breakpoint(large) {
-		text-align: right;
+	@media (min-width: map-get($breakpoints, large)) {
+		font-size: 1.9375rem; // where is this number coming from?
 	}
 }
 
@@ -390,42 +293,27 @@ $global-grid-gap: 20px;
 3.4 Footer Grid
 --------------------------------------------------------------*/
 
-.flaxen-footer {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	   grid-gap: $global-grid-gap;
-}
-
-.footer-bg-color {
-	grid-column: 1 / 5;
-	grid-row: 1;
-	background: $light-gray;
-	border-radius: $global-radius;
-
-	@include breakpoint(medium) {
-		grid-column: 1 / 3;
-	}
-}
-
 .footer-navigation-top {
+	background: lightgray;
 	grid-column: 1 / 4;
-	grid-row: 1;
-
-	@include breakpoint(medium) {
+	grid-row: 8;
+	border-radius: $global-radius;
+	width: calc(100% - 2em); // remove the padding
+	max-width: 33rem;
+	justify-self: end;
+	padding: $global-padding;
+	box-shadow: $shadow;
+	@media (min-width: map-get($breakpoints, medium)) {
 		grid-column: 1;
 	}
 }
 
 .footer-contact {
-	grid-column: 1 / 3;
-	grid-row: 2;
-	padding: $global-grid-gap;
-	color: $medium-gray;
-
-	@include breakpoint(medium) {
+	grid-column: 1 / 4;
+	grid-row: 8;
+	color: $primary-color;
+	@media (min-width: map-get($breakpoints, medium)) {
 		grid-column: 3;
-		grid-row: 1;
-		padding: 0;
 	}
 }
 
@@ -435,50 +323,68 @@ $global-grid-gap: 20px;
 
 .navigation-top{
 	color: $secondary-color;
+	z-index: 11; // over the mini menu
+	button {
+		margin-bottom: 0; // specific overwrite
+	}
 }
 
-.header-promo {
-
-}
-
-.header-promo a {
-	padding: $global-padding;
+.header-promo { // im not sure if i want this on the block level
 	background: $light-gray;
 	border-radius: $global-radius;
 	transition: $button-transition;
+	width: 100%;
+	max-width: 66rem;
+	box-shadow: $shadow;
 }
 
-.header-promo a:hover {
-	background: $primary-color;
-	color: $secondary-color;
+.header-promo a { // this is all a little scrappy and could be tidied up
+	display: inline-block; // needed for width height
+	width: calc(100% - 2em);
+	height: calc(100% - 2em);
+	padding: $global-padding;
+}
+
+.header-promo:hover {
+	background: #cacaca;
+}
+
+.header-promo:hover a {
+	color: $blend-color;
 }
 
 /*--------------------------------------------------------------
 10.0 Links
 --------------------------------------------------------------*/
 
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a, li a {
-	transition: $button-transition;
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+	text-decoration: none;
+	transition: $button-transition; // should this just be all things?
 }
 
 /*--------------------------------------------------------------
 12.0 Navigation
 --------------------------------------------------------------*/
 
+hr {
+	border-bottom: 1px solid $primary-color;
+}
+
 .menu {
-	font-weight: bold !important;
+	padding-left: 0; // default overwrite
+}
+
+#minimenu .sub-menu { // deals with .text-center
+	padding-left: 0; // default overwrite
+	display: block; // lock the margin bottom in
 }
 
 svg {
-	fill: currentColor;
-}
-
-.position-top {
-	height: auto;
+	fill: currentColor; // we have this at the top does it need to be repeated?
 }
 
 .current-menu-item a {
-	color: $anchor-color-hover;
+	color: $blend-color;
 }
 
 .off-canvas a:hover, .off-canvas .current-menu-item a {
@@ -495,15 +401,15 @@ svg {
 
 .icon {
 	width: 1em;
-	// height: 3em;
+	height: 2em;
 }
 
-.icon-search {
+.icon-search { // why does this need to be specifically different?
 	padding-left: $global-padding;
 	color: $white;
 }
 
-.icon-angle-down {
+.icon-angle-down { // document this
 	height: 1em;
 }
 
@@ -516,18 +422,14 @@ svg {
 	color: $dark-gray;
 }
 
-.header-contact svg {
-	margin: .25em;
-}
-
-.header-contact button {
-	margin-left: 1em;
-	margin-right: 1em;
-}
-
 .menu li {
-	float: right;
 	list-style-type: none;
+	margin-bottom: 1em;
+}
+
+.menu a {
+	margin-bottom: 1em; // this doubles up with sub menu
+	display: block; // lock the margin bottom in
 }
 
 .menu-item .is-active {
@@ -540,43 +442,42 @@ svg {
 	width: 100%;
 }
 
-/*
-.pagination a, .pagination button {
-	display: inline;
-} */
-
 .page-numbers {
 	display: inline;
 }
 
-.social-links-menu li {
-	display: inline-block;
-}
-
 .social-links-menu li a {
-	color: $secondary-color;
-	background: $medium-gray;
-	border-radius: 50%;
-	width: 3em;
-	height: 3em;
+	width: 2em;
+	height: 2em;
 	float: left;
-	display: grid;
-	align-items: center;
-	justify-items: center;
 }
 
 .social-links-menu li a:hover {
 	color: $primary-color;
 }
 
+.menu-social-container {
+	float: left;
+	width: 100%;
+}
+
+#menu-social {
+	float: left;
+	width: 100%;
+	padding-left: 0; // default overwrite
+	display: flex;
+	justify-content: center;
+}
+
 #menu-social li {
+	float: left;
 	width: auto;
 }
 
 // This should be in one class
 .social-navigation .icon, #menu-social li a .icon {
 	width: 1em;
-	// height: 1em;
+	height: 2em;
 }
 
 .submenu a {
@@ -587,14 +488,15 @@ input[type="search"] {
 	width: auto;
 }
 
-.off-canvas a:hover, .off-canvas .current-menu-item a {
-	// color: $secondary-color;
-}
+.view-results {
+	list-style: none;
+	padding-left: 0;
+	margin-bottom: 1em;
 
-.footer-navigation-top .current-menu-item a {
-	// color: $dark-gray;
+	li {
+		margin-bottom: 1em;
+	}
 }
-
 
 /*--------------------------------------------------------------
 18.0 SVGs Fallbacks
@@ -638,10 +540,9 @@ input[type="search"] {
 	font-style: italic;
 }
 
-// https://foundation.zurb.com/sites/docs/sticky.html#sticky-navigation ?
-.sticky {
-	/* Currently not using */
-}
+/* .sticky {
+	// Currently not using
+} */
 
 .screen-reader-text {
 	position: static !important;
@@ -682,25 +583,113 @@ img .alignleft {
 	padding-left: 0 !important;
 }
 
-/* hacky little extra overriding the foundation styles */
-.footer-navigation-top .sub-menu .menu-item {
-	float: left !important;
-	clear: both;
-}
-
 /* little extra for the off canvas sub menus  might be availabe in settings */
 .off-canvas .sub-menu a {
 	color: $secondary-color;
 }
 
 .off-canvas .sub-menu a:hover {
-	color: $white;
+	color: $white; 
 }
 
 .large-text-right {
 	text-align: left;
 
-	@include breakpoint(large) {
+	@media (min-width: map-get($breakpoints, large)) {
 		text-align: right;
 	}
+}
+
+cite {
+	font-size: unset !important;
+}
+
+#minimenu {
+	background: $light-gray;
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	transform: translate3d(0,-100%,0); // hide the menu to start 100% doesnt seem to be working currently that needs to be fixed // this seems to be because of the .page margin
+	// width: calc(100% - 2em);
+	width: 100%;
+	z-index: 10;
+	box-shadow: $shadow;
+	transition-duration: 3s;
+	// padding: 1em;
+
+	hr {
+		width: calc(100% - 2em);
+		border: none;
+		border-bottom: 2px solid $secondary-color;
+	}
+
+	h2 {
+		font-weight: 900; // these are specific to aaw
+		font-style: italic; // these are specific to aaw
+	}
+}
+
+.minimenu-toggle {
+	z-index: 11;
+}
+
+.minimenu-open {
+	transform: translate3d(0,0,0) !important;
+	// transition-duration: 3s;
+}
+
+.social-links-menu li {
+	list-style: none;
+}
+
+input[type="text"],
+textarea {
+	font-family: 'Playfair Display', serif; // defualt overwrite
+	font-size: 1em; // defualt overwrite
+	width: calc(100% - 2em);
+	padding: $global-padding/2;
+	margin-top: 0.5em;
+	margin-bottom: 1em;
+	border: 1px solid $primary-color;
+	border-radius: $global-radius;
+}
+
+.form-label-numbers {
+	display: flex;
+	justify-content: space-between;
+
+	label {
+		margin-right: 1em;
+	}
+}
+
+form .form-big-input { // form needed for higher specificity
+	padding: 1em;
+}
+
+.single-list {
+	padding-left: 0; // default overwrite
+	li {
+		list-style: none;
+		font-size: 1.25em; // major third h5
+		margin-bottom: 1em;
+	}
+}
+
+.site-branding-text h1 {
+	margin-bottom: 0; // reset
+	transition-duration: 3s;
+}
+
+.site-branding-text h1 a:hover {
+	color: $secondary-color;
+	text-decoration: underline;
+}
+
+.menu-item {
+	font-size: 19px; // this cant use an em or it doubles up with submenus
+}
+
+.footer-navigation-top .sub-menu li {
+	// list-style: disc !important; // this isnt working
 }

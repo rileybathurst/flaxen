@@ -63,30 +63,32 @@ function flaxen_scripts() {
 	wp_enqueue_style( 'flaxen-style', get_stylesheet_uri() );
 	
    // Foundation style.
-    wp_enqueue_style( 'foundation', get_template_directory_uri() . '/css/app.css' );
+    wp_enqueue_style( 'flaxen', get_template_directory_uri() . '/css/app.css' );
 
    // Google Font style.
-    wp_enqueue_style( 'font', 'https://fonts.googleapis.com/css?family=Playfair+Display' );
+	wp_enqueue_style( 'font', 'https://fonts.googleapis.com/css?family=Playfair+Display&display=swap' );
 
-	// Load the html5 shiv.
+	// Load the html5 shiv. what is this?
 	wp_enqueue_script( 'html5', get_theme_file_uri( '/assets/js/html5.js' ), array(), '3.7.3' );
 	wp_script_add_data( 'html5', 'conditional', 'lt IE 9' );
 
 	/* this is from 2017 I should think about it but its out until I do
 *	wp_enqueue_script( 'flaxen-skip-link-focus-fix', get_theme_file_uri( '/assets/js/skip-link-focus-fix.js' ), array(), '1.0', true );
 */
-	
+	wp_enqueue_script( 'flaxen-js', get_template_directory_uri() . '/js/flaxen.js', array(), false, true);
+
+
 	/**
 	 * SVG icons functions and filters.
 	 */
-	require get_parent_theme_file_path( '/inc/icon-functions.php' );
+	require get_parent_theme_file_path( '/inc/icon-functions.php' ); // i dont think this should be in the enqueue scripts?
 	// backend options
 	// require get_parent_theme_file_path( '/inc/admin-pages.php' );
 }
 add_action( 'wp_enqueue_scripts', 'flaxen_scripts' );
 
 /**
- * Register custom fonts.
+ * Register custom fonts. why have I dont this in a really different way? I have playfair display above?
  */
 function flaxen_fonts_url() {
 	$fonts_url = '';
@@ -153,7 +155,7 @@ function flaxen_fonts_url() {
 
 
 
-// Stay Gold additional setting
+// Stay Gold additional setting // isnt this the inc/menu-functions.php file? why is it replicated?
 /*WordPress Menus API.*/
 function add_new_menu_items()
 {
@@ -374,7 +376,7 @@ function stay_gold_faq_page()
 
 
 
-/**
+/** // these should now be done in a different way or just removed and all done automatiacally
  * Create a metabox with multiple fields.
 	 * Create the metabox
 	 * @link https://developer.wordpress.org/reference/functions/add_meta_box/
@@ -595,6 +597,11 @@ add_filter( 'wp_mail_from_name', function( $name ) {
 });
 */
 
+
+
+
+
+
 /*FIX A FEW THINGS WITH AUTOUPDATING TO THE SITE*/
 // Discovery form from _POST
 // deals with contact form sent through form _POST
@@ -613,7 +620,7 @@ function prefix_admin_discovery() {
 	} else {
 		// Build POST request:
 		$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-		$recaptcha_secret = '6LdiC4YUAAAAAFQuaFjA7c6O5baXRE9FVVwbJXE2';
+		$recaptcha_secret = '6LdiC4YUAAAAAFQuaFjA7c6O5baXRE9FVVwbJXE2'; // this needs to be hidden from github
 		$recaptcha_response = $_POST['g-recaptcha-response'];
 	
 		// Make and decode POST request:
@@ -631,7 +638,7 @@ function prefix_admin_discovery() {
 			$name = $_POST['name'];
 			$email = $_POST['email'];
 
-			$to			= 'riley@rileybathurst.com'; // developer testing needs to be off
+			$to			= 'riley@rileybathurst.com'; // developer testing needs to be off by default
 			$to2		= 'authenticalignmentwellness@gmail.com';
 			$to3		= 'info@authenticalignmentwellness.com';
 			$subject	= 'Authentic Alignment Wellness Discovery Session: '.$name;
