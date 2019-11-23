@@ -423,27 +423,25 @@ svg {
   color: #35070F;
 }
 
-.menu-social-container {
-  float: left;
-  width: 100%;
+#menu-social {
+  display: flex;
 }
 
-#menu-social {
-  float: left;
-  width: 100%;
-  padding-left: 0;
+/*
+#menu-social li {
+	float: left;
+	width: auto;
+}
+
+// This should be in one class
+.social-navigation .icon, #menu-social li a .icon {
+	width: 1em;
+	height: 2em;
+}
+*/
+#header-social {
   display: flex;
   justify-content: center;
-}
-
-#menu-social li {
-  float: left;
-  width: auto;
-}
-
-.social-navigation .icon, #menu-social li a .icon {
-  width: 1em;
-  height: 2em;
 }
 
 .submenu a {

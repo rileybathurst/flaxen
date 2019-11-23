@@ -36,21 +36,6 @@ function flaxen_setup() {
 		'gallery',
 		'caption',
 	) );
-
-	/*
-	 * Enable support for Post Formats.
-	 *
-	 * See: https://codex.wordpress.org/Post_Formats
-	 */
-	add_theme_support( 'post-formats', array( // these can now be removed with gutenberg
-		'aside',
-		'image',
-		'video',
-		'quote',
-		'link',
-		'gallery',
-		'audio',
-	) );
 }
 add_action( 'after_setup_theme', 'flaxen_setup' );
 
@@ -77,15 +62,18 @@ function flaxen_scripts() {
 */
 	wp_enqueue_script( 'flaxen-js', get_template_directory_uri() . '/js/flaxen.js', array(), false, true);
 
-
-	/**
-	 * SVG icons functions and filters.
-	 */
-	require get_parent_theme_file_path( '/inc/icon-functions.php' ); // i dont think this should be in the enqueue scripts?
 	// backend options
 	// require get_parent_theme_file_path( '/inc/admin-pages.php' );
 }
 add_action( 'wp_enqueue_scripts', 'flaxen_scripts' );
+
+/**
+ * REQUIRED FILES
+ * Include required files.
+ */
+
+// Handle SVG icons. this needs a bunch of work but I need to get better at sorting before I can fix that up
+require get_template_directory() . '/inc/general.php';
 
 /**
  * Register custom fonts. why have I dont this in a really different way? I have playfair display above?

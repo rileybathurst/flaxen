@@ -456,19 +456,20 @@ svg {
 	color: $primary-color;
 }
 
-.menu-social-container {
-	float: left;
-	width: 100%;
-}
+// This needs work
+// .menu-social-container {
+// 	float: left;
+// 	width: 100%;
+// }
 
 #menu-social {
-	float: left;
-	width: 100%;
-	padding-left: 0; // default overwrite
+	// float: left;
+	// width: 100%;
+	// padding-left: 0; // default overwrite
 	display: flex;
-	justify-content: center;
+	// justify-content: center;
 }
-
+/*
 #menu-social li {
 	float: left;
 	width: auto;
@@ -478,6 +479,12 @@ svg {
 .social-navigation .icon, #menu-social li a .icon {
 	width: 1em;
 	height: 2em;
+}
+*/
+
+#header-social {
+	display: flex;
+	justify-content: center;
 }
 
 .submenu a {

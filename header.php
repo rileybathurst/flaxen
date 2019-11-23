@@ -77,27 +77,18 @@
 			<?php } // if admin
 		} // if has menu top
 
-		if ( has_nav_menu( 'social' ) ) { ?>
-			<nav class="footer-social" role="navigation" aria-label="<?php esc_attr_e( 'Footer Social Links Menu', 'twentyseventeen' ); ?>">
-				<?php
-					wp_nav_menu(
-						array(
-							'theme_location' => 'social',
-							'menu_class'     => 'social-links-menu text-center',
-							'depth'          => 1,
-							'link_before'    => '<span class="screen-reader-text">',
-							'link_after'     => '</span>' . twentyseventeen_get_svg( array( 'icon' => 'chain' ) ),
-						)
-					);
-				?>
-			</nav><!-- .social-navigation -->
-		<?php } else {
-
-			if ($user_role == 'administrator') { ?>
-				<!-- Im not sure if this needs to be a ul? -->
-				<ul class="inline-list right main-navigation"><li><a href="<?php echo esc_url( home_url( '/' ) ); ?>wp-admin/nav-menus.php">Put the menu in.</a></li></ul>
-			<?php } // if admin
-		} ?> <!-- if has menu social -->
+		if ( has_nav_menu( 'social' ) ) {
+			wp_nav_menu(
+				array(
+					'theme_location' => 'social',
+					'walker'  => new Walker_Quickstart_Menu(), //use our custom walker
+					'menu_id' => 'header-social'
+				)
+			);
+		} elseif(current_user_can('administrator')) { ?>
+			<!-- Im not sure if this needs to be a ul? -->
+			<ul class="inline-list right main-navigation"><li><a href="<?php echo esc_url( home_url( '/' ) ); ?>wp-admin/nav-menus.php">Put the menu in.</a></li></ul>
+		<?php } // if admin ?>
 	</div> <!-- end of the off canvas -->
 
 	<!--  this is the in canvas -->
@@ -113,12 +104,11 @@
 					<button onclick="touchMenu()" class="minimenu-toggle hide-for-print">Menu</button><!-- toggle off canvas -->
 				</div>
 
-			<?php } else {
-				if ($user_role == 'administrator') { ?>
+			<?php } elseif(current_user_can('administrator')) { ?>
 					<!-- Im not sure if this needs to be a ul? -->
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>wp-admin/nav-menus.php">Put the menu in.</a>
 				<?php } // if admin
-			} ?>
+			?>
 
 		</header>
 

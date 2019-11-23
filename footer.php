@@ -16,26 +16,14 @@
 	<!-- extra alignment needed as nothing as has links -->
 	<li><a href="mailto:authenticalignmentwellness@gmail.com" class="no-padding-left">authenticalignmentwellness@gmail.com</a></li> <!-- change this to the default -->
 
-	<?php if ( has_nav_menu( 'social' ) ) { ?>
-		<nav class="footer-social" role="navigation" aria-label="<?php esc_attr_e( 'Footer Social Links Menu', 'twentyseventeen' ); ?>">
-			<?php
-				wp_nav_menu(
-					array(
-						'theme_location' => 'social',
-						'menu_class'     => 'social-links-menu menu',
-						'depth'          => 1,
-						'link_before'    => '<span class="screen-reader-text">',
-						'link_after'     => '</span>' . twentyseventeen_get_svg( array( 'icon' => 'chain' ) ),
-					)
-				);
-			?> <!-- need to update the 2017 svg -->
-		</nav><!-- .social-navigation -->
-	<?php } /*end if has_nav_menu */ else {
-		if ($user_role == 'administrator') { ?>
-			<!-- Im not sure if this needs to be a ul? -->
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>wp-admin/nav-menus.php">Put the menu in.</a>
-		<?php } // if admin
-	} /*end else has_nav_menu*/ ?>
+	<?php if ( has_nav_menu( 'social' ) ) {
+		wp_nav_menu(
+			array(
+				'theme_location' => 'social',
+				'walker'  => new Walker_Quickstart_Menu() //use our custom walker
+			)
+		);
+	} ?>
 
 	<!-- add these to the backend -->
 	<h4>Office Hours:</h4>
@@ -52,3 +40,10 @@
 
 </body>
 </html>
+
+
+<!-- ,
+						'depth'          => 1,
+						'link_before'    => '<span class="screen-reader-text">',
+						'link_after'     => '</span>' . twentyseventeen_get_svg( array( 'icon' => 'chain' ) ),
+-->
