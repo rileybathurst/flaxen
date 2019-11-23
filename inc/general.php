@@ -39,7 +39,7 @@ class Walker_Quickstart_Menu extends Walker {
 			);
 		} else {
 			$output .= sprintf( "\n<li><span class='screenreader'>%s</span</li>\n",
-				$item->title,
+				$item->title
 			);
 		}
 	}
