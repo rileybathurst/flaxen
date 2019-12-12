@@ -142,6 +142,13 @@ li {
 	margin-bottom: 0.5em;
 }
 
+.show-for-large {
+	display: none;
+	@media (min-width: map-get($breakpoints, large)) {
+		display: initial;
+	}
+}
+
 .site {
 	display: grid;
 	grid-template-columns: 1fr 10px 1fr; // kinda creating the grid gap as I use it for the vertical borders
@@ -198,7 +205,7 @@ main, .main {
 	grid-column: 1 / 4;
 	grid-row: 6;
 	padding: $global-grid-gap;
-	width: 100%;
+	width: calc(100% - 40px);
 	max-width: 44em;
 	margin: 0 auto;
 	// box-shadow: $shadow;
@@ -310,10 +317,11 @@ main, .main {
 
 .footer-contact {
 	grid-column: 1 / 4;
-	grid-row: 8;
+	grid-row: 9;
 	color: $primary-color;
 	@media (min-width: map-get($breakpoints, medium)) {
 		grid-column: 3;
+		grid-row: 8;
 	}
 }
 
