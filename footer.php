@@ -32,6 +32,11 @@
 	<li>Thursday: 9am-6pm</li>
 	<li>Friday: 9am-6pm</li>
 	<li>Saturday-Tuesday: Closed</li>
+
+	<?php if(current_user_can('administrator')) { ?>
+		
+		<p><a href="<?php echo esc_url( home_url( '/' ) ); ?>/view-results">View Form Submissions - Admin only</a></p>
+	<?php } ?>
 </ul>
 
 </div><!-- #page opened in header.php-->
@@ -40,10 +45,3 @@
 
 </body>
 </html>
-
-
-<!-- ,
-						'depth'          => 1,
-						'link_before'    => '<span class="screen-reader-text">',
-						'link_after'     => '</span>' . twentyseventeen_get_svg( array( 'icon' => 'chain' ) ),
--->

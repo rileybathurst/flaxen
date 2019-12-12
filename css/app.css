@@ -31,6 +31,10 @@ body {
   margin: 0;
 }
 
+bodyp::selection {
+  background-color: #35070F;
+}
+
 p {
   margin-bottom: 1.25em;
 }
@@ -344,6 +348,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 12.0 Navigation
 --------------------------------------------------------------*/
 hr {
+  border: none;
   border-bottom: 1px solid #35070F;
 }
 
@@ -629,6 +634,7 @@ textarea {
 
 form .form-big-input {
   padding: 1em;
+  width: calc(100% - 12em);
 }
 
 .single-list {

@@ -64,6 +64,10 @@ body {
   margin: 0; // reset
 }
 
+body p::selection {
+	background-color: $primary-color; 
+}
+
 p {margin-bottom: 1.25em;}
 
 h1, h2, h3, h4, h5 {
@@ -375,6 +379,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 --------------------------------------------------------------*/
 
 hr {
+	border: none; // chrome reset
 	border-bottom: 1px solid $primary-color;
 }
 
@@ -680,6 +685,7 @@ textarea {
 
 form .form-big-input { // form needed for higher specificity
 	padding: 1em;
+	width: calc(100% - 12em); // fit the search box on the same line
 }
 
 .single-list {
