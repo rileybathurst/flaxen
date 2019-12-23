@@ -9,6 +9,9 @@
 			'menu_class'     => 'vertical menu align-left',
 		)
 	); ?>
+	<?php if(current_user_can('administrator')) { ?>	
+		<p><a href="<?php echo esc_url( home_url( '/' ) ); ?>/view-results">View Form Submissions - Admin only</a></p>
+	<?php } ?>
 </div>
 
 <ul class="footer-contact vertical menu">
@@ -32,11 +35,6 @@
 	<li>Thursday: 9am-6pm</li>
 	<li>Friday: 9am-6pm</li>
 	<li>Saturday-Tuesday: Closed</li>
-
-	<?php if(current_user_can('administrator')) { ?>
-		
-		<p><a href="<?php echo esc_url( home_url( '/' ) ); ?>/view-results">View Form Submissions - Admin only</a></p>
-	<?php } ?>
 </ul>
 
 </div><!-- #page opened in header.php-->

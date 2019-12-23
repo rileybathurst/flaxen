@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html <?php language_attributes(); ?> class="no-js no-svg">
+<html <?php language_attributes(); ?> class="no-js no-svg"><!-- not sure about these classes I think they are a left over from foundation -->
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -81,7 +81,7 @@
 			wp_nav_menu(
 				array(
 					'theme_location' => 'social',
-					'walker'  => new Walker_Quickstart_Menu(), //use our custom walker
+					'walker'  => new Walker_Quickstart_Menu(), // needed 
 					'menu_id' => 'header-social'
 				)
 			);
@@ -105,11 +105,14 @@
 				</div>
 
 			<?php } elseif(current_user_can('administrator')) { ?>
-					<!-- Im not sure if this needs to be a ul? -->
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>wp-admin/nav-menus.php">Put the menu in.</a>
-				<?php } // if admin
-			?>
+				<!-- Im not sure if this needs to be a ul? -->
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>wp-admin/nav-menus.php">Put the menu in.</a>
+			<?php } // if admin ?>
 
 		</header>
 
 		<p class="header-promo cards text-center"><a href="<?php echo esc_url( home_url( '/' ) ); ?>discovery/">Start With a Free Discovery Session</a></p> <!-- this should be custom in the backend also im not sure about this being a p but is it a button? -->
+
+	<!-- left open
+	#page
+body

@@ -1,58 +1,56 @@
-<?php get_header(); ?>
-<!--Left Open
-	#page
-	#masthead
-	.off-canvas-wrapper
-	off-canvas-wrapper-inner
-	off-canvas-content
--->
+<?php get_header();
 
-<!-- theres some double up of the same things with the 404 that could be cleaner -->
+if ( have_posts() ) { ?>
 
+<!-- these are purposley empty as they are grid only elements -->
 <div class="title-border"><!-- stay gold --></div>
 <div class="border-extender"><!-- stay gold --></div>
+
 <div class="main-bg-color cards"><!-- stay gold --></div>
+<div class="main">
 
-<?php if ( have_posts() ) {
-	while ( have_posts() ) { // i think this is normally done a little different in 2019
+	<div class="col-1 col-end-4 row-1 large-col-5 large-col-end-8">
+
+	<?php while ( have_posts() ) { 
 		the_post(); ?>
+		<h1><?php echo the_title(); ?></h1>
 
-		<h1 class="title-bottom split-entry-header-lower"><?php the_title(); ?></h1>
+		<?php if ( has_post_thumbnail() ) {
+			the_post_thumbnail(); 
+		} ?>
 
-		<div class="title-image">
-			<?php if ( has_post_thumbnail() ) {
-				the_post_thumbnail();
-			} else { ?>
-				<img src="<?php echo get_template_directory_uri(); ?>/screenshot.jpg" alt="" /> <!-- alt is purposley blank as this is unkown and decorative --> 
-			<?php } ?>
-		</div>
-
-		<main <?php post_class(); ?>>
-			<?php the_content(); ?>
-		</main>
-
-	<?php } /* end if have post */
-} else { ?> <!-- end while have posts -->
-
-	<h1 class="title-bottom split-entry-header-lower">404 Sorry</h1>
-
-	<div class="title-image">
-		<img src="<?php echo get_template_directory_uri(); ?>/assets/images/header.jpg" alt="stay gold header image" />
+		<?php the_content(); ?>
+		<hr>
+		
+		<?php } ?>
 	</div>
 
-	<!-- these might be able to be removed so they dont have to be repeated they are decorative elements so could just load after the if posts -->
+	
+</div><!-- .main -->
 
 
-	<div class="main">
-		<p>We're a little lost here, how about you head back <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">home</a> and lets start again.<br>
+<?php } else { /* end while have posts */ ?>
+	<h1 class="title-top split-entry-title-top text-right">404</h1>
+</header><!-- #masthead -->
+
+<h1 class="title-bottom split-entry-header-lower">Sorry</h1>
+
+<div class="title-image">
+	<img src="<?php echo get_template_directory_uri(); ?>/assets/images/header.jpg" alt="stay gold header image" />
+</div>
+
+<!-- these are purposley empty as they are grid only elements -->
+<div class="title-border"><!-- stay gold --></div>
+<div class="border-extender"><!-- stay gold --></div>
+
+<div class="main-bg-color cards"><!-- stay gold --></div>
+<div class="main">
+	<p class="col-1 col-end-4 row-1 large-col-5 large-col-end-8">We're a little lost here, how about you head back <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">home</a> and lets start again.<br>
 		Thanks</p>
-	</div>
+</div>
 <?php }
 
 /* Left Open
 *	#page
-*	.off-canvas-wrapper
-*	off-canvas-wrapper-inner
-*	off-canvas-content
 */
 get_footer(); ?>

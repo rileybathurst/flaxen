@@ -5,8 +5,11 @@
 
 get_header();
 
-//define variable for url bar .php?n=
-$unid = $_GET['n']; ?>
+if(isset($_GET['n'])) {
+	//define variable for url bar .php?n=
+	$unid = $_GET['n'];
+}
+?>
 
 <div class="title-border"><!-- stay gold --></div>
 <div class="border-extender"><!-- stay gold --></div>

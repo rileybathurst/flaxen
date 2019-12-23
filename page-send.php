@@ -1,7 +1,10 @@
 <?php
 /*  
- *  Template Name: Discovery
+ *  Template Name: send
  */ 
+
+// seems like this is a duplicate of discovery is it actually needed?
+
 get_header(); ?>
 
 <!-- Start the main container -->
@@ -73,7 +76,7 @@ get_header(); ?>
 					<small class="form-error">A full name is required.</small>
 
 					<label for="email" class="right-medium-up">email:*</label>
-					<input name="email" type="text" required pattern="email" id="email"
+					<input name="email" type="text" required id="email"
 						<?php if ( is_user_logged_in() ) { ?>
 							value="<?php echo $current_user->user_email; ?>"
 						<?php } else { ?>
@@ -140,11 +143,4 @@ get_header(); ?>
 </div>
 <?php } 
 
-/* Left Open
-*	#page
-*	.off-canvas-wrapper
-*	off-canvas-wrapper-inner
-*	off-canvas-content
-*/
-	
 get_footer(); ?>

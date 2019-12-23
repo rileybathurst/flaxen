@@ -7,7 +7,6 @@ sass scss/flaxen.scss css/app.css --watch
 
 ### CSS Grid Design
 
-- functions file could use some real cleaning up but this was having issues when I tried to do it really quickly
 - pagination on page-view-results.php works but Im sure it could be cleaner if I just use a wordpress version
 - I would guess some of the grids could become flex to make it a little less complex
 - scss needs cleaning up and better documentation

@@ -64,7 +64,7 @@ body {
   margin: 0; // reset
 }
 
-body p::selection {
+body p::selection { // this isnt working
 	background-color: $primary-color; 
 }
 
@@ -82,7 +82,7 @@ h1 {
   font-size: 3.052em;
   font-weight: 900; // these are specific to aaw
   font-style: italic; // these are specific to aaw
-  font-family: 'Playfair Display script=all rev=1', serif;
+  font-family: 'Playfair Display script=all rev=1', serif; // what are the additional parts of this?
 }
 
 h2 {
