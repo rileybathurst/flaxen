@@ -30,16 +30,14 @@ get_header();
 			<div class="main">
 
 				<?php the_content(); ?>
-
-				<hr>
 				
 				<!-- enctype='multipart/form-data' is key to submitting documents -->
 				<form action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" enctype='multipart/form-data' method="post" data-abide novalidate>
 
 					<fieldset>
 						<input type="hidden" name="action" value="contact">
-						<input type="hidden" name="data" value="contactid"><!-- slightly different value to differentiate, not used -->
-
+						<input type="hidden" name="data" value="contactid">
+						<!-- slightly different value to differentiate, not used -->
 
 						<label for="name" class="right-medium-up">Full Name:*</label>
 
@@ -50,13 +48,6 @@ get_header();
 								placeholder="Jane Smith"
 							<?php } ?>
 						/>
-
-						<label for="add1" class="right-medium-up">Address:*</label>
-						<input name="add1" type="text" id="add1" placeholder="Street Address">
-
-						<input name="add2" type="text" id="add2" placeholder="City">
-						<input name="add3" type="text" id="add3" placeholder="State">
-						<input name="add4" type="number" id="add4" placeholder="Zip Code">
 
 						<label for="email" class="right-medium-up">email:*</label>
 						<input name="email" type="text" required id="email"  
@@ -72,8 +63,11 @@ get_header();
 
 						<hr>
 
-						<label for="add_notes" class="right-medium-up">Notes</label>
+						<label for="add_notes" class="right-medium-up">Enquiry</label>
 						<input type="text" name="add_notes">
+
+						<!-- recaptcha -->
+						<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
 
 						<button type="submit" class="button">Submit</button>
 					</fieldset>

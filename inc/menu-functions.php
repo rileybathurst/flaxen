@@ -31,8 +31,7 @@ function theme_options_page()
 
 				// Add the submit button to serialize the options
 				submit_button(); 
-
-			?>          
+			?>
 		</form>
 	</div>
 	<?php

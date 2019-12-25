@@ -78,6 +78,7 @@ function flaxen_fonts_url() {
 require get_template_directory() . '/inc/general.php'; // Handle SVG icons. this needs a bunch of work but I need to get better at sorting before I can fix that up
 require get_parent_theme_file_path( '/inc/back.php' );
 require get_parent_theme_file_path( '/inc/discovery.php' );
+require get_parent_theme_file_path( '/inc/contact.php' );
 require get_parent_theme_file_path( '/inc/results.php' );
 require get_parent_theme_file_path( '/inc/event-date.php' );
 

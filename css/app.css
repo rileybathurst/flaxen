@@ -31,7 +31,7 @@ body {
   margin: 0;
 }
 
-bodyp::selection {
+body p::selection {
   background-color: #35070F;
 }
 
@@ -114,6 +114,10 @@ button:hover {
 
 li {
   margin-bottom: 0.5em;
+}
+
+fieldset {
+  border: none;
 }
 
 .show-for-large {

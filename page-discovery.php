@@ -4,10 +4,6 @@
  */ 
 get_header(); ?>
 
-<div class="title-border"><!-- stay gold --></div>
-<div class="border-extender"><!-- stay gold --></div>
-<div class="main-bg-color cards"><!-- stay gold --></div>
-
 <?php if (have_posts()) { ?>
 	<?php while (have_posts()) {
 		the_post(); ?>
@@ -24,6 +20,10 @@ get_header(); ?>
 					<img src="<?php echo get_template_directory_uri(); ?>/assets/images/header.jpg" alt="stay gold header image" />
 				</div>
 			<?php } ?>
+
+			<div class="title-border"><!-- stay gold --></div>
+			<div class="border-extender"><!-- stay gold --></div>
+			<div class="main-bg-color cards"><!-- stay gold --></div>
 
 			<div class="main">
 				<?php the_content(); ?>

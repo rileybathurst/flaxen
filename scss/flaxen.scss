@@ -146,6 +146,10 @@ li {
 	margin-bottom: 0.5em;
 }
 
+fieldset {
+	border: none; // browser reset
+}
+
 .show-for-large {
 	display: none;
 	@media (min-width: map-get($breakpoints, large)) {

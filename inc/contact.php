@@ -1,7 +1,7 @@
 <?php
 // Discovery form from _POST
 // deals with contact form sent through form _POST
-function prefix_admin_discovery() {
+function prefix_admin_contact() {
 	// Check if captcha has been checked
 	if(isset($_POST['g-recaptcha-response'])){
 		$captcha=$_POST['g-recaptcha-response'];
@@ -72,37 +72,15 @@ function prefix_admin_discovery() {
 												<hr style="color:#d9d9d9;background-color:#d9d9d9;min-height:1px;border:none;"/>
 
 												<p>
-													For your records the message was,<br>
-													What are your 3 biggest obstacles to being in your peak health?
-												</p>
-
-												<p>'.
-													$_POST['obs1'] . '<br/>'.
-													$_POST['obs2'] . '<br/>'.
-													$_POST['obs3'] . '<br/>
-												</p>
-
-												<p>What is one thing that you could be doing for yourself that you know would have a significant impact on your health and well-being?</p> ' .
-													$_POST['significant'] .
-
-												'<p>Who is your biggest idol and why?</p> ' .
-													$_POST['idol'] .
-
-												'<p> Whats your favorite band?</p> ' .
-													$_POST['band'] .
-
-												'<p>How did you find Authentic Alignment Wellness?</p> ' .
-													$_POST['find'] .
-
-												'<hr style="color:#d9d9d9;background-color:#d9d9d9;min-height:1px;border:none;"/>
-
-												<p>
 													We will contact you back on, ' .
 														$_POST['email'] .
 													' or '.
 														$_POST['phone'] .
 												'</p>
+												<p>Your enquiry was ' .
+													$_POST['add_notes'] .
 
+												'</p>
 												<hr style="color:#d9d9d9;background-color:#d9d9d9;min-height:1px;border:none;"/>
 
 											</td>
@@ -138,36 +116,6 @@ function prefix_admin_discovery() {
 			wp_mail($to3, $subject, $message); // info@authenticalignmentwellness.com
 			wp_mail($email, $subject, $message); // customer email
 
-			// Extremley Important to set
-			global $wpdb;
-
-			// Whats inserted
-			$wpdb->insert( 'flaxen_inquiry' ,
-				array(
-					'type'			=> 'discovery' ,
-
-					'name'			=> $_POST['name'] ,
-					'email'			=> $_POST['email'] ,
-					'phone'			=> $_POST['phone'] ,
-
-					'obs1'			=> $_POST['obs1'] ,
-					'obs2'			=> $_POST['obs2'] ,
-					'obs3'			=> $_POST['obs3'] ,
-
-					'significant'	=> $_POST['significant'] ,
-					'idol'			=> $_POST['idol'] ,
-					'band'			=> $_POST['band'] ,
-
-					'find'			=> $_POST['find'] ,
-				)
-			);
-
-			// give the unid in the next url
-			$id = $wpdb->insert_id;
-
-			// return safe if the inserted number is above zero and inserted to database
-			// the email may be sent even if the database doesn't update but better to false negative than false positive
-				
 			// thanks to the correct person would also be a nice touch
 			wp_redirect( home_url() . '/thanks?n=' . $id );
 
@@ -180,5 +128,5 @@ function prefix_admin_discovery() {
 
 } // close out the prefix_admin_contact
 
-add_action( 'admin_post_discovery', 'prefix_admin_discovery' );
-add_action( 'admin_post_nopriv_discovery', 'prefix_admin_discovery' );
+add_action( 'admin_post_contact', 'prefix_admin_contact' );
+add_action( 'admin_post_nopriv_contact', 'prefix_admin_contact' );
