@@ -114,73 +114,76 @@
 		<p class="header-promo cards text-center"><a href="<?php echo esc_url( home_url( '/' ) ); ?>discovery/">Start With a Free Discovery Session</a></p> <!-- this should be custom in the backend also im not sure about this being a p but is it a button? -->
 
 				<?php
-					echo date("m/d/o");
-					$string_date = date("o");
-					echo 'string date = ' . $string_date . '<hr>';
-
 					$date_now = new DateTime();
-					$date2 = new DateTime("12/13/2016"); // needs to come from query this runs month / day / year 13/12/2016 will kill it
 
-					// echo $date_now; this wont run in php
-
-					// query newest event check if date is newer?
-					// query newest 10 events run the dates into an array find the next start date?
-
-					$event_dates = [
-						0 => "2015",
-						1 => "2016",
-						2 => "2017",
-						3 => "2018",
-						4 => "2019",
-						5 => "2020",
-						6 => "2021",
+					$args = [
+						'post_type'			=> 'flaxen_event',
+						'posts_per_page'	=> 10,
 					];
 
-					print_r ($event_dates);
-					echo '<hr>';
-					echo $event_dates[1];
-					rsort($event_dates);
-					echo '<hr>';
+					$loop = new WP_Query($args);
+					while ($loop->have_posts()) {
+						$loop->the_post();
+						
+						the_content();
 
-					print_r ($event_dates);
-					echo '<hr>';
-					echo $event_dates[1];
+						$meta = get_post_meta( $post->ID, 'event_date', false );
+						$data = $meta[0]; // this step should be able to be removed?
+			
+						print_r ($meta);
 
-					if ($event_dates[0] < $string_date ) {
-						echo $string_date . ' is bigger than ' . $event_dates[0];
-					} elseif ($event_dates[1] < $string_date ) {
-						echo $string_date . ' is bigger than ' . $event_dates[1];
-					} elseif ($event_dates[2] < $string_date ) {
-						echo $string_date . ' is bigger than ' . $event_dates[2];
-					} elseif ($event_dates[3] < $string_date ) {
-						echo $string_date . ' is bigger than ' . $event_dates[3];
-					} elseif ($event_dates[4] < $string_date ) {
-						echo $string_date . ' is bigger than ' . $event_dates[4];
-					} elseif ($event_dates[5] < $string_date ) {
-						echo $string_date . ' is bigger than ' . $event_dates[5];
-					} elseif ($event_dates[6] < $string_date ) {
-						echo $string_date . ' is bigger than ' . $event_dates[6];
-					} elseif ($event_dates[7] < $string_date ) {
-						echo $string_date . ' is bigger than ' . $event_dates[7];
-					} elseif ($event_dates[8] < $string_date ) {
-						echo $string_date . ' is bigger than ' . $event_dates[8];
-					} elseif ($event_dates[9] < $string_date ) {
-						echo $string_date . ' is bigger than ' . $event_dates[9];
-					}
+						echo 'before' . $data['start_date_m'] . 'after';
 
-					if ($date2 > $date_now) {
-						echo 'show the event banner';
-					} else {
-						echo 'show the discovery banner';
-					}
+						$stack = array();
 
-					if ( isset($string_date) && $string_date == '2018' ) {
-						echo 'yup';
-					} else {
-						echo 'nope';
-					}
+						array_push($stack, $data['start_date_m']);
+
+						print_r ($stack);
+
+						$mon = $data['start_date_m'];
+						$da = $data['start_date_d'];
+						$yea = $data['start_date_o'];
+			
+						$date_now = new DateTime();
+						$date3 = new DateTime("$mon/$da/$yea"); // needs to come from query this runs month / day / year 13/12/2016 
 
 
+					
+						// write this as a smart little loop
+						if ($stack[0] < $date3 ) {
+							echo '0 is past<br>';
+						} else {
+							echo '0 is future<br>';
+						}
+						
+						if (isset ($stack[1])) {
+							if ($stack[1] < $date3 ) {
+								echo '1 was past<br>';
+							} else {
+								echo '1 was future<br>';
+							}
+						}
+						/* elseif ($event_dates[1] < $string_date ) {
+							echo $string_date . ' is bigger than ' . $event_dates[1];
+						} elseif ($event_dates[2] < $string_date ) {
+							echo $string_date . ' is bigger than ' . $event_dates[2];
+						} elseif ($event_dates[3] < $string_date ) {
+							echo $string_date . ' is bigger than ' . $event_dates[3];
+						} elseif ($event_dates[4] < $string_date ) {
+							echo $string_date . ' is bigger than ' . $event_dates[4];
+						} elseif ($event_dates[5] < $string_date ) {
+							echo $string_date . ' is bigger than ' . $event_dates[5];
+						} elseif ($event_dates[6] < $string_date ) {
+							echo $string_date . ' is bigger than ' . $event_dates[6];
+						} elseif ($event_dates[7] < $string_date ) {
+							echo $string_date . ' is bigger than ' . $event_dates[7];
+						} elseif ($event_dates[8] < $string_date ) {
+							echo $string_date . ' is bigger than ' . $event_dates[8];
+						} elseif ($event_dates[9] < $string_date ) {
+							echo $string_date . ' is bigger than ' . $event_dates[9];
+						}
+						*/
+				}
 				?>
 	<!-- left open
 	#page

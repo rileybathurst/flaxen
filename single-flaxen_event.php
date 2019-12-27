@@ -1,4 +1,6 @@
-<?php get_header();
+<?php
+// flaxen events template
+get_header();
 
 if ( have_posts() ) { ?>
 
@@ -19,9 +21,40 @@ if ( have_posts() ) { ?>
 			the_post_thumbnail(); 
 		}
 		
-		the_content();
+		the_content(); ?>
+
+		<?php
+
+			$meta = get_post_meta( $post->ID, 'event_date', false );
+			$data = $meta[0]; // this step should be able to be removed?
+
+			print_r ($meta);
+
+			// view and check
+			echo $data['start_date_m'] . '/';
+			echo $data['start_date_d'] . '/';
+			echo $data['start_date_o'];
+
+			// variables for new DateTime
+			$mon = $data['start_date_m'];
+			$da = $data['start_date_d'];
+			$yea = $data['start_date_o'];
+
+			$date_now = new DateTime();
+			$date3 = new DateTime("$mon/$da/$yea"); // needs to come from query this runs month / day / year 13/12/2016 will kill it
+
+			// checks the new date
+			print_r ($date3);
+
+			// is it future or past
+			if ($date3 < $date_now ) {
+				echo 'smaller';
+			} else {
+				echo 'bigger';
+			}
+		?>
 		
-		} ?>
+		<?php } ?>
 	</div>
 
 	

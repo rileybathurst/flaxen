@@ -6,7 +6,7 @@ function event_date_add_post_meta_boxes() {
 		'event-date', // Unique ID
 		'Event Date', // Title
 		'event_date_render_metabox', // Callback function
-		'post', // Admin page (or post type)
+		'flaxen_event', // post
 		'normal', // Context
 		'default' // Priority
 	);
@@ -27,7 +27,7 @@ function event_date_defaults() {
 function event_date_render_metabox() {
 	// Variables
 	global $post; // Get the current post data
-	$saved = get_post_meta( $post->ID, 'flaxen', true ); // Get the saved values
+	$saved = get_post_meta( $post->ID, 'event_date', true ); // Get the saved values
 	$defaults = event_date_defaults(); // Get the default values
 	$event_date = wp_parse_args( $saved, $defaults ); // Merge the two in case any fields don't exist in the saved data
 	?>
@@ -119,6 +119,6 @@ function event_date_save_metabox( $post_id, $post ) {
 		$sanitized[$key] = wp_filter_post_kses( $date );
 	}
 	// Save our submissions to the database
-	update_post_meta( $post->ID, 'flaxen', $sanitized );
+	update_post_meta( $post->ID, 'event_date', $sanitized );
 }
 add_action( 'save_post', 'event_date_save_metabox', 1, 2 );
