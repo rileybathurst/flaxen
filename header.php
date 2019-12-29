@@ -55,23 +55,15 @@
 					<?php // Primary navigation menu.
 						wp_nav_menu( array(
 							// needs to run a grid to evenly distribute from the center when above medium size
-							'theme_location'    => 'top',
-							'items_wrap'        => '<ul class="menu text-center">%3$s</ul>' // %3$s is the code for the menu item
+							'theme_location'	=> 'top',
+							'items_wrap'		=> '<ul class="menu text-center">%3$s</ul>' // %3$s is the code for the menu item
 						) );
 					?>
 				</nav><!-- .main-navigation -->
 				<hr>
 		<?php } else {
 
-			if ( is_user_logged_in() ) {
-				// I think there is a faster way of getting to this
-				$current_user = wp_get_current_user();
-				$current_id = $current_user->ID;
-				$user_info = get_userdata( $current_id );
-				$user_role = implode(', ', $user_info->roles);
-			}
-
-			if ($user_role == 'administrator') { ?>
+			if(current_user_can('administrator')) { ?>
 				<!-- Im not sure if this needs to be a ul? -->
 				<ul class="inline-list right main-navigation"><li><a href="<?php echo esc_url( home_url( '/' ) ); ?>wp-admin/nav-menus.php">Put the menu in.</a></li></ul>
 			<?php } // if admin
@@ -111,10 +103,11 @@
 
 		</header>
 
-		<p class="header-promo cards text-center"><a href="<?php echo esc_url( home_url( '/' ) ); ?>discovery/">Start With a Free Discovery Session</a></p> <!-- this should be custom in the backend also im not sure about this being a p but is it a button? -->
-
 				<?php
-					$date_now = new DateTime();
+					$date_now = new DateTime(); // current
+
+					$stack = array(); // build an empty array to add event dates to
+					$beta = array(); // a secondary array to keep the event ids but I think I can do this better
 
 					$args = [
 						'post_type'			=> 'flaxen_event',
@@ -124,66 +117,79 @@
 					$loop = new WP_Query($args);
 					while ($loop->have_posts()) {
 						$loop->the_post();
-						
-						the_content();
+
+						// the_content(); we dont currently need the content this is once we decide which event will get run
 
 						$meta = get_post_meta( $post->ID, 'event_date', false );
-						$data = $meta[0]; // this step should be able to be removed?
-			
-						print_r ($meta);
+						$data = $meta[0]; // this step should be able to be removed? but the meta data is deeper in the array so currently needed
 
-						echo 'before' . $data['start_date_m'] . 'after';
+						// echo the_id(). ' result<br>';
+						// print_r ($meta); // print the start and end dates saved for each result
+						// echo '<hr>';
 
-						$stack = array();
+						// echo 'before' . $data['start_date_m'] . 'after'; // echo test a single result
 
-						array_push($stack, $data['start_date_m']);
-
-						print_r ($stack);
-
+						// variables for the dates
 						$mon = $data['start_date_m'];
 						$da = $data['start_date_d'];
 						$yea = $data['start_date_o'];
 			
-						$date_now = new DateTime();
-						$date3 = new DateTime("$mon/$da/$yea"); // needs to come from query this runs month / day / year 13/12/2016 
+						$eventdate = new DateTime("$mon/$da/$yea"); // runs month / day / year 13/12/2016 
 
+						$event_id = get_the_id();
+						// echo $event_id; // test
 
-					
-						// write this as a smart little loop
-						if ($stack[0] < $date3 ) {
-							echo '0 is past<br>';
-						} else {
-							echo '0 is future<br>';
-						}
-						
-						if (isset ($stack[1])) {
-							if ($stack[1] < $date3 ) {
-								echo '1 was past<br>';
-							} else {
-								echo '1 was future<br>';
-							}
-						}
-						/* elseif ($event_dates[1] < $string_date ) {
-							echo $string_date . ' is bigger than ' . $event_dates[1];
-						} elseif ($event_dates[2] < $string_date ) {
-							echo $string_date . ' is bigger than ' . $event_dates[2];
-						} elseif ($event_dates[3] < $string_date ) {
-							echo $string_date . ' is bigger than ' . $event_dates[3];
-						} elseif ($event_dates[4] < $string_date ) {
-							echo $string_date . ' is bigger than ' . $event_dates[4];
-						} elseif ($event_dates[5] < $string_date ) {
-							echo $string_date . ' is bigger than ' . $event_dates[5];
-						} elseif ($event_dates[6] < $string_date ) {
-							echo $string_date . ' is bigger than ' . $event_dates[6];
-						} elseif ($event_dates[7] < $string_date ) {
-							echo $string_date . ' is bigger than ' . $event_dates[7];
-						} elseif ($event_dates[8] < $string_date ) {
-							echo $string_date . ' is bigger than ' . $event_dates[8];
-						} elseif ($event_dates[9] < $string_date ) {
-							echo $string_date . ' is bigger than ' . $event_dates[9];
-						}
-						*/
+						$stack[$event_id] = $eventdate;
+						// print_r ($stack); // check the date has been added to the array
+
+						array_push ($beta, $event_id);
+
+				} // while have events
+				// echo '<br>all together in accending order<br>'; // break test
+				// sort($stack); // this is probably just sorting by the array entry order ie the way they are put in not the date but this will also destroy the keys
+				// print_r ($stack); // check the date has been added to the array
+				// echo '<hr>';
+
+				// need to loop through each of the array in a smart way
+				// echo '<hr>';
+				// print_r ($beta);
+				// echo '<hr>';
+				// echo $beta[0];
+				// print_r ($stack[336]); // id need to guess the numbers to do this? well they are in an array? make another array seems overkill but would work
+
+				// write this as a smart little loop
+				if (isset ($beta[0])) {
+					$current = $beta[0]; // grab the id number to run through the other array
+					if ($date_now < $stack[$current] ) { // if today is less than the event day
+						// echo $current . ' is future<br>
+						// because its date is'; // weve found the first event after today we need to display this in the header
+						// print_r ($stack[$current]);
+
+						$number_post = get_post($current);
+						$title = $number_post->post_title;
+						// echo $title;
+						?>
+						<p class="header-promo cards text-center"><a href="<?php echo esc_url( home_url( '/' ) ) . $title; ?>"><?php echo $title; ?></a></p>
+						<?php
+					} // no if as we dont need to deal with events in the past
+				} // mellow fail depending on number of events
+					else { ?>
+						<p class="header-promo cards text-center"><a href="<?php echo esc_url( home_url( '/' ) ); ?>discovery/">Start With a Free Discovery Session</a></p>
+		<!-- this should be custom in the backend also im not sure about this being a p but is it a button? -->
+
+					<?php }
+				
+				/*
+				if (isset ($stack[1])) {
+					if ($stack[1] < $date_now ) {
+						echo '1 is past<br>';
+					} else {
+						echo '1 is future<br>';
+
+					}
 				}
+				*/
+
 				?>
 	<!-- left open
 	#page

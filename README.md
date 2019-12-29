@@ -12,7 +12,6 @@ sass scss/flaxen.scss css/app.css --watch
 - scss needs cleaning up and better documentation
 - The SVGs for the social menu are pretty scrappy and only work in certain conditions but as I'm working out how the best way to do them for now its fine
 
-
 ### Discovery Form
 
 When sending has a couple of redirects based 
@@ -24,6 +23,10 @@ When sending has a couple of redirects based
 ### Results
 
 only has one option, straight redirect as it shouldn't have any reason to fail, it's a required field so shouldn't be able to get through without a query.
+
+### Events
+
+Running a custom post type for events that are looped through an array to determine if there are any in the future if an event is coming up the first one is then selected to run in the header.
 
 ### WP Pages
 
@@ -41,3 +44,7 @@ only has one option, straight redirect as it shouldn't have any reason to fail, 
 - The Authentic Alignment mission // front page
 - View Results
 - View Single
+
+### Issues
+
+Running the emails from a gmail is causing an error

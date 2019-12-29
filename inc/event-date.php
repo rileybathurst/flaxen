@@ -1,5 +1,6 @@
 <?php
-/* Create one or more meta boxes to be displayed on the post editor screen. */
+// Create one or more meta boxes to be displayed on the post editor screen.
+// currently not saving revisions as it saved development time
 function event_date_add_post_meta_boxes() {
 
 	add_meta_box(
@@ -34,11 +35,11 @@ function event_date_render_metabox() {
 
 	<fieldset>
 		<div class="wrap">
-			<!-- echo date("m"); month -->
-			<?php $em = date("m"); ?>
+			<!-- echo date("m"); month test -->
+			<?php $em = date("m"); ?> <!-- used with an if this month is -->
 			<!-- echo $em; -->
-			<!-- echo date("d"); day -->
-			<!-- echo date("o"); year -->
+			<!-- echo date("d"); day test -->
+			<!-- echo date("o"); year test -->
 
 			<p>When does this event start.</p>
 
@@ -58,33 +59,33 @@ function event_date_render_metabox() {
 				<option value="12" <?php if ( $event_date['start_date_m'] == '12' ) { echo "selected"; } elseif ( $event_date['start_date_m'] == 'default ' && $em == 12) { echo "selected"; } ?>>12-Dec</option>
 			</select>
 
-			<input id="event_date[start_date_d]" name="event_date[start_date_d]" class="jj" type="text" size="2" maxlength="2" autocomplete="off" value="<?php if ($event_date['start_date_d'] != 'default') { echo $event_date['start_date_d']; } else { echo date("d"); } ?>">
+			<input id="event_date[start_date_d]" name="event_date[start_date_d]" type="text" size="2" maxlength="2" autocomplete="off" value="<?php if ($event_date['start_date_d'] != 'default') { echo $event_date['start_date_d']; } else { echo date("d"); } ?>">
 			,
-			<input id="event_date[start_date_o]" name="event_date[start_date_o]" class="jj" type="text" size="4" maxlength="4" autocomplete="off" value="<?php echo $event_date['start_date_o'];?>">
+			<input id="event_date[start_date_o]" name="event_date[start_date_o]" type="text" size="4" maxlength="4" autocomplete="off" value="<?php if ($event_date['start_date_o'] != 'default') { echo $event_date['start_date_d']; } else { echo date("d"); } ?>">
 		</div>
 
 		<div class="wrap">
-			<?php $ed = date("d") + 1; ?>
+			<?php $tomorrow = date("d") + 1; ?>
 
 			<p>When does this event finish.</p>
-			<select id="end-month" class="mm">
-				<option value="01" <?php if ($em == 1) { echo "selected"; } ?>>01-Jan</option>
-				<option value="02" <?php if ($em == 2) { echo "selected"; } ?>>02-Feb</option>
-				<option value="03" <?php if ($em == 3) { echo "selected"; } ?>>03-Mar</option>
-				<option value="04" <?php if ($em == 4) { echo "selected"; } ?>>04-Apr</option>
-				<option value="05" <?php if ($em == 5) { echo "selected"; } ?>>05-May</option>
-				<option value="06" <?php if ($em == 6) { echo "selected"; } ?>>06-Jun</option>
-				<option value="07" <?php if ($em == 7) { echo "selected"; } ?>>07-Jul</option>
-				<option value="08" <?php if ($em == 8) { echo "selected"; } ?>>08-Aug</option>
-				<option value="09" <?php if ($em == 9) { echo "selected"; } ?>>09-Sep</option>
-				<option value="10" <?php if ($em == 10) { echo "selected"; } ?>>10-Oct</option>
-				<option value="11" <?php if ($em == 11) { echo "selected"; } ?>>11-Nov</option>
-				<option value="12" <?php if ($em == 12) { echo "selected"; } ?>>12-Dec</option>
+			<select id="event_date[end_date_m]" name="event_date[end_date_m]">
+				<option value="01" <?php if ( $event_date['end_date_m'] == '01' ) { echo "selected"; } elseif ( $event_date['end_date_m'] == 'default ' && $em == 1) { echo "selected"; } ?>>01-Jan</option> 
+				<option value="02" <?php if ( $event_date['end_date_m'] == '02' ) { echo "selected"; } elseif ( $event_date['end_date_m'] == 'default ' && $em == 2) { echo "selected"; } ?>>02-Feb</option>
+				<option value="03" <?php if ( $event_date['end_date_m'] == '03' ) { echo "selected"; } elseif ( $event_date['end_date_m'] == 'default ' && $em == 3) { echo "selected"; } ?>>03-Mar</option>
+				<option value="04" <?php if ( $event_date['end_date_m'] == '04' ) { echo "selected"; } elseif ( $event_date['end_date_m'] == 'default ' && $em == 4) { echo "selected"; } ?>>04-Apr</option>
+				<option value="05" <?php if ( $event_date['end_date_m'] == '05' ) { echo "selected"; } elseif ( $event_date['end_date_m'] == 'default ' && $em == 5) { echo "selected"; } ?>>05-May</option>
+				<option value="06" <?php if ( $event_date['end_date_m'] == '06' ) { echo "selected"; } elseif ( $event_date['end_date_m'] == 'default ' && $em == 6) { echo "selected"; } ?>>06-Jun</option>
+				<option value="07" <?php if ( $event_date['end_date_m'] == '07' ) { echo "selected"; } elseif ( $event_date['end_date_m'] == 'default ' && $em == 7) { echo "selected"; } ?>>07-Jul</option>
+				<option value="08" <?php if ( $event_date['end_date_m'] == '08' ) { echo "selected"; } elseif ( $event_date['end_date_m'] == 'default ' && $em == 8) { echo "selected"; } ?>>08-Aug</option>
+				<option value="09" <?php if ( $event_date['end_date_m'] == '09' ) { echo "selected"; } elseif ( $event_date['end_date_m'] == 'default ' && $em == 9) { echo "selected"; } ?>>09-Sep</option>
+				<option value="10" <?php if ( $event_date['end_date_m'] == '10' ) { echo "selected"; } elseif ( $event_date['end_date_m'] == 'default ' && $em == 10) { echo "selected"; } ?>>10-Oct</option>
+				<option value="11" <?php if ( $event_date['end_date_m'] == '11' ) { echo "selected"; } elseif ( $event_date['end_date_m'] == 'default ' && $em == 11) { echo "selected"; } ?>>11-Nov</option>
+				<option value="12" <?php if ( $event_date['end_date_m'] == '12' ) { echo "selected"; } elseif ( $event_date['end_date_m'] == 'default ' && $em == 12) { echo "selected"; } ?>>12-Dec</option>
 			</select>
 
-			<input id="end-day" name="event-day" class="jj" type="text" size="2" maxlength="2" autocomplete="off" value="<?php echo $ed;?>">
+			<input id="event_date[end_date_d]" name="event_date[end_date_d]" type="text" size="2" maxlength="2" autocomplete="off" value="<?php if ($event_date['end_date_d'] != 'default') { echo $event_date['end_date_d']; } else { echo date("d"); } ?>">
 			,
-			<input id="end-year" name="event-day" class="jj" type="text" size="4" maxlength="4" autocomplete="off" value="<?php echo date("o");?>">
+			<input id="event_date[end_date_o]" name="event_date[end_date_o]" type="text" size="4" maxlength="4" autocomplete="off" value="<?php if ($event_date['end_date_o'] != 'default') { echo $event_date['end_date_d']; } else { echo $tomorrow; } ?>">
 		</div>
 	</fieldset>
 

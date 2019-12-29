@@ -286,7 +286,6 @@ main, .main {
 .main h1, .main h2, .main h3, .main h4, .main h5, .main h6, .main hr, .main blockquote,
 .main div, // secondary catch all
 .main p, .main ul {
-	width: 100%;
 	max-width: 44rem; // has to be rem or all the h will be different
 	margin-left: auto;
 	margin-right: auto;
@@ -383,6 +382,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 --------------------------------------------------------------*/
 
 hr {
+	width: 100%; // browser reset
 	border: none; // chrome reset
 	border-bottom: 1px solid $primary-color;
 }

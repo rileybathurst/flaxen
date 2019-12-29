@@ -88,8 +88,8 @@ function wporg_custom_post_type()
 	register_post_type('flaxen_event',
 		array(
 			'labels'		=> array(
-			'name'			=> __('Events'),
-			'singular_name'	=> __('Events'),
+				'name'			=> __('Events'),
+				'singular_name'	=> __('Events'),
 			),
 			'public'			=> true,
 			'has_archive'	=> true,
