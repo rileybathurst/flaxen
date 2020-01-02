@@ -104,93 +104,83 @@
 		</header>
 
 				<?php
-					$date_now = new DateTime(); // current
+					$date_now = new DateTime(); // current time date, note this cant be used with an echo $date_now needs print_r($date_now);
 
 					$stack = array(); // build an empty array to add event dates to
-					$beta = array(); // a secondary array to keep the event ids but I think I can do this better
 
+					// query for events
 					$args = [
 						'post_type'			=> 'flaxen_event',
 						'posts_per_page'	=> 10,
 					];
 
+					// run the events in a loop this doesnt print anything just builds an array
 					$loop = new WP_Query($args);
 					while ($loop->have_posts()) {
 						$loop->the_post();
 
 						// the_content(); we dont currently need the content this is once we decide which event will get run
 
-						$meta = get_post_meta( $post->ID, 'event_date', false );
-						$data = $meta[0]; // this step should be able to be removed? but the meta data is deeper in the array so currently needed
+						$meta = get_post_meta( $post->ID, 'event_date', false ); // grab the dates meta
+						$data = $meta[0]; // this ends up as an array in an array it might be possible to remove this step but for now its needed
 
-						// echo the_id(). ' result<br>';
-						// print_r ($meta); // print the start and end dates saved for each result
-						// echo '<hr>';
+						// print_r ($meta); // print the start date saved for each event
+						// echo '<br>';
 
-						// echo 'before' . $data['start_date_m'] . 'after'; // echo test a single result
+						// echo $data['start_date_m']; // echo test a single result
 
-						// variables for the dates
+						// create variables for the date portions
 						$mon = $data['start_date_m'];
 						$da = $data['start_date_d'];
 						$yea = $data['start_date_o'];
 			
+						// create a date with the variables as one
 						$eventdate = new DateTime("$mon/$da/$yea"); // runs month / day / year 13/12/2016 
 
+						// echo the_id(). ' result<br>'; // check the ID
 						$event_id = get_the_id();
 						// echo $event_id; // test
 
-						$stack[$event_id] = $eventdate;
+						$stack[$event_id] = $eventdate; // add the dates as a value to the array with the ID as the key
 						// print_r ($stack); // check the date has been added to the array
 
-						array_push ($beta, $event_id);
-
 				} // while have events
-				// echo '<br>all together in accending order<br>'; // break test
-				// sort($stack); // this is probably just sorting by the array entry order ie the way they are put in not the date but this will also destroy the keys
-				// print_r ($stack); // check the date has been added to the array
-				// echo '<hr>';
 
-				// need to loop through each of the array in a smart way
-				// echo '<hr>';
-				// print_r ($beta);
-				// echo '<hr>';
-				// echo $beta[0];
-				// print_r ($stack[336]); // id need to guess the numbers to do this? well they are in an array? make another array seems overkill but would work
+				// print_r ($stack); // check the stack
+				// echo '<br>';
+				asort($stack); // ascending sort is oldest to newest and doesnt alter the keys
+				// print_r ($stack); // check the array is ordered correctly
+				// echo '<br>';
 
-				// write this as a smart little loop
-				if (isset ($beta[0])) {
-					$current = $beta[0]; // grab the id number to run through the other array
-					if ($date_now < $stack[$current] ) { // if today is less than the event day
-						// echo $current . ' is future<br>
-						// because its date is'; // weve found the first event after today we need to display this in the header
-						// print_r ($stack[$current]);
+				foreach ( $stack as $key => $value ) {
+					// print_r ($value); // check the date prints for each events
+					// echo '<br>';
+					// echo $key; // test the ID
+					// echo '<br>';
 
-						$number_post = get_post($current);
-						$title = $number_post->post_title;
-						// echo $title;
+					if ($date_now < $value) {
+						// echo ' future<br>'; check for correct entries
+						$title = get_post($key)->post_title; // the events title
+						// echo $title; // check the title
 						?>
-						<p class="header-promo cards text-center"><a href="<?php echo esc_url( home_url( '/' ) ) . $title; ?>"><?php echo $title; ?></a></p>
-						<?php
-					} // no if as we dont need to deal with events in the past
-				} // mellow fail depending on number of events
-					else { ?>
-						<p class="header-promo cards text-center"><a href="<?php echo esc_url( home_url( '/' ) ); ?>discovery/">Start With a Free Discovery Session</a></p>
-		<!-- this should be custom in the backend also im not sure about this being a p but is it a button? -->
+						<p class="header-promo cards text-center"><a href="<?php echo esc_url( home_url( '/' ) ). $key; ?>">
+							<?php echo $title; ?>
+						</a></p>
+						<?php break; // stop looping once we find something in the future
+					} // if the events in the future
+				} // loop of all events
 
-					<?php }
-				
-				/*
-				if (isset ($stack[1])) {
-					if ($stack[1] < $date_now ) {
-						echo '1 is past<br>';
-					} else {
-						echo '1 is future<br>';
+				// if no new events are coming up we need to add this
+				$last = array_key_last ($stack); 
+				// print_r($last); // check the last ID
 
-					}
-				}
-				*/
+				if ($date_now > $stack[$last]) {
+					// echo 'nothing coming up'; // check we couldnt find any future events
+					?>
+					<p class="header-promo cards text-center"><a href="<?php echo esc_url( home_url( '/' ) ); ?>discovery/">Start With a Free Discovery Session</a></p>
+					<!-- this should be custom in the backend also im not sure about this being a p but is it a button? -->
+				<?php } ?>
 
-				?>
 	<!-- left open
 	#page
 body -->

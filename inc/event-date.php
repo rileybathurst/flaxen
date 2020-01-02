@@ -83,9 +83,9 @@ function event_date_render_metabox() {
 				<option value="12" <?php if ( $event_date['end_date_m'] == '12' ) { echo "selected"; } elseif ( $event_date['end_date_m'] == 'default ' && $em == 12) { echo "selected"; } ?>>12-Dec</option>
 			</select>
 
-			<input id="event_date[end_date_d]" name="event_date[end_date_d]" type="text" size="2" maxlength="2" autocomplete="off" value="<?php if ($event_date['end_date_d'] != 'default') { echo $event_date['end_date_d']; } else { echo date("d"); } ?>">
+			<input id="event_date[end_date_d]" name="event_date[end_date_d]" type="text" size="2" maxlength="2" autocomplete="off" value="<?php if ($event_date['end_date_d'] != 'default') { echo $event_date['end_date_d']; } else { echo $tomorrow; } ?>">
 			,
-			<input id="event_date[end_date_o]" name="event_date[end_date_o]" type="text" size="4" maxlength="4" autocomplete="off" value="<?php if ($event_date['end_date_o'] != 'default') { echo $event_date['end_date_o']; } else { echo $tomorrow; } ?>">
+			<input id="event_date[end_date_o]" name="event_date[end_date_o]" type="text" size="4" maxlength="4" autocomplete="off" value="<?php if ($event_date['end_date_o'] != 'default') { echo $event_date['end_date_o']; } else { echo date("o"); } ?>">
 		</div>
 	</fieldset>
 
