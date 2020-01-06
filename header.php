@@ -171,15 +171,17 @@
 				} // loop of all events
 
 				// if no new events are coming up we need to add this
-				$last = array_key_last ($stack); 
+//				$last = array_key_last ($stack); 
 				// print_r($last); // check the last ID
 
-				if ($date_now > $stack[$last]) {
+/*				if ($date_now > $stack[$last]) {
 					// echo 'nothing coming up'; // check we couldnt find any future events
 					?>
 					<p class="header-promo cards text-center"><a href="<?php echo esc_url( home_url( '/' ) ); ?>discovery/">Start With a Free Discovery Session</a></p>
 					<!-- this should be custom in the backend also im not sure about this being a p but is it a button? -->
-				<?php } ?>
+				<?php }
+*/				
+				?>
 
 	<!-- left open
 	#page
