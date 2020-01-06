@@ -182,7 +182,7 @@
 				<?php }
 */				
 				?>
-				<p class="header-promo cards text-center"><a href="<?php echo esc_url( home_url( '/' ) ); ?>discovery/">Start With a Free Discovery Session</a></p>
+				<p class="header-promo cards text-center behind-the-events"><a href="<?php echo esc_url( home_url( '/' ) ); ?>discovery/">Start With a Free Discovery Session</a></p>
 
 	<!-- left open
 	#page

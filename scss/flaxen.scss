@@ -715,6 +715,12 @@ form .form-big-input { // form needed for higher specificity
 	font-size: 19px; // this cant use an em or it doubles up with submenus
 }
 
+/*
 .footer-navigation-top .sub-menu li {
 	// list-style: disc !important; // this isnt working
+}
+*/
+
+.behind-the-events {
+	z-index: -1; // top bar shows discovery as a default after php 7.3 this can be removed
 }
