@@ -47,4 +47,4 @@ Running a custom post type for events that are looped through an array to determ
 
 ### Issues
 
-Running the emails from a gmail is causing an error
+Running the emails from a gmail is causing an error 
