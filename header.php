@@ -163,7 +163,7 @@
 						$title = get_post($key)->post_title; // the events title
 						// echo $title; // check the title
 						?>
-						<p class="header-promo cards text-center"><a href="<?php echo esc_url( home_url( '/' ) ). $key; ?>">
+						<p class="header-promo cards text-center"><a href="<?php echo esc_url( home_url( '/?p=' ) ). $key; ?>">
 							<?php echo $title; ?>
 						</a></p>
 						<?php break; // stop looping once we find something in the future
