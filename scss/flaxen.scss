@@ -721,6 +721,10 @@ form .form-big-input { // form needed for higher specificity
 }
 */
 
-.behind-the-events {
+.behind-the-events { // this breaks the link as its behind things
 	z-index: -1; // top bar shows discovery as a default after php 7.3 this can be removed
+}
+
+.forward-banner {
+	z-index: 2;
 }

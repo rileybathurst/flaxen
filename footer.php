@@ -31,10 +31,8 @@
 	<!-- add these to the backend -->
 	<h4>Office Hours:</h4>
 
-	<li>Wednesday: 9am-6pm</li>
-	<li>Thursday: 9am-6pm</li>
-	<li>Friday: 9am-6pm</li>
-	<li>Saturday-Tuesday: Closed</li>
+	<li>Tuesday - Friday: 9am-6pm</li>
+	<li>Sunday - Monday: Closed</li>
 </ul>
 
 </div><!-- #page opened in header.php-->

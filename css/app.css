@@ -673,4 +673,8 @@ form .form-big-input {
   z-index: -1;
 }
 
+.forward-banner {
+  z-index: 2;
+}
+
 /*# sourceMappingURL=app.css.map */

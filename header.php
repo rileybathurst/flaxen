@@ -163,7 +163,7 @@
 						$title = get_post($key)->post_title; // the events title
 						// echo $title; // check the title
 						?>
-						<p class="header-promo cards text-center"><a href="<?php echo esc_url( home_url( '/?p=' ) ). $key; ?>">
+						<p class="header-promo cards text-center forward-banner"><a href="<?php echo esc_url( home_url( '/?p=' ) ). $key; ?>">
 							<?php echo $title; ?>
 						</a></p>
 						<?php break; // stop looping once we find something in the future
@@ -182,7 +182,10 @@
 				<?php }
 */				
 				?>
-				<p class="header-promo cards text-center behind-the-events"><a href="<?php echo esc_url( home_url( '/' ) ); ?>discovery/">Start With a Free Discovery Session</a></p>
+
+				<p class="header-promo cards text-center">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>discovery/">Start With a Free Discovery Session</a>
+				</p>
 
 	<!-- left open
 	#page
