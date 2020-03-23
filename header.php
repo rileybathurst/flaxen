@@ -184,7 +184,7 @@
 				?>
 
 				<p class="header-promo cards text-center">
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>discovery/">Start With a Free Discovery Session</a>
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>discovery/">Start With a Discovery Session</a>
 				</p>
 
 	<!-- left open
