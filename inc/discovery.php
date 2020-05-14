@@ -32,7 +32,7 @@ function prefix_admin_discovery() {
 			$name = $_POST['name'];
 			$email = $_POST['email'];
 
-			$to			= 'riley@rileybathurst.com'; // developer testing needs to be off by default
+			// $to			= 'riley@rileybathurst.com'; // developer testing needs to be off by default
 			$to2		= 'authenticalignmentwellness@gmail.com';
 			$to3		= 'info@authenticalignmentwellness.com';
 			$subject	= 'Authentic Alignment Wellness Discovery Session: '.$name;
@@ -133,7 +133,7 @@ function prefix_admin_discovery() {
 					return 'text/html';
 			}
 
-			wp_mail($to, $subject, $message); // developer testing account should be off by default
+			// wp_mail($to, $subject, $message); // developer testing account should be off by default
 			wp_mail($to2, $subject, $message); // authenticalignmentwellness@gmail.com
 			wp_mail($to3, $subject, $message); // info@authenticalignmentwellness.com
 			wp_mail($email, $subject, $message); // customer email

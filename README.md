@@ -1,7 +1,10 @@
 # Authentic Alignment Wellness Theme
 
 ## Sass
-sass scss/flaxen.scss css/app.css --watch
+
+``` sass scss/flaxen.scss css/app.css --watch ```
+
+``` sass --style=compressed scss/flaxen.scss css/app.css ```
 
 ## Built on Wordpress and Foundation
 
