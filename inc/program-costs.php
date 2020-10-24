@@ -1,25 +1,25 @@
 <?php
 /* Fire our meta box setup function on the post editor screen. */
-add_action( 'load-post.php', 'featured_video_meta_boxes_setup' );
-add_action( 'load-post-new.php', 'featured_video_meta_boxes_setup' );
+add_action( 'load-post.php', 'featured_programs_meta_boxes_setup' );
+add_action( 'load-post-new.php', 'featured_programs_meta_boxes_setup' );
 
 /* Meta box setup function. */
-function featured_video_meta_boxes_setup() {
+function featured_programs_meta_boxes_setup() {
 
   /* Add meta boxes on the 'add_meta_boxes' hook. */
-  add_action( 'add_meta_boxes', 'video_add_post_meta_boxes' );
+  add_action( 'add_meta_boxes', 'program_add_post_meta_boxes' );
 
   /* Save post meta on the 'save_post' hook. */
-  add_action( 'save_post', 'video_save_meta', 10, 2 );
+  add_action( 'save_post', 'program_save_meta', 10, 2 );
 }
 
 /* Create one or more meta boxes to be displayed on the post editor screen. */
-function video_add_post_meta_boxes() {
+function program_add_post_meta_boxes() {
 
 	add_meta_box(
-		'video-post', // Unique ID
-		esc_html__( 'Featured Video', 'example' ), // Title
-		'featured_video_meta_box', // Callback function
+		'pro-cost', // Unique ID
+		esc_html__( 'Program Cost', 'example' ), // Title
+		'program_cost_meta_box', // Callback function
 		'flaxen_program', // post
 		'side', // Context
 		'default' // Priority
@@ -28,17 +28,17 @@ function video_add_post_meta_boxes() {
 
 // take below here into sperate files
 /* Display the post meta box. */
-function featured_video_meta_box( $post ) { ?>
+function program_cost_meta_box( $post ) { ?>
 
   <?php wp_nonce_field( basename( __FILE__ ), 'featured_program_nonce' ); ?>
 
   <p>
-	<input class="widefat" type="text" name="video-post" id="video-post" value="<?php echo esc_attr( get_post_meta( $post->ID, 'featured_video', true ) ); ?>" size="30" />
+	<input class="widefat" type="text" name="pro-cost" id="pro-cost" value="<?php echo esc_attr( get_post_meta( $post->ID, 'featured_video', true ) ); ?>" size="30" />
   </p>
 <?php }
 
 /* Save the meta box's post metadata. */
-function video_save_meta( $post_id, $post ) {
+function program_save_meta( $post_id, $post ) {
 
   /* Verify the nonce before proceeding. */
   if ( !isset( $_POST['featured_program_nonce'] ) || !wp_verify_nonce( $_POST['featured_program_nonce'], basename( __FILE__ ) ) )
@@ -52,7 +52,7 @@ function video_save_meta( $post_id, $post ) {
 	return $post_id;
 
   /* Get the posted data and sanitize it for use as an HTML class. */
-  $new_meta_value = ( $_POST['video-post'] );
+  $new_meta_value = ( $_POST['pro-cost'] );
 
   /* Get the meta key. */
   $meta_key = 'featured_video';
