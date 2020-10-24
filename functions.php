@@ -81,8 +81,9 @@ require get_parent_theme_file_path( '/inc/discovery.php' );
 require get_parent_theme_file_path( '/inc/contact.php' );
 require get_parent_theme_file_path( '/inc/results.php' );
 require get_parent_theme_file_path( '/inc/event-date.php' );
+require get_parent_theme_file_path( '/inc/program-costs.php' );
 
-// custom post types
+// Events
 function wporg_custom_post_type()
 {
 	register_post_type('flaxen_event',
@@ -98,6 +99,34 @@ function wporg_custom_post_type()
 	);
 }
 add_action('init', 'wporg_custom_post_type');
+
+// Programs
+function wporg_custom_programs()
+{
+	register_post_type('flaxen_program',
+		array(
+			'labels'			=> array(
+				'name'			=> __('Programs'),
+				'singular_name'	=> __('Programs'),
+			),
+			'public'		=> true,
+			'has_archive'	=> true,
+			'rewrite'		=> array( 'slug' => 'programs' ),
+			'supports'		=> array( 
+				'title',
+				'editor',
+				'author',
+				'thumbnail',
+				'excerpt',
+				// 'comments' 
+				)
+		)
+	);
+}
+add_action('init', 'wporg_custom_programs');
+
+
+
 
 // these cant be used from a gmail
 // Change the email that root level mail is sent from
