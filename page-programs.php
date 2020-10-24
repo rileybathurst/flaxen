@@ -44,7 +44,7 @@ get_header(); ?>
 						if ( $the_query->have_posts() ) {
 							while ( $the_query->have_posts() ) {
 								$the_query->the_post();
-								echo '<li>' . get_the_title() . '</li>';
+								echo '<li>' . get_the_title() . '<hr>' . esc_attr( get_post_meta( $post->ID, 'p_cost', true ) ); '</li>';
 							}
 						} else {
 							// no posts found

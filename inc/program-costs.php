@@ -1,4 +1,5 @@
 <?php
+
 /* Fire our meta box setup function on the post editor screen. */
 add_action( 'load-post.php', 'featured_programs_meta_boxes_setup' );
 add_action( 'load-post-new.php', 'featured_programs_meta_boxes_setup' );
@@ -33,7 +34,7 @@ function program_cost_meta_box( $post ) { ?>
   <?php wp_nonce_field( basename( __FILE__ ), 'featured_program_nonce' ); ?>
 
   <p>
-	<input class="widefat" type="text" name="pro-cost" id="pro-cost" value="<?php echo esc_attr( get_post_meta( $post->ID, 'featured_video', true ) ); ?>" size="30" />
+	<input class="widefat" type="text" name="pro-cost" id="pro-cost" value="<?php echo esc_attr( get_post_meta( $post->ID, 'p_cost', true ) ); ?>" size="30" />
   </p>
 <?php }
 
@@ -55,7 +56,7 @@ function program_save_meta( $post_id, $post ) {
   $new_meta_value = ( $_POST['pro-cost'] );
 
   /* Get the meta key. */
-  $meta_key = 'featured_video';
+  $meta_key = 'p_cost';
 
   /* Get the meta value of the custom field key. */
   $meta_value = get_post_meta( $post_id, $meta_key, true );
