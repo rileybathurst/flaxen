@@ -732,3 +732,30 @@ form .form-big-input { // form needed for higher specificity
 .forward-banner {
 	z-index: 2;
 }
+
+.programs-list {
+	padding-left: 0;
+
+	li {
+		list-style: none;
+
+		h3 {
+			display: inline;
+
+			a {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+.price-click {
+	background: #F2AD8D;
+	margin-top: 0.5rem;
+	margin-left: 1rem;
+	padding: 0.5rem 1rem;
+	color: #fefefe;
+	border-radius: 4px;
+	text-decoration: none;
+	display: inline-block;
+}

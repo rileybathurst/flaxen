@@ -29,12 +29,12 @@ get_header(); ?>
 				<?php the_content(); ?>
 
 				<div class="main-extra">
-					<ul>
+					<ul class="programs-list">
 
 					<?php
-					
 						$args = [
-							'post_type'			=> 'flaxen_program'
+							'post_type'			=> 'flaxen_program',
+							'order'				=> 'ASC',
 						];
 
 						// The Query
@@ -43,9 +43,20 @@ get_header(); ?>
 						// The Loop
 						if ( $the_query->have_posts() ) {
 							while ( $the_query->have_posts() ) {
-								$the_query->the_post();
-								echo '<li>' . get_the_title() . '<hr>' . esc_attr( get_post_meta( $post->ID, 'p_cost', true ) ); '</li>';
-							}
+								$the_query->the_post(); ?>
+								<li>
+									<hr>
+									<h3>
+										<a href="<?php the_permalink(); ?>">
+											<?php the_title(); ?>
+										</a>
+									</h3>
+									<a href="<?php the_permalink(); ?>" class="price-click">
+										$<?php echo esc_attr( get_post_meta( $post->ID, 'p_cost', true ) ); ?>
+									</a>
+									<?php the_excerpt(); ?>
+								</li>
+							<?php }
 						} else {
 							// no posts found
 						}
