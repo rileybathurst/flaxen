@@ -2,7 +2,7 @@
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
 
-// yeah I need to finish this
+// TBC
 
 /*--------------------------------------------------------------
 1.0 Normalize
@@ -24,14 +24,19 @@ $dark-gray: #8a8a8a;
 $primary-color: #35070F;
 $secondary-color: #F2AD8D; // this might be better with an rgba?
 
-$blend-color: #995751;
+$ivory: #FFF9F7;
+$peach: #F9DACC;
+$terracotta: #995751;
 
+// Riley 2021 note
+// I dont like this hover should be darker
 $anchor-color-hover: scale-color($secondary-color, $lightness: -55%);
 
 $global-padding: 1rem;
-$global-radius: 5px;
-$global-grid-gap: 20px; // should also be an rem?
+$global-radius: 2px;
+$global-grid-gap: 1rem;
 
+// this seems overly specific
 $button-transition: background-color 0.25s ease-out, color 0.25s ease-out;
 
 $header-lineheight: 1.4;
@@ -39,10 +44,6 @@ $header-margin-bottom: 0.5rem;
 
 $shadow: 2px 2px 10px 0px rgba(0,0,0,0.20);
 $shadow-hover: 2px 2px 10px 0px rgba(0,0,0,0.50);
-
-.text-center {
-	text-align: center;
-}
 
 /*--------------------------------------------------------------
 3.0 Alignments
@@ -56,16 +57,16 @@ $shadow-hover: 2px 2px 10px 0px rgba(0,0,0,0.50);
 html {font-size: 16px;}
 
 body {
-  background-color: white;
-  font-family: 'Playfair Display', serif;
+  background-color: $ivory;
+  font-family: 'Raleway', serif;
   font-weight: 400;
   line-height: 1.45;
   color: $primary-color;
   margin: 0; // reset
 }
 
-body p::selection { // this isnt working
-	background-color: $primary-color; 
+body p::selection {
+	background-color: $peach; 
 }
 
 p {margin-bottom: 1.25em;}
@@ -79,29 +80,29 @@ h1, h2, h3, h4, h5 {
 
 h1 {
   margin-bottom: 2.441rem;
-  font-size: 3.052em;
+  font-size: 3.052em; // 48px
   font-weight: 900; // these are specific to aaw
   font-style: italic; // these are specific to aaw
   font-family: 'Playfair Display script=all rev=1', serif; // what are the additional parts of this?
 }
 
 h2 {
-	font-size: 2.441em;
+	font-size: 2.441em; // 39px
 	margin-bottom: 1.953rem;
 }
 
 h3 {
-	font-size: 1.953em;
+	font-size: 1.953em; // 31px
 	margin-bottom: 1.563rem;
 }
 
 h4 {
-	font-size: 1.563em;
+	font-size: 1.563em; // 25px
 	margin-bottom: 1.25rem;
 }
 
 h5 {
-	font-size: 1.25em;
+	font-size: 1.25em; // 20px
 	margin-bottom: 1rem;
 }
 
@@ -112,7 +113,7 @@ svg {
 }
 
 svg:hover {
-	fill: $blend-color;
+	fill: $terracotta;
 }
 
 a {
@@ -120,30 +121,40 @@ a {
 }
 
 a:hover {
-	color: $blend-color;
+	color: $terracotta;
 }
 
 button, .button {
-	background: $secondary-color;
-	color: $primary-color;
+	background: $terracotta;
+	color: $ivory;
 	padding: $global-padding;
 	border-radius: $global-radius;
-	border: none;
-	font-family: 'playfair-display', serif;
+	border: 2px $ivory solid;
+	// font-family: 'playfair-display', serif; // is this explicit neccecary
 	font-size: 1.25em;
 	display: inline-block;
 	transition-duration: 1s;
 	box-shadow: $shadow;
+	text-transform: uppercase;
 }
 
 button:hover {
-	background: $blend-color;
-	color: $secondary-color;
+	background: darken($terracotta, 20);
+	color: darken($ivory, 20);
 	box-shadow: $shadow-hover;
+}
+
+button a {
+	color: $ivory;
+	text-decoration: none;
 }
 
 li {
 	margin-bottom: 0.5em;
+}
+
+.text-center {
+	text-align: center;
 }
 
 fieldset {
@@ -158,25 +169,80 @@ fieldset {
 }
 
 .site {
-	display: grid;
-	grid-template-columns: 1fr 10px 1fr; // kinda creating the grid gap as I use it for the vertical borders
+	// display: grid;
+	// grid-template-columns: 1fr 10px 1fr; // kinda creating the grid gap as I use it for the vertical borders
 	
-	margin: 0 10px 40px 10px; // top (hide mini menu use padding) right bottom left
+	background: $peach;
+	margin: 0 10px 10px 10px; // top (hide mini menu use padding) right bottom left
 	grid-gap: 10px; // mobile first would say this should be the grid gap then *2 below
-	padding-top: 2.441em; // type scale
+	// padding-top: 2.441em; // type scale
+
+	padding-bottom: 3rem;
 
 	@media (min-width: map-get($breakpoints, large)) {
 		grid-template-columns: 1fr 20px 1fr;
 	}
 }
 
+.header-background-color {
+	background: $ivory;
+}
+
+// this might now all be old
 .site-header {
-	grid-column: 1 / 4;
-	grid-row: 1;
 	align-items: baseline;
-	width: 100%;
-	max-width: 66rem;
-	justify-self: center;
+	// justify-self: center;
+	// background: $ivory;
+}
+
+footer {
+	background: $ivory;
+	border-radius: $global-radius;
+	margin: 0 auto;
+	margin-bottom: 3rem;
+	max-width: 63rem; // this is filled so its smaller
+	width: calc(100% - 1rem);
+	padding: 0.5rem;
+	display: grid;
+	grid-gap: 1rem;
+	// this could be a flex but its easier to keep the same as main
+
+	@media (min-width: map-get($breakpoints, medium)) {
+		width: calc(100% - 4rem); // why is this more?
+		padding: 1rem;
+		grid-template-columns: 1fr 1rem 1fr;
+	}
+
+	> .footer-navigation-top {
+		grid-row: 1;
+	}
+
+	> hr {
+		grid-row: 2;
+
+		@media (min-width: map-get($breakpoints, medium)) {
+			display: none;
+		}
+	}
+
+	> .footer-border {
+		display: none;
+		@media (min-width: map-get($breakpoints, medium)) {
+			display: block;
+			grid-row: 1;
+			height: 100%;
+			border-left: 2px $black solid;
+		}
+	}
+
+	> .footer-navigation-bottom {
+		grid-row: 3;
+		
+		@media (min-width: map-get($breakpoints, medium)) {
+			grid-row: 1;
+			grid-column: 3;
+		}
+	}
 }
 
 .title-image {
@@ -195,40 +261,92 @@ fieldset {
 }
 
 .title-border {
+	grid-row: 1;
 	grid-column: 2;
-	grid-row: 3 / 6;
 	border-left: 2px solid $black;
-	z-index: 2;
+	z-index: 2; // over the article background
+	margin-bottom: -2rem; // get past the grid gap
+	width: 100%; // fill the grid space
 }
 
 .main-bg-color {
-	grid-column: 1 / 4;
-	grid-row: 4 / 8;
-	background: scale-color($secondary-color, $lightness: 55%); // I think this could probably made a second variable higher up
+	// background: $peach;
+	width: calc(100vw - 2rem);
+	display: grid;
+	// grid-column: 1 / 4;
+	// grid-row: 4 / 8;
+	// background: scale-color($secondary-color, $lightness: 55%); // I think this could probably made a second variable higher up
 	border-radius: $global-radius;
-	box-shadow: $shadow;
+	// box-shadow: $shadow;
+}
+
+.attachment-post-thumbnail {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: cover;
 }
 
 main, .main {
-	grid-column: 1 / 4;
-	grid-row: 6;
-	padding: $global-grid-gap;
-	width: calc(100% - 40px);
-	max-width: 44em;
-	margin: 0 auto;
-	// box-shadow: $shadow;
+	padding: 0.5rem;
+	// I also want these to not be square as tops and sides are different
+	width: calc(100% - 1rem);
+	max-width: 65em;
+	margin: 2rem auto;
+	// dont put on a border radius this connects to the footer
+	border-top-left-radius: $global-radius;
+	border-top-right-radius: $global-radius;
+	display: grid;
+	grid-gap: 1rem;
+	grid-template-columns: 1fr 1rem 1fr;
+
+	@media (min-width: map-get($breakpoints, medium)) {
+		width: calc(100% - 2rem);
+		padding: 1rem;
+	}
 }
+
+main > .main-thumbnail {
+	max-height: 15rem;
+	max-width: 100%;
+	height: auto;
+	border: 1rem $ivory solid;
+	border-radius: $global-radius;
+	overflow-y: hidden;
+}
+
+main > .main-thumbnail > .attachment-post-thumbnail {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: cover;
+
+}
+
+main > article {
+	grid-row: 2;
+	grid-column: 1/4; // guess and check
+	background: $ivory;
+	padding: 0.5rem;
+
+	@media (min-width: map-get($breakpoints, medium)) {
+		padding: 1rem;
+	}
+}
+
+main > h1 {
+	grid-row: 1;
+	grid-column: 3;
+	width: 100%;
+}
+
 /* 
 .main-extra {
 	// waiting on what I need to do
 } */
-
+/* 
 .footer-border {
-	grid-column: 2;
-	grid-row: 7 / 9;
 	border-left: 2px solid $black;
 	z-index: 2; // above main bg color
-}
+} */
 
 .footer-border-extender {
 	/* empty with a minimum heigh to cause the grid row to show */
@@ -255,14 +373,28 @@ main, .main {
 3.1 Header Grid
 --------------------------------------------------------------*/
 
-.site-header {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
+header {
+	width: calc(100% - 1rem);
+	max-width: 65rem;
+	margin: 0 auto;
+	padding: 0.5rem;
+	display: grid;
+	grid-gap: 1rem;
+
+	@media (min-width: map-get($breakpoints, medium)) {
+		width: calc(100% - 2rem);
+		padding: 1rem;
+	}
+}
+
+.navigation-top {
+	grid-row: 1;
+	grid-column: 2;
+	justify-self: end;
 }
 
 .header-promo {
-	grid-column: 1 / 4;
+	grid-column: 1 / 3;
 	grid-row: 2;
 	justify-self: center;
 }
@@ -287,23 +419,32 @@ main, .main {
 3.3 Article Grid
 --------------------------------------------------------------*/
 
-.main h1, .main h2, .main h3, .main h4, .main h5, .main h6, .main hr, .main blockquote,
-.main div, // secondary catch all
-.main p, .main ul {
-	max-width: 44rem; // has to be rem or all the h will be different
-	margin-left: auto;
-	margin-right: auto;
+// this might still need something but main article could do this easier 
+main {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	hr,
+	blockquote,
+	div, // secondary catch all
+	p,
+	ul {
+		max-width: 44rem; // has to be rem or all the h will be different
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 
-.main blockquote {
-	font-size: 1.1875rem; // where is this number coming from? type scale?
-	line-height: $header-lineheight;
-	margin-top: 0; // is this a default overwrite?
-	margin-bottom: $header-margin-bottom;
-	padding-left: 0;
-		
-	@media (min-width: map-get($breakpoints, large)) {
-		font-size: 1.9375rem; // where is this number coming from?
+
+blockquote {
+	@extend h3;
+	margin: 0;
+
+	> p {
+		margin: 0; // browser reset
 	}
 }
 
@@ -312,15 +453,6 @@ main, .main {
 --------------------------------------------------------------*/
 
 .footer-navigation-top {
-	background: lightgray;
-	grid-column: 1 / 4;
-	grid-row: 8;
-	border-radius: $global-radius;
-	width: calc(100% - 2em); // remove the padding
-	max-width: 33rem;
-	justify-self: end;
-	padding: $global-padding;
-	box-shadow: $shadow;
 	@media (min-width: map-get($breakpoints, medium)) {
 		grid-column: 1;
 	}
@@ -349,28 +481,28 @@ main, .main {
 }
 
 .header-promo { // im not sure if i want this on the block level
-	background: $light-gray;
-	border-radius: $global-radius;
-	transition: $button-transition;
+	// background: $light-gray;
+	// border-radius: $global-radius;
+	// transition: $button-transition;
 	width: 100%;
 	max-width: 66rem;
-	box-shadow: $shadow;
+	// box-shadow: $shadow;
 }
 
 .header-promo a { // this is all a little scrappy and could be tidied up
-	display: inline-block; // needed for width height
+	display: inline; // needed for width height
 	width: calc(100% - 2em);
 	height: calc(100% - 2em);
-	padding: $global-padding;
+	// padding: $global-padding;
 }
 
-.header-promo:hover {
+/* .header-promo:hover {
 	background: #cacaca;
 }
 
 .header-promo:hover a {
-	color: $blend-color;
-}
+	color: $terracotta;
+} */
 
 /*--------------------------------------------------------------
 10.0 Links
@@ -405,7 +537,7 @@ svg {
 }
 
 .current-menu-item a {
-	color: $blend-color;
+	color: $terracotta;
 }
 
 .off-canvas a:hover, .off-canvas .current-menu-item a {
@@ -490,12 +622,38 @@ svg {
 	display: flex;
 	// justify-content: center;
 }
-/*
+
 #menu-social li {
-	float: left;
-	width: auto;
+	// float: left;
+	// width: auto;
+	background: $terracotta;
+	border-radius: 50%;
+	border: 2px $ivory solid;
+	box-shadow: $shadow;
+	fill: $ivory;
+	display: grid;
+	place-items: center;
+	width: 3rem;
+	height: 3rem;
+
+	a {
+		color: $ivory;
+		margin-bottom: 0; // reset .menu a
+		width: 24px;
+		height: 24px;
+	}
+
+	// this should really adjust the whole button
+	svg:hover {
+		fill: darken($ivory, 20);
+	}
 }
 
+#menu-social li:first-child {
+	margin-right: 1rem;
+}
+
+/*
 // This should be in one class
 .social-navigation .icon, #menu-social li a .icon {
 	width: 1em;
@@ -629,11 +787,11 @@ img .alignleft {
 }
 
 cite {
-	font-size: unset !important;
+	@extend h4;
 }
 
 #minimenu {
-	background: $light-gray;
+	background: $terracotta;
 	display: flex;
 	flex-direction: column;
 	position: absolute;
@@ -645,6 +803,14 @@ cite {
 	transition-duration: 3s;
 	// padding: 1em;
 
+	a {
+		color: $ivory;
+	}
+
+	a:hover {
+		color: darken($ivory, 20);
+	}
+
 	hr {
 		width: calc(100% - 2em);
 		border: none;
@@ -654,6 +820,34 @@ cite {
 	h2 {
 		font-weight: 900; // these are specific to aaw
 		font-style: italic; // these are specific to aaw
+		margin-top: 2rem;
+	}
+
+	.menu-social-container {
+		li:first-child {
+			margin-right: 1rem;
+		}
+
+		li:nth-child(2) {
+			margin-left: 1rem;
+		}
+
+		a {
+			background: $peach;
+			border-radius: 50%;
+			border: 2px $ivory solid;
+			padding: 0.5rem;
+			width: 24px;
+			height: 24px;
+
+			svg {
+				fill: $terracotta;
+			}
+
+			svg:hover {
+				fill: darken($terracotta, 20);
+			}
+		}
 	}
 }
 
@@ -758,4 +952,67 @@ form .form-big-input { // form needed for higher specificity
 	border-radius: 4px;
 	text-decoration: none;
 	display: inline-block;
+}
+
+// testimonial badges were out of ratio
+.wp-block-media-text__media img,
+.wp-block-media-text__media video {
+	height: auto;
+}
+
+// testimonials
+// needs to be done better
+.page-id-198 {
+	blockquote {
+		p {
+			font-size: 1rem;
+			line-height: 1.5;
+		}
+
+		cite {
+			font-size: 1rem;
+		}
+	}
+
+	.wp-block-media-text__media {
+		max-width: 10rem; // guess and check
+		justify-self: center;
+	}
+}
+
+#featured-programs {
+	display: flex;
+	max-width: 65rem;
+	margin: 3rem auto;
+
+	article {
+		flex: 1 1 35rem;
+		background: $ivory;
+		border: 2px $ivory solid;
+		border-radius: $global-radius;
+		padding: 1rem;
+
+		img {
+			max-width: 100%;
+			height: auto;
+			object-fit: cover;
+			max-height: 10rem; // guess and check
+		}
+
+		.a-title {
+			text-decoration: underline;
+		}
+
+		.a-learn {
+			@extend button;
+		}
+	}
+
+	article:first-child {
+		margin-right: 1rem;
+	}
+
+	article:nth-child(2) {
+		margin-left: 1rem;
+	}
 }
