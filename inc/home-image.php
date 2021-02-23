@@ -18,7 +18,7 @@ function featured_home_meta_boxes_setup() {
 function image_add_post_meta_boxes() {
 
 	add_meta_box(
-		'pro-cost', // Unique ID
+		'i-two', // Unique ID
 		esc_html__( 'Home Image', 'example' ), // Title
 		'image_cost_meta_box', // Callback function
 		'flaxen_program', // post
@@ -34,7 +34,7 @@ function image_cost_meta_box( $post ) { ?>
   <?php wp_nonce_field( basename( __FILE__ ), 'home_image_nonce' ); ?>
 
   <p>
-	<input class="widefat" type="text" name="pro-cost" id="pro-cost" value="<?php echo esc_attr( get_post_meta( $post->ID, 'p_cost', true ) ); ?>" size="30" />
+	<input class="widefat" type="text" name="i-two" id="i-two" value="<?php echo esc_attr( get_post_meta( $post->ID, 'i_two', true ) ); ?>" size="30" />
   </p>
 <?php }
 
@@ -53,10 +53,10 @@ function image_save_meta( $post_id, $post ) {
 	return $post_id;
 
   /* Get the posted data and sanitize it for use as an HTML class. */
-  $new_meta_value = ( $_POST['pro-cost'] );
+  $new_meta_value = ( $_POST['i-two'] );
 
   /* Get the meta key. */
-  $meta_key = 'p_cost';
+  $meta_key = 'i_two';
 
   /* Get the meta value of the custom field key. */
   $meta_value = get_post_meta( $post_id, $meta_key, true );

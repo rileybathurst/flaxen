@@ -38,9 +38,7 @@ if ( have_posts() ) { ?>
 						$the_query->the_post(); ?>
 
 						<article>
-							<?php if ( has_post_thumbnail() ) {
-								the_post_thumbnail(); 
-							} ?>
+							<img src="<?php echo esc_attr( get_post_meta( $post->ID, 'i_two', true ) ); ?>" />
 							<h2><a href="<?php the_permalink(); ?>" class="a-title"><?php the_title(); ?></a></h2>
 							<p><?php the_excerpt(); ?></p>
 							<a href="<?php the_permalink(); ?>" class="a-learn">Learn More</a>
