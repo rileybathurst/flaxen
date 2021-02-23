@@ -95,7 +95,16 @@ function wporg_custom_post_type()
 			),
 			'public'			=> true,
 			'has_archive'	=> true,
+			'show_in_rest' => true,
 			'rewrite'		=> array( 'slug' => 'events' ),
+			'supports'		=> array( 
+				'title',
+				'editor',
+				'author',
+				'thumbnail',
+				'excerpt',
+				// 'comments' 
+				)
 		)
 	);
 }
@@ -113,6 +122,7 @@ function wporg_custom_programs()
 			'public'		=> true,
 			'has_archive'	=> true,
 			'rewrite'		=> array( 'slug' => 'programs' ),
+			'show_in_rest' => true,
 			'supports'		=> array( 
 				'title',
 				'editor',

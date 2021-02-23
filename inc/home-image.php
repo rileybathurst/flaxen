@@ -33,6 +33,8 @@ function image_cost_meta_box( $post ) { ?>
 
   <?php wp_nonce_field( basename( __FILE__ ), 'home_image_nonce' ); ?>
 
+  <!-- I need to deal with admin css for this -->
+  <!-- <img src="< php echo esc_attr( get_post_meta( $post->ID, 'i_two', true ) ); ?>" /> -->
   <p>
 	<input class="widefat" type="text" name="i-two" id="i-two" value="<?php echo esc_attr( get_post_meta( $post->ID, 'i_two', true ) ); ?>" size="30" />
   </p>
