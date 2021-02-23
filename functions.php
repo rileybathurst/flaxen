@@ -82,6 +82,7 @@ require get_parent_theme_file_path( '/inc/contact.php' );
 require get_parent_theme_file_path( '/inc/results.php' );
 require get_parent_theme_file_path( '/inc/event-date.php' );
 require get_parent_theme_file_path( '/inc/program-costs.php' );
+require get_parent_theme_file_path( '/inc/home-image.php' );
 
 // Events
 function wporg_custom_post_type()

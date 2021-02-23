@@ -428,12 +428,14 @@ blockquote > p {
 .header-promo {
   width: 100%;
   max-width: 66rem;
+  padding: 0;
 }
 
 .header-promo a {
-  display: inline;
-  width: calc(100% - 2em);
-  height: calc(100% - 2em);
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
 }
 
 /* .header-promo:hover {

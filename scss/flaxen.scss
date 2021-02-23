@@ -486,14 +486,14 @@ blockquote {
 	// transition: $button-transition;
 	width: 100%;
 	max-width: 66rem;
-	// box-shadow: $shadow;
+	padding: 0;
 }
 
 .header-promo a { // this is all a little scrappy and could be tidied up
-	display: inline; // needed for width height
-	width: calc(100% - 2em);
-	height: calc(100% - 2em);
-	// padding: $global-padding;
+	display: inline-block; // needed for width height
+	width: 100%;
+	height: 100%;
+	padding: $global-padding;
 }
 
 /* .header-promo:hover {
