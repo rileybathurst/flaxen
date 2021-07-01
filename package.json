@@ -1,0 +1,19 @@
+{
+  "name": "flaxen",
+  "version": "1.0.0",
+  "description": "Authentic Alignment Wellness Theme",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rileybathurst/flaxen.git"
+  },
+  "author": "Riley Bathurst",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rileybathurst/flaxen/issues"
+  },
+  "homepage": "https://github.com/rileybathurst/flaxen#readme"
+}
